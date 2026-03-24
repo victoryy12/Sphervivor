@@ -3,7 +3,7 @@
 [node name="arena" type="CSGBox3D" unique_id=1603033897]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1645737, -0.4995, -5.7576065)
 use_collision = true
-size = Vector3(1000, 0.001, 1000)
+size = Vector3(250, 0.001, 250)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1530707756]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.000004, -501.00003)
