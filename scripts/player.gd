@@ -1,7 +1,7 @@
 extends RigidBody3D
 
-@export var rolling_force = 40
-@export var jump_force = 150
+@export var rolling_force = 100.0
+@export var jump_force = 150.0
 
 func _ready() -> void:
 	$CameraRig.top_level = true
@@ -27,10 +27,10 @@ func _physics_process(delta: float) -> void:
 		angular_velocity.z += rolling_force * delta
 	elif Input.is_action_pressed("right") and onFloor:
 		angular_velocity.z -= rolling_force * delta
-		
 	if Input.is_action_pressed("jump") and onFloor:
 		apply_central_impulse(Vector3.UP * jump_force)
 	if Input.is_action_pressed("slam") and !onFloor:
 		angular_velocity.y -= rolling_force * delta
 		apply_central_force(Vector3.DOWN * 10000)
+	
 	

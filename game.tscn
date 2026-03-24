@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://orm513dg4chk"]
 
 [ext_resource type="PackedScene" uid="uid://m3sigj8s4nmg" path="res://player.tscn" id="1_a202f"]
+[ext_resource type="PackedScene" uid="uid://c4d1vn0itpmdx" path="res://arena.tscn" id="2_e2o6t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -30,14 +31,5 @@ shadow_enabled = true
 [node name="Player" parent="." unique_id=1314071749 instance=ExtResource("1_a202f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25997603, 0.17368901, 0.8930223)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1104711543]
-transform = Transform3D(2.6777527, 0, 0, 0, 1, 0, 0, 0, 1.7667929, 0.30130327, -1.2476158, 0.61204886)
-use_collision = true
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1435720735]
-transform = Transform3D(2.6777527, 0, 0, 0, 1, 0, 0, 0, 1.7667929, 5.351454, -1.2476158, 0.61204886)
-use_collision = true
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1222136013]
-transform = Transform3D(2.6777527, 0, 0, 0, 1, 0, 0, 0, 1.7667929, 10.88246, -1.2476158, -5.3915806)
-use_collision = true
+[node name="arena" parent="." unique_id=1603033897 instance=ExtResource("2_e2o6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.13344, -0.4995, -2.6852164)
