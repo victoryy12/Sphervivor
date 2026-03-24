@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c4d1vn0itpmdx"]
+
+[node name="arena" type="CSGBox3D" unique_id=1603033897]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1645737, -0.4995, -5.7576065)
+size = Vector3(1000, 0.001, 1000)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1530707756]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.000004, -501.00003)
+size = Vector3(1000, 35, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1531367680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -501, 18.000004, -1.0000229)
+size = Vector3(1, 35, 1000)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=207056861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 17, 0)
+size = Vector3(1, 35, 1000)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1128874749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 500)
+size = Vector3(1000, 35, 1)
