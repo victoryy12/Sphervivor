@@ -2,6 +2,7 @@ extends RigidBody3D
 
 @export var rolling_force = 70.0
 @export var jump_force = 150.0
+@export var slam_speed = 5000.0
 @export var mouse_sensitivity := 0.002
 
 var yaw := 0.0   # left/right
@@ -23,35 +24,33 @@ func _physics_process(delta: float) -> void:
 	$CameraRig.global_transform.origin = global_transform.origin
 	$touchingFloor.global_transform.origin = global_transform.origin
 
-	deathPlane() 
-	playerMovement(delta)
-	print(angular_velocity)
+	death_plane() 
+	player_movement(delta)
 	
 	
-func playerMovement(delta):
+func player_movement(delta):
 	$CameraRig.rotation.y = yaw
 	$CameraRig.rotation.x = pitch
+	
 	var onFloor =  $touchingFloor.is_colliding()
+	var x_input = Input.get_axis("down", "up")
+	var z_input = Input.get_axis("right", "left")
+	
+	var cam = $CameraRig
+	
+	# Get camera directions
+	var forward = -cam.global_transform.basis.z
+	var right = cam.global_transform.basis.x
+
+	# Flatten so we don't move up/down
+	forward.y = 0
+	right.y = 0
+	forward = forward.normalized()
+	right = right.normalized()
+	
+	var direction = (forward * z_input + right * x_input).normalized()
 
 	if onFloor:
-		var x_input = Input.get_axis("down", "up")
-		var z_input = Input.get_axis("right", "left")
-		
-		var cam = $CameraRig
-		
-		# Get camera directions
-		var forward = -cam.global_transform.basis.z
-		var right = cam.global_transform.basis.x
-
-		# Flatten so we don't move up/down
-		forward.y = 0
-		right.y = 0
-		
-		forward = forward.normalized()
-		right = right.normalized()
-
-		# Combine directions
-		var direction = (forward * z_input + right * x_input).normalized()
 		angular_velocity.x -= direction.x * rolling_force * delta
 		angular_velocity.z -= direction.z * rolling_force * delta
 		#jump
@@ -61,11 +60,11 @@ func playerMovement(delta):
 			angular_velocity.y /= 1.2
 
 	if Input.is_action_pressed("slam") and !onFloor:
-		angular_velocity.y -= rolling_force * delta
-		apply_central_force(Vector3.DOWN * 1000)
+		apply_central_force(Vector3.DOWN * slam_speed)
+	
 
 #testing..going to make death function
-func deathPlane():
+func death_plane():
 	var deathBarrierDepth = -25
 	if global_position.y < deathBarrierDepth:
 		get_tree().reload_current_scene()

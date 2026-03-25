@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://bj5tgev4klsij" path="res://assets/download.jpg" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://c6ci0ect73ili" path="res://scripts/player.gd" id="1_onrkg"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_onrkg"]
+bounce = 0.24
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onrkg"]
 albedo_texture = ExtResource("1_4flbx")
 
@@ -12,6 +15,7 @@ albedo_texture = ExtResource("1_4flbx")
 
 [node name="Player" type="RigidBody3D" unique_id=1714944700]
 mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_onrkg")
 script = ExtResource("1_onrkg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1285117708]

@@ -18,3 +18,7 @@ size = Vector3(1, 15, 250)
 [node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1128874749]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 125)
 size = Vector3(250, 15, 1)
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="." unique_id=885827488]
+transform = Transform3D(22.838882, 0, 0, 0, 2.8520284, 0, 0, 0, 12.279811, 0, 0.5865493, 0)
+inner_radius = 2.6069534
