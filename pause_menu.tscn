@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://8td6c1bs1vdb"]
+
+[ext_resource type="Shader" uid="uid://el6ke6iu8ynn" path="res://shaders/puaseMenu.gdshader" id="1_hdmo1"]
+[ext_resource type="Script" uid="uid://hl3uq38xk0hv" path="res://scripts/pause_menu.gd" id="1_nwcfo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwcfo"]
+shader = ExtResource("1_hdmo1")
+shader_parameter/lod = 0.158000007505
+
+[node name="pause menu" type="Control" unique_id=147475881]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nwcfo")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=884991663]
+material = SubResource("ShaderMaterial_nwcfo")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.9990001
+anchor_bottom = 1.0
+offset_right = 0.15185547
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=846360465]
+layout_mode = 0
+offset_left = 365.0
+offset_top = 91.0
+offset_right = 761.0
+offset_bottom = 529.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1666072527]
+layout_mode = 2
+
+[node name="resumeButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=841365209]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Resume"
+
+[node name="restartButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1277501890]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Restart"
+
+[node name="quitButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=398176399]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/resumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/quitButton" to="." method="_on_quit_button_pressed"]

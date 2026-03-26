@@ -13,6 +13,7 @@ func _ready() -> void:
 	$touchingFloor.top_level = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
+	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		yaw -= event.relative.x * mouse_sensitivity
@@ -20,12 +21,13 @@ func _input(event: InputEvent) -> void:
 		# clamp vertical look so you don’t flip
 		pitch = clamp(pitch, deg_to_rad(-80), deg_to_rad(80))
 	
+	
 func _physics_process(delta: float) -> void:
 	$CameraRig.global_transform.origin = global_transform.origin
 	$touchingFloor.global_transform.origin = global_transform.origin
 
 	death_plane() 
-	player_movement(delta)
+	player_movement(delta)	
 	
 	
 func player_movement(delta):
@@ -61,7 +63,8 @@ func player_movement(delta):
 
 	if Input.is_action_pressed("slam") and !onFloor:
 		apply_central_force(Vector3.DOWN * slam_speed)
-	
+
+
 
 #testing..going to make death function
 func death_plane():
