@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bu0qwuh8hgnn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m37v0"]
+albedo_color = Color(0.32364932, 0.44055852, 0.71103543, 1)
+
+[node name="Basic_Enemy" type="Node3D" unique_id=149836046]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=1807252174]
+use_collision = true
+radius = 0.25
+height = 0.85
+cone = true
+smooth_faces = false
+material = SubResource("StandardMaterial3D_m37v0")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1711846081]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+use_collision = true
+radius = 0.115
+smooth_faces = false
+material = SubResource("StandardMaterial3D_m37v0")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="." unique_id=50699175]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.15, 0.5, 0)
+use_collision = true
+radius = 0.071
+height = 0.115
+cone = true
+smooth_faces = false
+material = SubResource("StandardMaterial3D_m37v0")
