@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://crdlhuohh2d3w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v71c2"]
+albedo_color = Color(0.50980395, 0, 0.6862745, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gr2t4"]
+albedo_color = Color(0.50980395, 0, 0.6862745, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wgmjp"]
+albedo_color = Color(0.50867206, 0.0013763469, 0.6881413, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjm8w"]
+albedo_color = Color(0.10856094, 0, 0.83318114, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ho2ls"]
+albedo_color = Color(0.10980392, 0, 0.83137256, 1)
+
+[node name="snow_man" type="Node3D" unique_id=1193151535]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=39407305]
+use_collision = true
+size = Vector3(0.75, 0.75, 0.75)
+material = SubResource("StandardMaterial3D_v71c2")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=396426936]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+use_collision = true
+size = Vector3(0.5, 0.5, 0.5)
+material = SubResource("StandardMaterial3D_gr2t4")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1478532203]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+use_collision = true
+size = Vector3(0.25, 0.25, 0.25)
+material = SubResource("StandardMaterial3D_wgmjp")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1462835815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0)
+radius = 0.1
+material = SubResource("StandardMaterial3D_jjm8w")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=590017920]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.18, 1.025, 0)
+radius = 0.05
+height = 0.1
+cone = true
+material = SubResource("StandardMaterial3D_ho2ls")
