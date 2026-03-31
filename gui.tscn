@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://pp16gegsjrhv"]
+
+[ext_resource type="PackedScene" uid="uid://8td6c1bs1vdb" path="res://menus and ui/pause_menu.tscn" id="1_6lon5"]
+[ext_resource type="PackedScene" uid="uid://bkiesf1tiyrjb" path="res://menus and ui/user_interface.tscn" id="2_q8o8l"]
+
+[node name="gui" type="CanvasLayer" unique_id=659538166]
+
+[node name="pause menu" parent="." unique_id=147475881 instance=ExtResource("1_6lon5")]
+
+[node name="userInterface" parent="." unique_id=126740338 instance=ExtResource("2_q8o8l")]

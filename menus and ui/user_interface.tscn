@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bkiesf1tiyrjb"]
+
+[ext_resource type="Script" uid="uid://cvr0l3ebritj3" path="res://scripts/user_interface.gd" id="1_kxhmu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i7dvk"]
+
+[node name="userInterface" type="Control" unique_id=126740338]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_kxhmu")
+
+[node name="speedometer" type="Label" parent="." unique_id=1453805185]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.287
+offset_left = 990.0
+offset_top = 531.0
+offset_right = 1144.0
+offset_bottom = 626.52
+label_settings = SubResource("LabelSettings_i7dvk")
