@@ -4,6 +4,7 @@
 
 [sub_resource type="SystemFont" id="SystemFont_sb0x1"]
 font_names = PackedStringArray("Jokerman")
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_i7dvk"]
 font = SubResource("SystemFont_sb0x1")
@@ -25,3 +26,10 @@ offset_top = 531.0
 offset_right = 1144.0
 offset_bottom = 626.52
 label_settings = SubResource("LabelSettings_i7dvk")
+
+[node name="playerHealth" type="ProgressBar" parent="." unique_id=778097279]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 13.0
+offset_right = 382.0
+offset_bottom = 40.0
