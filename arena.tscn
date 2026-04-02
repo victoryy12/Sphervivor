@@ -13,43 +13,6 @@ use_collision = true
 size = Vector3(250, 0.5, 250)
 material = SubResource("StandardMaterial3D_444vf")
 
-[node name="Wall1" type="CSGBox3D" parent="." unique_id=1530707756]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -125)
-size = Vector3(250, 15, 0)
-
-[node name="Wal2" type="CSGBox3D" parent="." unique_id=1531367680]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -125, 5, 0)
-size = Vector3(1, 15, 250)
-
-[node name="Wall3" type="CSGBox3D" parent="." unique_id=207056861]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 125, 5, 0)
-size = Vector3(1, 15, 250)
-
-[node name="Wall4" type="CSGBox3D" parent="." unique_id=1128874749]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 125)
-size = Vector3(250, 15, 1)
-
-[node name="Hill" type="CSGSphere3D" parent="." unique_id=858780850]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82, -9, 0)
-radius = 20.0
-radial_segments = 21
-rings = 30
-material = SubResource("StandardMaterial3D_ubfh8")
-
-[node name="Hill2" type="CSGSphere3D" parent="." unique_id=1551357863]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.31707, -9, 59.99442)
-radius = 20.0
-radial_segments = 21
-rings = 30
-material = SubResource("StandardMaterial3D_ubfh8")
-
-[node name="Hill3" type="CSGSphere3D" parent="." unique_id=1567653764]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.002731, -9, -54.321144)
-radius = 20.0
-radial_segments = 21
-rings = 30
-material = SubResource("StandardMaterial3D_ubfh8")
-
 [node name="Trees" type="Node3D" parent="." unique_id=1069072719]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.52679, 0.5000076, 20.35318)
 
@@ -96,3 +59,45 @@ transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -59.58511, 1.2499924, -29.614
 
 [node name="Tree15" parent="Trees" unique_id=883532929 instance=ExtResource("1_ubfh8")]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -73.13083, 1.2499847, -102.66447)
+
+[node name="walls" type="CSGCombiner3D" parent="." unique_id=1725280646]
+
+[node name="Wall1" type="CSGBox3D" parent="walls" unique_id=1530707756]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -125)
+size = Vector3(250, 15, 0)
+
+[node name="Wal2" type="CSGBox3D" parent="walls" unique_id=1531367680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -125, 5, 0)
+size = Vector3(1, 15, 250)
+
+[node name="Wall3" type="CSGBox3D" parent="walls" unique_id=207056861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 125, 5, 0)
+size = Vector3(1, 15, 250)
+
+[node name="Wall4" type="CSGBox3D" parent="walls" unique_id=1128874749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 125)
+size = Vector3(250, 15, 1)
+
+[node name="hills" type="CSGCombiner3D" parent="." unique_id=118064932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -125)
+
+[node name="Hill" type="CSGSphere3D" parent="hills" unique_id=858780850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82, -14, 125)
+radius = 20.0
+radial_segments = 21
+rings = 30
+material = SubResource("StandardMaterial3D_ubfh8")
+
+[node name="Hill2" type="CSGSphere3D" parent="hills" unique_id=1551357863]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.31707, -14, 184.99442)
+radius = 20.0
+radial_segments = 21
+rings = 30
+material = SubResource("StandardMaterial3D_ubfh8")
+
+[node name="Hill3" type="CSGSphere3D" parent="hills" unique_id=1567653764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.002731, -14, 70.678856)
+radius = 20.0
+radial_segments = 21
+rings = 30
+material = SubResource("StandardMaterial3D_ubfh8")

@@ -3,6 +3,7 @@ extends RigidBody3D
 @export var rolling_force = 70.0
 @export var jump_force = 150.0
 @export var slam_speed = 5000.0
+@export var player_health = 1000.0
 @export var mouse_sensitivity := 0.002
 
 var yaw := 0.0   # left/right

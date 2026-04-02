@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Spherevivor"
-run/main_scene="uid://dat6iyrol62hr"
+run/main_scene="uid://orm513dg4chk"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [input]
