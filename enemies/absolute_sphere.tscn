@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cxd17xto40u2i"]
+
+[ext_resource type="Script" uid="uid://ht4htyriq007" path="res://absolute_sphere.gd" id="1_wgjya"]
+[ext_resource type="Script" uid="uid://dg2ftjkvcaivg" path="res://boss_body.gd" id="2_iq2gm"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_lpwmt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hexc0"]
+albedo_color = Color(0.8542334, 0, 0.18067321, 1)
+metallic = 1.0
+roughness = 0.0
+emission = Color(0.99999994, 0.22953579, 0.17418489, 1)
+bent_normal_enabled = true
+ao_enabled = true
+ao_light_affect = 0.37
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wgjya"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_wgjya"]
+inner_radius = 0.95
+
+[sub_resource type="Skin" id="Skin_iq2gm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_814he"]
+albedo_color = Color(1, 0.76524276, 0.501666, 1)
+emission_enabled = true
+emission = Color(0.8117647, 0.5372549, 0, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_4hqk4"]
+inner_radius = 0.95
+
+[node name="AbsoluteSphere" type="Node3D" unique_id=1286040135]
+script = ExtResource("1_wgjya")
+
+[node name="BossBody" type="RigidBody3D" parent="." unique_id=145609100]
+script = ExtResource("2_iq2gm")
+
+[node name="SphereMesh" type="MeshInstance3D" parent="BossBody" unique_id=566427159]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("SphereMesh_lpwmt")
+surface_material_override/0 = SubResource("StandardMaterial3D_hexc0")
+
+[node name="SphereCollision" type="CollisionShape3D" parent="BossBody" unique_id=1367144241]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("SphereShape3D_wgjya")
+
+[node name="RingRoot" type="Node3D" parent="BossBody" unique_id=152784977]
+
+[node name="RingA" type="MeshInstance3D" parent="BossBody/RingRoot" unique_id=51893662]
+transform = Transform3D(10.392304, -6, 0, 5.196152, 9, -6, 3, 5.196152, 10.392304, 0, 0, 0)
+mesh = SubResource("TorusMesh_wgjya")
+skin = SubResource("Skin_iq2gm")
+surface_material_override/0 = SubResource("StandardMaterial3D_814he")
+
+[node name="RingB" type="MeshInstance3D" parent="BossBody/RingRoot" unique_id=1654121189]
+transform = Transform3D(10.392304, -6, 0, -5.196152, -9, -6.000001, 3.0000005, 5.196153, -10.392304, 0, 0, 0)
+mesh = SubResource("TorusMesh_4hqk4")
+surface_material_override/0 = SubResource("StandardMaterial3D_814he")
+
+[node name="RingC" type="MeshInstance3D" parent="BossBody/RingRoot" unique_id=392770340]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 0)
+mesh = SubResource("TorusMesh_wgjya")
+skin = SubResource("Skin_iq2gm")
+surface_material_override/0 = SubResource("StandardMaterial3D_814he")
+
+[node name="FloorRay" type="RayCast3D" parent="BossBody" unique_id=888837314]
+target_position = Vector3(0, -2, 0)
+collision_mask = 15
+hit_back_faces = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=878252319]
