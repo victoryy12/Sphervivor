@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cvr0l3ebritj3" path="res://scripts/user_interface.gd" id="1_kxhmu"]
 
+[sub_resource type="SystemFont" id="SystemFont_sb0x1"]
+font_names = PackedStringArray("Jokerman")
+
 [sub_resource type="LabelSettings" id="LabelSettings_i7dvk"]
+font = SubResource("SystemFont_sb0x1")
+font_size = 30
 
 [node name="userInterface" type="Control" unique_id=126740338]
 layout_mode = 3

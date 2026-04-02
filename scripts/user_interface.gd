@@ -10,4 +10,4 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var speed_mph = int(player_stats.linear_velocity.length())
-	$speedometer.text = str(speed_mph)
+	$speedometer.text = str(speed_mph) + " MPH"

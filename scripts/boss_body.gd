@@ -31,8 +31,10 @@ var _wants_attack: bool = false
 
 @onready var _player: Node3D = get_node_or_null(player_path)
 @onready var _floor_ray: RayCast3D = $FloorRay  # add RayCast3D child, point down
+
 func _ready() -> void:
 	_pick_new_wander_target()
+	
 func _physics_process(delta: float) -> void:
 	var move_dir := Vector3.ZERO
 	if move_dir.length() > 0.01:

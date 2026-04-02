@@ -33,8 +33,21 @@ size = Vector3(250, 15, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82, -9, 0)
 radius = 20.0
 radial_segments = 21
-rings = 12
-smooth_faces = false
+rings = 30
+material = SubResource("StandardMaterial3D_ubfh8")
+
+[node name="Hill2" type="CSGSphere3D" parent="." unique_id=1551357863]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.31707, -9, 59.99442)
+radius = 20.0
+radial_segments = 21
+rings = 30
+material = SubResource("StandardMaterial3D_ubfh8")
+
+[node name="Hill3" type="CSGSphere3D" parent="." unique_id=1567653764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.002731, -9, -54.321144)
+radius = 20.0
+radial_segments = 21
+rings = 30
 material = SubResource("StandardMaterial3D_ubfh8")
 
 [node name="Trees" type="Node3D" parent="." unique_id=1069072719]
