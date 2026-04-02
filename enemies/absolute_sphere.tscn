@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cxd17xto40u2i"]
 
-[ext_resource type="Script" uid="uid://ht4htyriq007" path="res://absolute_sphere.gd" id="1_wgjya"]
-[ext_resource type="Script" uid="uid://dg2ftjkvcaivg" path="res://boss_body.gd" id="2_iq2gm"]
+[ext_resource type="Script" uid="uid://cby55yghtyl3" path="res://scripts/absolute_sphere.gd" id="1_inppo"]
+[ext_resource type="Script" uid="uid://bvf5jkhiqaj7p" path="res://scripts/boss_body.gd" id="2_nqkh1"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_lpwmt"]
 
@@ -31,10 +31,10 @@ emission_energy_multiplier = 10.0
 inner_radius = 0.95
 
 [node name="AbsoluteSphere" type="Node3D" unique_id=1286040135]
-script = ExtResource("1_wgjya")
+script = ExtResource("1_inppo")
 
 [node name="BossBody" type="RigidBody3D" parent="." unique_id=145609100]
-script = ExtResource("2_iq2gm")
+script = ExtResource("2_nqkh1")
 
 [node name="SphereMesh" type="MeshInstance3D" parent="BossBody" unique_id=566427159]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
