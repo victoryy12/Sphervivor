@@ -19,3 +19,6 @@ shape = SubResource("SphereShape3D_6rg8l")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1988273411]
 mesh = SubResource("SphereMesh_6rg8l")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=383424308]
+avoidance_enabled = true
