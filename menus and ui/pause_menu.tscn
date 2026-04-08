@@ -25,31 +25,51 @@ anchor_right = 0.9990001
 anchor_bottom = 1.0
 offset_right = 0.15185547
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=846360465]
-layout_mode = 0
-offset_left = 365.0
-offset_top = 91.0
-offset_right = 761.0
-offset_bottom = 529.0
+[node name="pauseOptions" type="PanelContainer" parent="." unique_id=846360465]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -191.5
+offset_top = -79.5
+offset_right = 191.5
+offset_bottom = 79.5
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1666072527]
+[node name="VBoxContainer" type="VBoxContainer" parent="pauseOptions" unique_id=1666072527]
 layout_mode = 2
 
-[node name="resumeButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=841365209]
+[node name="resumeButton" type="Button" parent="pauseOptions/VBoxContainer" unique_id=841365209]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Resume"
 
-[node name="restartButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1277501890]
+[node name="restartButton" type="Button" parent="pauseOptions/VBoxContainer" unique_id=1277501890]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Restart"
 
-[node name="quitButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=398176399]
+[node name="quitButton" type="Button" parent="pauseOptions/VBoxContainer" unique_id=398176399]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/resumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/quitButton" to="." method="_on_quit_button_pressed"]
+[node name="stats" type="PanelContainer" parent="." unique_id=1978131070]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -386.0
+offset_right = 386.0
+offset_bottom = 173.0
+grow_horizontal = 2
+
+[node name="displayStats" type="RichTextLabel" parent="stats" unique_id=169024059]
+layout_mode = 2
+
+[connection signal="pressed" from="pauseOptions/VBoxContainer/resumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="pauseOptions/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="pauseOptions/VBoxContainer/quitButton" to="." method="_on_quit_button_pressed"]

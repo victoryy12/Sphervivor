@@ -7,21 +7,22 @@ extends CharacterBody3D
 @onready var player = get_tree().get_first_node_in_group("player")
 
 func _physics_process(delta):
+	movement_tracking(delta)
+
+
+func movement_tracking(delta):
 	if not player:
 		return
-
-	# 1. Calculate direction toward the player
-	# We ignore the Y axis so the enemy doesn't tilt upward
+	
 	var direction = player.global_position - global_position
 	direction.y = 0 
 	direction = direction.normalized()
 
-	# 2. Smoothly rotate to look at the player
 	if direction != Vector3.ZERO:
 		var target_rotation = atan2(direction.x, direction.z)
 		rotation.y = lerp_angle(rotation.y, target_rotation, delta * 5.0)
 
-	# 3. Handle Movement
+	#Movement
 	velocity.x = lerp(velocity.x, direction.x * speed, accel * delta)
 	velocity.z = lerp(velocity.z, direction.z * speed, accel * delta)
 
@@ -30,3 +31,8 @@ func _physics_process(delta):
 		velocity.y -= 9.8 * delta
 
 	move_and_slide()
+
+
+func collision_attack():
+	pass
+	

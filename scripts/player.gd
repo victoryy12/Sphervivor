@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-@export var rolling_force = 70.0
+@export var rolling_force = 30.0
 @export var jump_force = 150.0
 @export var slam_speed = 5000.0
 @export var player_health = 1000.0
@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	$CameraRig.global_transform.origin = global_transform.origin
 	$touchingFloor.global_transform.origin = global_transform.origin
 
-	death_plane() 
+	player_death() 
 	player_movement(delta)	
 	
 	
@@ -52,11 +52,13 @@ func player_movement(delta):
 	right = right.normalized()
 	
 	var direction = (forward * z_input + right * x_input).normalized()
-
+	var move_velocity = direction * rolling_force
+	
 	if onFloor:
 		angular_velocity.x -= direction.x * rolling_force * delta
 		angular_velocity.z -= direction.z * rolling_force * delta
-		#jump
+		apply_central_impulse(move_velocity * delta)
+		
 		if Input.is_action_pressed("jump"):
 			apply_central_impulse(Vector3.UP * jump_force)
 			#reduces slam angular velocity
@@ -65,9 +67,10 @@ func player_movement(delta):
 	if Input.is_action_pressed("slam") and !onFloor:
 		apply_central_force(Vector3.DOWN * slam_speed)
 
+func player_death():
+	death_plane()
+	
 
-
-#testing..going to make death function
 func death_plane():
 	var deathBarrierDepth = -25
 	if global_position.y < deathBarrierDepth:

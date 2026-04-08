@@ -2,9 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://8td6c1bs1vdb" path="res://menus and ui/pause_menu.tscn" id="1_6lon5"]
 [ext_resource type="PackedScene" uid="uid://bkiesf1tiyrjb" path="res://menus and ui/user_interface.tscn" id="2_q8o8l"]
+[ext_resource type="PackedScene" uid="uid://sx8x7j8icr1p" path="res://menus and ui/upgrades_screen.tscn" id="3_eli7m"]
 
 [node name="gui" type="CanvasLayer" unique_id=659538166]
 
 [node name="pause menu" parent="." unique_id=147475881 instance=ExtResource("1_6lon5")]
 
 [node name="userInterface" parent="." unique_id=126740338 instance=ExtResource("2_q8o8l")]
+
+[node name="upgrades_screen" parent="." unique_id=216765729 instance=ExtResource("3_eli7m")]
+offset_left = -3.0
+offset_top = 4.0
+offset_right = -3.0
+offset_bottom = 4.0
