@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 @onready var cam = $CameraRig
-@onready var charge_meter = $gui/charge_meter
+@onready var arrow = $arrow
 
 @export var rolling_force = 30.0
 @export var jump_force = 150.0
@@ -9,7 +9,7 @@ extends RigidBody3D
 @export var player_health = 1000.0
 @export var charge_power = 0.0
 var charging = false 
-var max_charge = 5000.0; var charge_speed = 100000
+var max_charge = 5000.0; var charge_speed = 25000
 
 @export var mouse_sensitivity := 0.002
 
@@ -17,8 +17,10 @@ var yaw := 0.0   # left/right
 var pitch := 0.0 # up/down
 
 func _ready() -> void:
-	$CameraRig.top_level = true
+	cam.top_level = true
+	arrow.top_level = true
 	$touchingFloor.top_level = true
+	arrow.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	
@@ -33,21 +35,22 @@ func _input(event: InputEvent) -> void:
 
 func charge_input(event):
 	if event.is_action_pressed("charge ball"):
-		#charge_meter.visible = true
+		arrow.visible = true
 		charging = true
 		charge_power = 0.0
 		Engine.time_scale = 0.2
 	
 	if event.is_action_released("charge ball"):
-		#charge_meter.visible = false
+		arrow.visible = false
 		bullet_time_launch()
 		charging = false
 		Engine.time_scale = 1.0
 	
 	
 func _physics_process(delta: float) -> void:
-	$CameraRig.global_transform.origin = global_transform.origin
+	cam.global_transform.origin = global_transform.origin
 	$touchingFloor.global_transform.origin = global_transform.origin
+	arrow.global_transform.origin = global_transform.origin
 	player_death() 
 	player_movement(delta)
 	
@@ -86,6 +89,9 @@ func player_movement(delta):
 		apply_central_force(Vector3.DOWN * slam_speed)
 	#bullet time charge
 	if charging:
+		var scale_amount = lerp(0.5, 5.0, charge_power / max_charge)
+		arrow.look_at(global_position + direction, Vector3.UP)
+		arrow.scale = Vector3(scale_amount, scale_amount, scale_amount)
 		charge_power += charge_speed * delta
 		charge_power = clamp(charge_power, 0, max_charge)
 		print(charge_power)
