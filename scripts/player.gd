@@ -1,9 +1,16 @@
 extends RigidBody3D
+class_name player_stats
+
+@onready var cam = $CameraRig
 
 @export var rolling_force = 30.0
 @export var jump_force = 150.0
 @export var slam_speed = 5000.0
 @export var player_health = 1000.0
+@export var charge_power = 0.0
+var charging = false 
+var max_charge = 2500.0; var charge_speed = 500
+
 @export var mouse_sensitivity := 0.002
 
 var yaw := 0.0   # left/right
@@ -22,25 +29,29 @@ func _input(event: InputEvent) -> void:
 		# clamp vertical look so you don’t flip
 		pitch = clamp(pitch, deg_to_rad(-80), deg_to_rad(80))
 	
+	if event.is_action_pressed("charge ball"):
+		charging = true
+		charge_power = 0.0
+	
+	if event.is_action_released("charge ball"):
+		bullet_time_launch()
+		charging = false
+	
 	
 func _physics_process(delta: float) -> void:
 	$CameraRig.global_transform.origin = global_transform.origin
 	$touchingFloor.global_transform.origin = global_transform.origin
-
 	player_death() 
-	player_movement(delta)	
+	player_movement(delta)
 	
 	
 func player_movement(delta):
-	$CameraRig.rotation.y = yaw
-	$CameraRig.rotation.x = pitch
+	cam.rotation.y = yaw
+	cam.rotation.x = pitch
 	
 	var onFloor =  $touchingFloor.is_colliding()
 	var x_input = Input.get_axis("down", "up")
 	var z_input = Input.get_axis("right", "left")
-	
-	var cam = $CameraRig
-	
 	# Get camera directions
 	var forward = -cam.global_transform.basis.z
 	var right = cam.global_transform.basis.x
@@ -66,7 +77,23 @@ func player_movement(delta):
 
 	if Input.is_action_pressed("slam") and !onFloor:
 		apply_central_force(Vector3.DOWN * slam_speed)
+	#bullet time charge
+	if charging:
+		angular_velocity.x -= direction.x * rolling_force * delta
+		charge_power += charge_speed * delta
+		charge_power = clamp(charge_power, 0, max_charge)
+		print(charge_power)
 
+
+func bullet_time_launch():
+	var direction = -cam.global_transform.basis.z
+
+	direction.y = 0.3
+	direction =direction.normalized()
+	
+	apply_central_impulse(direction * charge_power)
+	
+	
 func player_death():
 	death_plane()
 	
