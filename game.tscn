@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://m3sigj8s4nmg" path="res://player.tscn" id="1_a202f"]
 [ext_resource type="Script" uid="uid://1a20jnor4x2t" path="res://scripts/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://cxd17xto40u2i" path="res://enemies/absolute_sphere.tscn" id="4_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://dh0pg7noum18o" path="res://enemies/enemy_1.tscn" id="5_7jktm"]
 [ext_resource type="PackedScene" uid="uid://c4d1vn0itpmdx" path="res://forest_arena.tscn" id="6_eow3j"]
+[ext_resource type="PackedScene" uid="uid://ch0exdx0a55dy" path="res://Spawner/Spawn.tscn" id="6_ryrav"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fc0e3"]
 
@@ -18,17 +18,7 @@ physics_material_override = SubResource("PhysicsMaterial_fc0e3")
 [node name="AbsoluteSphere" parent="." unique_id=1286040135 instance=ExtResource("4_fc0e3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.830345, 11.671169, -24.191729)
 
-[node name="enemy1" parent="." unique_id=1383739987 instance=ExtResource("5_7jktm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.56464, 2.9185276, -20.939432)
-accel = 5.0
-
-[node name="enemy2" parent="." unique_id=2104442614 instance=ExtResource("5_7jktm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.450863, 0.7499924, -16.542559)
-
-[node name="enemy3" parent="." unique_id=2045719002 instance=ExtResource("5_7jktm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.181194, 0.7499962, -11.979204)
-
-[node name="enemy4" parent="." unique_id=268336976 instance=ExtResource("5_7jktm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.744133, 0.75029373, 9.959862)
-
 [node name="forest arena" parent="." unique_id=2100858950 instance=ExtResource("6_eow3j")]
+
+[node name="enemy_spawner" parent="." unique_id=1852112187 instance=ExtResource("6_ryrav")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.482499, 0)
