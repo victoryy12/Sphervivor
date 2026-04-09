@@ -16,10 +16,14 @@ albedo_color = Color(0.95686275, 0.03137255, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0hwc"]
 albedo_color = Color(0.10980392, 0, 0.83137256, 1)
 
-[node name="elite_enemy" type="Node3D" unique_id=2100258259]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bwxuu"]
+height = 1.2209473
+
+[node name="elite_enemy" type="CharacterBody3D" unique_id=1881464982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006774664, 0, -0.03534293)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=180096745]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57760036, 0)
 use_collision = true
 radius = 0.25
 height = 0.75
@@ -27,29 +31,33 @@ sides = 20
 material = SubResource("StandardMaterial3D_o77uq")
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="." unique_id=1460848918]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42760038, 0)
 use_collision = true
 inner_radius = 0.26
 outer_radius = 0.405
 material = SubResource("StandardMaterial3D_oxq52")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1567956333]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0776004, 0)
 use_collision = true
 radius = 0.3
 material = SubResource("StandardMaterial3D_brei5")
 
 [node name="CSGTorus3D2" type="CSGTorus3D" parent="." unique_id=377499028]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72760034, 0)
 use_collision = true
 inner_radius = 0.26
 outer_radius = 0.405
 material = SubResource("StandardMaterial3D_yo4w2")
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="." unique_id=1350734966]
-transform = Transform3D(1.1924881e-08, 1, 0, -1, 1.1924881e-08, 0, 0, 0, 1, 0.35, 1.5, 0)
+transform = Transform3D(1.1924881e-08, 1, 0, -1, 1.1924881e-08, 0, 0, 0, 1, 0.35, 1.0776004, 0)
 use_collision = true
 radius = 0.1
 height = 0.25
 cone = true
 material = SubResource("StandardMaterial3D_a0hwc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1008582497]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.741773, 0)
+shape = SubResource("CapsuleShape3D_bwxuu")
