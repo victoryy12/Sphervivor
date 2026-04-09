@@ -1,6 +1,6 @@
 extends Control
 
-@onready var player_stats = get_parent().get_parent()
+#onready var player_stats = get_parent().get_parent()
 var pausedCheck = false
 
 func _input(event: InputEvent) -> void:
@@ -18,15 +18,15 @@ func pause_and_unpause():
 	self.visible = pausedCheck
 	
 	if pausedCheck:
-		display_stats()
+		#display_stats()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
-func display_stats():
-	$stats/displayStats.text = ("Speed " + str(int(player_stats.rolling_force))+ "\n" + 
-	" Jump " + str(int(player_stats.jump_force)))
+#func display_stats():
+#	$stats/displayStats.text = ("Speed " + str(int(player_stats.rolling_force))+ "\n" + 
+#	" Jump " + str(int(player_stats.jump_force)))
 
 
 func _on_resume_button_pressed() -> void:

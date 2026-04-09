@@ -20,7 +20,6 @@ sky_material = SubResource("ProceduralSkyMaterial_7v0pp")
 
 [sub_resource type="Environment" id="Environment_vqyi4"]
 background_mode = 2
-background_color = Color(0.3062937, 0.39219084, 0.16773638, 1)
 sky = SubResource("Sky_noarx")
 sky_custom_fov = 166.5
 reflected_light_source = 2

@@ -35,37 +35,49 @@ var _wants_attack: bool = false
 func _ready() -> void:
 	_pick_new_wander_target()
 	
+	
 func _physics_process(delta: float) -> void:
 	var move_dir := Vector3.ZERO
+	
 	if move_dir.length() > 0.01:
 		# Torque axis: roll around axis perpendicular to movement (in XZ plane)
 		var torque_axis := Vector3.UP.cross(move_dir).normalized()
 		apply_torque(torque_axis * rolling_force)
+		
 	var on_floor: bool = _floor_ray.is_colliding()
 	var lv := linear_velocity
+	
 	if not on_floor:
 		lv.y -= gravity * delta
 	else:
 		lv.y = 0.0
+		
 	var desired_dir := Vector3.ZERO
+	
 	if is_instance_valid(_player):
 		var to_player := _player.global_position - global_position
 		var flat_to_player := Vector3(to_player.x, 0.0, to_player.z)
 		var dist := flat_to_player.length()
+		
 		if dist <= detection_radius and dist > stop_distance:
 			desired_dir = flat_to_player.normalized()
+			
 	if desired_dir == Vector3.ZERO:
 		_wander_timer -= delta
+		
 		if _wander_timer <= 0.0 or global_position.distance_to(_wander_target) < 1.5:
 			_pick_new_wander_target()
+			
 		var to_wander := _wander_target - global_position
 		var flat_to_wander := Vector3(to_wander.x, 0.0, to_wander.z)
 		if flat_to_wander.length() > 0.1:
 			desired_dir = flat_to_wander.normalized()
+			
 	_move_dir = _move_dir.lerp(desired_dir, clamp(acceleration * delta, 0.0, 1.0))
 	lv.x = _move_dir.x * move_speed
 	lv.z = _move_dir.z * move_speed
 	linear_velocity = lv
+	
 	if _move_dir.length() > 0.05:
 		var target_y := atan2(_move_dir.x, _move_dir.z)
 		rotation.y = lerp_angle(rotation.y, target_y, clamp(turn_speed * delta, 0.0, 1.0))
@@ -77,12 +89,14 @@ func _physics_process(delta: float) -> void:
 	var to_player := _player.global_position - global_position
 	var flat := Vector3(to_player.x, 0.0, to_player.z)
 	var dist := flat.length()
+
 	if _wants_attack:
 		_telegraph -= delta
 		if _telegraph > 0.0:
 			# Optional: slow down or stop moving while winding up
 			_move_dir = Vector3.ZERO
 			return  # or skip your normal chase/roll for this frame
+			
 		if _telegraph <= 0.0:
 			_do_attack(flat.normalized())
 			_wants_attack = false
@@ -91,16 +105,22 @@ func _physics_process(delta: float) -> void:
 	if dist <= attack_range and dist > 0.5 and _attack_cd <= 0.0 and _telegraph <= 0.0:
 		_telegraph = telegraph_time
 		_wants_attack = true
+		
+		
 func _pick_new_wander_target() -> void:
 	_wander_timer = wander_interval
 	var ang := randf() * TAU
 	var r := randf_range(4.0, wander_radius)
 	var offset := Vector3(cos(ang) * r, 0.0, sin(ang) * r)
 	_wander_target = global_position + offset
+	
+	
 func _do_attack(dir: Vector3) -> void:
 	_charge_dir = dir
 	_charge_left = charge_duration
 	linear_velocity = Vector3(dir.x * charge_speed, linear_velocity.y, dir.z * charge_speed)
+	
+	
 func _damage_player(amount: float) -> void:
 	if _player and _player.has_method("take_damage"):
 		_player.take_damage(amount)

@@ -16,6 +16,10 @@ var upgrades = [
 		"name": "Wumbo beam",
 		"desc": "increase your mass",
 		"apply": func(player): player.jump_force += 10
+	}, {
+		"name": "Slo-mo glasses",
+		"desc": 'Press the "E" key to gain use a bullet-time ability',
+		"apply": func(player): player.jump_force += 10
 	}
 ]
 
