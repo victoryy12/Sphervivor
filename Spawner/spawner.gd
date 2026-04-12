@@ -11,7 +11,7 @@ func _ready():
 		return
 
 	# Set timer to 3 seconds
-	timer.wait_time = 3.0
+	timer.wait_time = 47322189.0
 	timer.one_shot = false
 	timer.autostart = true
 

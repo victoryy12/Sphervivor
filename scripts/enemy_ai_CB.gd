@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var speed = 4.0
 @export var accel = 10.0
+@export var enemy_damage = 100.0
 
 @onready var player = get_tree().get_first_node_in_group("player")
 

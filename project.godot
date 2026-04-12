@@ -11,7 +11,13 @@ config_version=5
 [application]
 
 config/name="Spherevivor"
+run/main_scene="uid://3ogrr84620rg"
 config/features=PackedStringArray("4.6", "Forward Plus")
+
+[global_group]
+
+Enemies=""
+Player=""
 
 [input]
 

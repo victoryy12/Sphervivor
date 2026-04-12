@@ -16,12 +16,14 @@ material = SubResource("StandardMaterial3D_i3pqv")
 [sub_resource type="SphereShape3D" id="SphereShape3D_hqtel"]
 
 [sub_resource type="TextMesh" id="TextMesh_i3pqv"]
-text = "<--------"
+text = "-------->"
 
-[node name="Player" type="RigidBody3D" unique_id=1714944700]
+[node name="Player" type="RigidBody3D" unique_id=1714944700 groups=["Player"]]
 mass = 200.0
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
 continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 10
 script = ExtResource("1_onrkg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=428767]
@@ -42,5 +44,7 @@ current = true
 [node name="gui" parent="." unique_id=659538166 instance=ExtResource("3_i3pqv")]
 
 [node name="arrow" type="MeshInstance3D" parent="." unique_id=556300033]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(2.1855696e-08, 0.50000006, 0.8660254, 1, -4.371139e-08, 0, 3.7855173e-08, 0.8660254, -0.50000006, 0, 0, 0)
 mesh = SubResource("TextMesh_i3pqv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

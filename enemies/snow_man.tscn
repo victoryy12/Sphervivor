@@ -1,23 +1,16 @@
 [gd_scene format=3 uid="uid://crdlhuohh2d3w"]
 
-[ext_resource type="Script" path="res://scripts/enemy1.gd" id="1_r0uwl"]
+[ext_resource type="Script" uid="uid://dhhw2yt3uutq8" path="res://scripts/enemy_ai_CB.gd" id="1_r0uwl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r0uwl"]
+radius = 0.4506836
+height = 1.4180329
 
 [sub_resource type="BoxMesh" id="BoxMesh_y724t"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_oyepe"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qkm8t"]
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5j4bl"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0uwl"]
-albedo_color = Color(0.08627451, 0.05882353, 1, 1)
-
-[sub_resource type="PrismMesh" id="PrismMesh_p34g0"]
-material = SubResource("StandardMaterial3D_r0uwl")
-left_to_right = 0.0
-size = Vector3(0.1, 0.1, 0.05)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oyepe"]
 albedo_color = Color(0.043039158, 0.04303915, 0.04303915, 1)
@@ -37,48 +30,32 @@ top_radius = 0.1
 bottom_radius = 0.1
 height = 0.1
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r0uwl"]
-radius = 0.4506836
-height = 1.5352539
-
-[node name="Node3D" type="CharacterBody3D" unique_id=502888724]
+[node name="snowman" type="CharacterBody3D" unique_id=502888724 groups=["Enemies"]]
 script = ExtResource("1_r0uwl")
 
-[node name="Bottom" type="RigidBody3D" parent="." unique_id=297350428]
+[node name="collisionBox" type="CollisionShape3D" parent="." unique_id=1844563824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42892626, 0)
+shape = SubResource("CapsuleShape3D_r0uwl")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Bottom" unique_id=498323419]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=498323419]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 mesh = SubResource("BoxMesh_y724t")
 
-[node name="Middle" type="RigidBody3D" parent="." unique_id=409828585]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.9604645e-08, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Middle" unique_id=314189250]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.5, 0)
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=314189250]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.49999994, 0)
 mesh = SubResource("BoxMesh_oyepe")
 
-[node name="Top" type="RigidBody3D" parent="." unique_id=366981232]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Top" unique_id=837669388]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=837669388]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.8, 0)
 mesh = SubResource("BoxMesh_qkm8t")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Top" unique_id=1786345741]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.8, 0)
-shape = SubResource("ConcavePolygonShape3D_5j4bl")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Top" unique_id=1695942599]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14838845, 0.82389164, 0)
-mesh = SubResource("PrismMesh_p34g0")
-
-[node name="Brim" type="MeshInstance3D" parent="Top" unique_id=1611824139]
+[node name="Brim" type="MeshInstance3D" parent="." unique_id=1611824139]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9038336, 0)
 mesh = SubResource("CylinderMesh_x8xuk")
 
-[node name="Hat" type="MeshInstance3D" parent="Top" unique_id=517716684]
+[node name="Hat" type="MeshInstance3D" parent="." unique_id=517716684]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9572523, 0)
 mesh = SubResource("CylinderMesh_5ydoh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1844563824]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28705043, 0)
-shape = SubResource("CapsuleShape3D_r0uwl")
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=335806744]
+avoidance_enabled = true

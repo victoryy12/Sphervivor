@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dat6iyrol62hr"]
 
-[ext_resource type="Script" uid="uid://b7gqepkqvbsjj" path="res://scripts/main_menu.gd" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://b7gqepkqvbsjj" path="res://menus and ui/gui scripts/main_menu.gd" id="1_06t4h"]
 
 [sub_resource type="SystemFont" id="SystemFont_06t4h"]
 font_names = PackedStringArray("Centaur")

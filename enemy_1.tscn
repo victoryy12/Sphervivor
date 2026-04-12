@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://8fbwuj1u4u44"]
+[gd_scene format=3 uid="uid://d3p3dxnc2utyn"]
 
-[ext_resource type="Script" uid="uid://dhhw2yt3uutq8" path="res://scripts/enemy1.gd" id="1_mbxyh"]
+[ext_resource type="Script" uid="uid://dhhw2yt3uutq8" path="res://scripts/enemy_ai_CB.gd" id="1_mbxyh"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6rg8l"]
 

@@ -17,6 +17,7 @@ extends RigidBody3D
 @export var charge_duration: float = 0.25
 @export var charge_impulse: float = 40.0
 
+var damage = 300.0
 var _charge_left: float = 0.0
 var _charge_dir: Vector3 = Vector3.ZERO
 # In _physics_process, if _charge_left > 0:
@@ -29,7 +30,7 @@ var _attack_cd: float = 0.0
 var _telegraph: float = 0.0
 var _wants_attack: bool = false
 
-@onready var _player: Node3D = get_node_or_null(player_path)
+@onready var _player: RigidBody3D = get_tree().get_first_node_in_group("player")
 @onready var _floor_ray: RayCast3D = $FloorRay  # add RayCast3D child, point down
 
 func _ready() -> void:
