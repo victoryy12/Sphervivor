@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dvkpq7oip6g6w"]
+
+[ext_resource type="Script" uid="uid://bfjmnql7vji6q" path="res://Spawner/Enemy Spawns/AE_spawn.gd" id="1_angau"]
+
+[node name="advanced_enemy_spawn" type="Node3D" unique_id=7461052]
+
+[node name="spawn" type="Marker3D" parent="." unique_id=990512443]
+script = ExtResource("1_angau")
+
+[node name="SpawnPoint" type="Marker3D" parent="spawn" unique_id=511352589]
+
+[node name="Timer" type="Timer" parent="spawn" unique_id=1749030930]

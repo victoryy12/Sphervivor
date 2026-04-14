@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bivimaap3ynkn"]
 
+[ext_resource type="Script" uid="uid://8wwb5s1hm8av" path="res://enemies/elite_enemy.gd" id="1_gy784"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o77uq"]
 albedo_color = Color(0.10980392, 0, 0.83137256, 1)
 
@@ -19,8 +21,9 @@ albedo_color = Color(0.10980392, 0, 0.83137256, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bwxuu"]
 height = 1.2209473
 
-[node name="elite_enemy" type="CharacterBody3D" unique_id=1881464982]
+[node name="elite_enemy" type="RigidBody3D" unique_id=1721088939]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006774664, 0, -0.03534293)
+script = ExtResource("1_gy784")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=180096745]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57760036, 0)
@@ -61,3 +64,6 @@ material = SubResource("StandardMaterial3D_a0hwc")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1008582497]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.741773, 0)
 shape = SubResource("CapsuleShape3D_bwxuu")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=338520991]
+avoidance_enabled = true
