@@ -23,4 +23,4 @@ continuous_cd = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9096453, 2.6243398, -10.088634)
 
 [node name="Spikes" parent="." unique_id=1419556687 instance=ExtResource("5_ryrav")]
-transform = Transform3D(1, 0, 0, 0, 0.402507, -0.9154169, 0, 0.9154169, 0.402507, -29.42948, 0.5752865, 1.7768949)
+transform = Transform3D(1, 0, 0, 0, 0.402507, -0.9154169, 0, 0.9154169, 0.402507, -38.364952, 0.5752865, -5.2660995)
