@@ -121,7 +121,10 @@ func _on_body_entered(body):
 			take_damage(body.enemy_damage)
 		elif body.has_method("take_damage"):
 			body.take_damage(impact_damage)
-		
+
+
+func deal_damage():
+	return impact_damage
 		
 func take_damage(amount):
 	curr_hp -= amount
