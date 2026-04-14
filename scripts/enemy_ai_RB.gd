@@ -2,9 +2,13 @@ extends RigidBody3D
 
 @export var speed = 4.0
 @export var accel = 10.0
-@export var enemy_damage = 100.0
-@export var enemy_hp = 1000.0 #not sure how we're gonna deal with hp but this is for testing
+@export var enemy_damage = 10.0
+@export var enemy_hp = 1000.0 #not sure how we're gonna deal with hp but this is just for testing
+@export var current_hp = 1000.0
+@export var head_offset: Vector3 = Vector3(0, 2.0, 0)
 
+signal health_changed(current_hp: float, max_hp: float)
+signal died
 
 @onready var player = get_tree().get_first_node_in_group("player")
 
@@ -16,6 +20,10 @@ func _ready() -> void:
 	axis_lock_angular_x = true
 	axis_lock_angular_z = true
 	
+	add_to_group("Enemies")
+	
+	current_hp = clamp(current_hp, 0.0, enemy_hp)
+	health_changed.emit(current_hp, enemy_hp)
 	
 func _physics_process(delta):
 	movement_tracking(delta)
@@ -43,16 +51,19 @@ func movement_tracking(delta):
 
 
 func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("player") and body.has_method("deal_damage"):
 		take_damage(body.deal_damage())
-		
 		
 func take_damage(amount):
 	enemy_hp -= amount
+	if amount <= 0.0:
+		return
 	
-	print("Enemy HP:", enemy_hp)
+	current_hp = maxf(current_hp - amount, 0.0)
+	health_changed.emit(current_hp, enemy_hp)
+	print("Enemy HP:", current_hp)
 
-	if enemy_hp <= 0:
+	if current_hp <= 0:
 		die()
 
 
@@ -60,10 +71,11 @@ func deal_damage():
 	return enemy_damage
 
 		
-func _on_hitbox_body_entered(body):
-	if body.is_in_group("Player"):
+func _on_hitbox_body_entered(body: Node) -> void:
+	if body.is_in_group("Player") and body.has_method("deal_damage"):
 		take_damage(body.deal_damage())
 		
 				
 func die():
+	died.emit()
 	queue_free() 
