@@ -4,17 +4,19 @@ extends RigidBody3D
 @onready var arrow = $arrow
 
 @export var rolling_force = 30.0
-@export var jump_force = 150.0
+@export var jump_force = 100.0
 @export var slam_speed = 5000.0
-@export var impact_damage = 100.0
+@export var slam_acceleration = 2000.0
+@export var player_damage = 100.0
 
 @export var max_hp = 1000.0
 @export var curr_hp = 1000.0
-@export var hp_regen = 1
+@export var hp_regen = 0.1
 
 @export var charge_power = 0.0
 var charging = false 
-var max_charge = 5000.0; var charge_speed = 25000
+var max_charge = 2500.0; var charge_speed = 7500
+var slowdown_time = 0.4
 
 @export var mouse_sensitivity := 0.002
 
@@ -77,9 +79,10 @@ func player_movement(delta):
 			apply_central_impulse(Vector3.UP * jump_force)
 			#reduces slam angular velocity
 			angular_velocity.y /= 1.2
-
-	if Input.is_action_pressed("slam") and !onFloor:
-		apply_central_force(Vector3.DOWN * slam_speed)
+	if !onFloor:
+		if Input.is_action_pressed("slam"):			
+			apply_central_force(Vector3.DOWN * slam_speed)
+			apply_central_impulse(forward * slam_acceleration * delta)
 	#bullet time charge
 	if charging:
 		charge_arrow()
@@ -89,9 +92,9 @@ func player_movement(delta):
 
 
 func bullet_time_launch():
-	var direction = -cam.global_transform.basis.z
-	direction =direction.normalized()
-	apply_central_impulse(direction * charge_power)
+	var launch_direction = -cam.global_transform.basis.z
+	launch_direction = launch_direction.normalized()
+	apply_central_impulse(launch_direction * charge_power)
 
 
 func charge_input(event):
@@ -99,7 +102,7 @@ func charge_input(event):
 		arrow.visible = true
 		charging = true
 		charge_power = 0.0
-		Engine.time_scale = 0.2
+		Engine.time_scale = slowdown_time
 	
 	if event.is_action_released("charge ball"):
 		arrow.visible = false
@@ -118,7 +121,8 @@ func charge_arrow():
 func _on_body_entered(body):
 	if body.is_in_group("Enemies"):
 		if int(linear_velocity.length()) < 10:
-			take_damage(body.enemy_damage)
+			take_damage(body.deal_damage())
+		
 		
 		
 func take_damage(amount):
@@ -126,12 +130,15 @@ func take_damage(amount):
 	print("took damage:", amount)
 
 
+func deal_damage():
+	return player_damage
+		
+
 func health_regen():
 	while true:
 		await get_tree().create_timer(0.1).timeout
 		curr_hp += hp_regen
 		curr_hp = min(curr_hp, max_hp)
-		print(curr_hp)
 		
 	
 func player_death():

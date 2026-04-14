@@ -11,5 +11,8 @@ anchors_preset = 0
 [node name="pause menu" parent="." unique_id=147475881 instance=ExtResource("1_6lon5")]
 
 [node name="upgrades_screen" parent="." unique_id=216765729 instance=ExtResource("3_eli7m")]
+process_mode = 3
+layer = 2
 
 [node name="userInterface" parent="." unique_id=126740338 instance=ExtResource("3_47e7f")]
+layer = 3

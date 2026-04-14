@@ -34,7 +34,7 @@ inner_radius = 0.95
 script = ExtResource("1_inppo")
 
 [node name="BossBody" type="RigidBody3D" parent="." unique_id=145609100 groups=["Enemies"]]
-mass = 100.0
+mass = 1000.0
 script = ExtResource("2_inppo")
 
 [node name="SphereMesh" type="MeshInstance3D" parent="BossBody" unique_id=566427159]

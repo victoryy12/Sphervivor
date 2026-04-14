@@ -15,18 +15,21 @@ offset_bottom = 484.0
 alignment = 1
 
 [node name="upgrade1" type="Button" parent="HBoxContainer" unique_id=1116031215]
-custom_minimum_size = Vector2(250, 10)
+custom_minimum_size = Vector2(250, 120)
 layout_mode = 2
+autowrap_mode = 3
 
 [node name="upgrade2" type="Button" parent="HBoxContainer" unique_id=437269172]
 custom_minimum_size = Vector2(250, 10)
 layout_mode = 2
 icon = SubResource("CanvasTexture_aaomk")
+autowrap_mode = 3
 
 [node name="upgrade3" type="Button" parent="HBoxContainer" unique_id=1460339691]
 custom_minimum_size = Vector2(250, 10)
 layout_mode = 2
 icon = SubResource("CanvasTexture_aaomk")
+autowrap_mode = 3
 
 [connection signal="pressed" from="HBoxContainer/upgrade1" to="." method="_on_upgrade_1_pressed"]
 [connection signal="pressed" from="HBoxContainer/upgrade2" to="." method="_on_upgrade_2_pressed"]
