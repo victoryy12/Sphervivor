@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 #onready var player_stats = get_parent().get_parent()
 var pausedCheck = false

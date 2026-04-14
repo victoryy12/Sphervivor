@@ -6,6 +6,8 @@ extends Node3D
 @onready var a := $RingRoot/RingA
 @onready var b := $RingRoot/RingB
 @onready var c := $RingRoot/RingC
+
+
 func _process(delta: float) -> void:
 	if a:
 		a.rotate_y(ring_a_speed * delta)

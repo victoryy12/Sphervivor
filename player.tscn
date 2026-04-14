@@ -1,33 +1,33 @@
 [gd_scene format=3 uid="uid://m3sigj8s4nmg"]
 
 [ext_resource type="Script" uid="uid://c6ci0ect73ili" path="res://scripts/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://by4b8asxgx2d2" path="res://assets/gray_rocks_diff_4k.jpg" id="3_hqtel"]
 [ext_resource type="PackedScene" uid="uid://pp16gegsjrhv" path="res://menus and ui/gui.tscn" id="3_i3pqv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_onrkg"]
 bounce = 0.24
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i3pqv"]
-load_path = "res://.godot/imported/download.jpg-cdfd3ae589be437b73d5b10dd72f4ed2.s3tc.ctex"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onrkg"]
-albedo_texture = SubResource("CompressedTexture2D_i3pqv")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
-albedo_color = Color(0.6907918, 0.1423254, 0.16672724, 1)
+albedo_texture = ExtResource("3_hqtel")
 
-[sub_resource type="SphereMesh" id="SphereMesh_i3pqv"]
+[sub_resource type="SphereMesh" id="SphereMesh_hqtel"]
 material = SubResource("StandardMaterial3D_i3pqv")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hqtel"]
 
-[node name="Player" type="RigidBody3D" unique_id=1714944700]
-mass = 100.0
+[sub_resource type="TextMesh" id="TextMesh_i3pqv"]
+text = "-------->"
+
+[node name="Player" type="RigidBody3D" unique_id=1714944700 groups=["Player"]]
+mass = 200.0
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 10
 script = ExtResource("1_onrkg")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1285117708]
-material_override = SubResource("StandardMaterial3D_onrkg")
-mesh = SubResource("SphereMesh_i3pqv")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=428767]
+mesh = SubResource("SphereMesh_hqtel")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=923740636]
 shape = SubResource("SphereShape3D_hqtel")
@@ -39,6 +39,12 @@ spring_length = 5.0
 [node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=2042187483]
 current = true
 
+[node name="touchingFloor" type="RayCast3D" parent="." unique_id=2055841617]
+
 [node name="gui" parent="." unique_id=659538166 instance=ExtResource("3_i3pqv")]
 
-[node name="touchingFloor" type="RayCast3D" parent="." unique_id=2055841617]
+[node name="arrow" type="MeshInstance3D" parent="." unique_id=556300033]
+transform = Transform3D(2.1855696e-08, 0.50000006, 0.8660254, 1, -4.371139e-08, 0, 3.7855173e-08, 0.8660254, -0.50000006, 0, 0, 0)
+mesh = SubResource("TextMesh_i3pqv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

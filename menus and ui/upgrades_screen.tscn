@@ -1,20 +1,13 @@
 [gd_scene format=3 uid="uid://sx8x7j8icr1p"]
 
-[ext_resource type="Script" uid="uid://b2gl7af8mfeg" path="res://scripts/upgrades_screen.gd" id="1_5h2bv"]
+[ext_resource type="Script" uid="uid://b2gl7af8mfeg" path="res://menus and ui/gui scripts/upgrades_screen.gd" id="1_5h2bv"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_aaomk"]
 
-[node name="upgrades_screen" type="Control" unique_id=216765729]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="upgrades_screen" type="CanvasLayer" unique_id=1374553911]
 script = ExtResource("1_5h2bv")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1913079543]
-layout_mode = 0
 offset_left = 171.0
 offset_top = 121.0
 offset_right = 1019.0
@@ -35,7 +28,6 @@ custom_minimum_size = Vector2(250, 10)
 layout_mode = 2
 icon = SubResource("CanvasTexture_aaomk")
 
-[connection signal="pressed" from="HBoxContainer/upgrade1" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/upgrade1" to="." method="_on_upgrade_1_pressed"]
 [connection signal="pressed" from="HBoxContainer/upgrade2" to="." method="_on_upgrade_2_pressed"]
 [connection signal="pressed" from="HBoxContainer/upgrade3" to="." method="_on_upgrade_3_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dh0pg7noum18o"]
+[gd_scene format=3 uid="uid://d3p3dxnc2utyn"]
 
 [ext_resource type="Script" uid="uid://dhhw2yt3uutq8" path="res://scripts/enemy_ai_CB.gd" id="1_mbxyh"]
 
@@ -10,7 +10,7 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_6rg8l"]
 material = SubResource("StandardMaterial3D_6rg8l")
 
-[node name="enemy1" type="CharacterBody3D" unique_id=1383739987 groups=["Enemies"]]
+[node name="enemy1" type="CharacterBody3D" unique_id=1383739987]
 collision_layer = 3
 script = ExtResource("1_mbxyh")
 
@@ -19,6 +19,3 @@ shape = SubResource("SphereShape3D_6rg8l")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1988273411]
 mesh = SubResource("SphereMesh_6rg8l")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=383424308]
-avoidance_enabled = true
