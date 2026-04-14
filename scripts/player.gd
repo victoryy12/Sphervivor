@@ -105,3 +105,13 @@ func death_plane():
 	var deathBarrierDepth = -25
 	if global_position.y < deathBarrierDepth:
 		get_tree().reload_current_scene()
+
+func die() -> void:
+	# Replace with your death screen/game over later
+	get_tree().reload_current_scene()
+
+func take_damage(amount: float) -> void:
+	player_health = maxf(player_health - amount, 0.0)
+	print("PLAYER HIT:", amount, " health:", player_health)
+	if player_health <= 0.0:
+		die()
