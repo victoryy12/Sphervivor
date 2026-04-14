@@ -2,9 +2,21 @@
 
 [ext_resource type="Script" uid="uid://y8an8iqbiuen" path="res://scripts/spikes.gd" id="1_s0g1x"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0g1x"]
+albedo_color = Color(0, 0, 0, 1)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_s0g1x"]
+top_radius = 0.0
+height = 0.837
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nrdsm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrdsm"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nrdsm"]
+top_radius = 0.25
+bottom_radius = 0.25
 
 [node name="Spikes" type="RigidBody3D" unique_id=1419556687]
 freeze = true
@@ -14,9 +26,16 @@ max_contacts_reported = 5
 script = ExtResource("1_s0g1x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=674419517]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9775008, 0)
+material_overlay = SubResource("StandardMaterial3D_s0g1x")
 mesh = SubResource("CylinderMesh_s0g1x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1355474400]
 shape = SubResource("CapsuleShape3D_nrdsm")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=796978863]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.047623515, 0)
+material_overlay = SubResource("StandardMaterial3D_nrdsm")
+mesh = SubResource("CylinderMesh_nrdsm")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
