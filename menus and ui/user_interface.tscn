@@ -3,12 +3,16 @@
 [ext_resource type="Script" uid="uid://cvr0l3ebritj3" path="res://menus and ui/gui scripts/user_interface.gd" id="1_kxhmu"]
 
 [sub_resource type="SystemFont" id="SystemFont_sb0x1"]
-font_names = PackedStringArray("Jokerman")
+font_names = PackedStringArray("Britannic")
 subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_i7dvk"]
 font = SubResource("SystemFont_sb0x1")
 font_size = 30
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0.078431375, 0, 0, 0.7607843)
 
 [node name="userInterface" type="CanvasLayer" unique_id=1682813763]
 layer = 2
@@ -28,6 +32,6 @@ grow_horizontal = 0
 grow_vertical = 0
 label_settings = SubResource("LabelSettings_i7dvk")
 
-[node name="playerHealth" type="ProgressBar" parent="." unique_id=778097279]
-offset_right = 368.0
-offset_bottom = 27.0
+[node name="playerHealth" type="ProgressBar" parent="." unique_id=1671027482]
+offset_right = 388.0
+offset_bottom = 68.0
