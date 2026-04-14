@@ -6,14 +6,17 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nrdsm"]
 
-[node name="spikes" type="Node3D" unique_id=1000033756]
-
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1419556687]
-disable_mode = 1
+[node name="Spikes" type="RigidBody3D" unique_id=1419556687]
+freeze = true
+freeze_mode = 1
+contact_monitor = true
+max_contacts_reported = 5
 script = ExtResource("1_s0g1x")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=674419517]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=674419517]
 mesh = SubResource("CylinderMesh_s0g1x")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1355474400]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1355474400]
 shape = SubResource("CapsuleShape3D_nrdsm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
