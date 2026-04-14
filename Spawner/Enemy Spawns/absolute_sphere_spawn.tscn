@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://0e0vkuqhcb5r"]
+
+[ext_resource type="Script" uid="uid://h06atlgv7e3s" path="res://Spawner/Enemy Spawns/AS_spawn.gd" id="1_juywx"]
+
+[node name="absolute_sphere_spawn" type="Node3D" unique_id=425148226]
+
+[node name="spawn" type="Marker3D" parent="." unique_id=241410938]
+script = ExtResource("1_juywx")
+
+[node name="SpawnPoint" type="Marker3D" parent="spawn" unique_id=1021497390]
+
+[node name="Timer" type="Timer" parent="spawn" unique_id=1898282330]
