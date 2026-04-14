@@ -123,7 +123,7 @@ func _on_body_entered(body):
 			body.take_damage(impact_damage)
 
 
-func deal_damage():
+func deal_damage() -> float:
 	return impact_damage
 		
 func take_damage(amount):
