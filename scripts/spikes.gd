@@ -1,10 +1,10 @@
-extends Node3D
+extends RigidBody3D
 
-@export var enemy_damage = 100.0
+@export var spikes_damage = 100.0
 
 
-func deal_damage():
-	return enemy_damage
+func spikes_deal_damage():
+	return spikes_damage
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

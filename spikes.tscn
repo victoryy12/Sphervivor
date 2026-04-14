@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://yibnm3rujw7e"]
 
-[ext_resource type="Script" uid="uid://y8an8iqbiuen" path="res://spikes.gd" id="1_s0g1x"]
+[ext_resource type="Script" uid="uid://y8an8iqbiuen" path="res://scripts/spikes.gd" id="1_s0g1x"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_s0g1x"]
 
@@ -9,6 +9,7 @@
 [node name="spikes" type="Node3D" unique_id=1000033756]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1419556687]
+disable_mode = 1
 script = ExtResource("1_s0g1x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=674419517]
