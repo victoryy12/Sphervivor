@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://crdlhuohh2d3w"]
 
-[ext_resource type="Script" uid="uid://dhhw2yt3uutq8" path="res://scripts/enemy_ai_CB.gd" id="1_r0uwl"]
+[ext_resource type="Script" uid="uid://d2s7x407y180s" path="res://scripts/enemy_ai_RB.gd" id="1_r0uwl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r0uwl"]
 radius = 0.4506836
@@ -30,7 +30,8 @@ top_radius = 0.1
 bottom_radius = 0.1
 height = 0.1
 
-[node name="snowman" type="CharacterBody3D" unique_id=502888724 groups=["Enemies"]]
+[node name="snowman" type="RigidBody3D" unique_id=363226556 groups=["Enemies"]]
+mass = 1000.0
 script = ExtResource("1_r0uwl")
 
 [node name="collisionBox" type="CollisionShape3D" parent="." unique_id=1844563824]
@@ -59,3 +60,5 @@ mesh = SubResource("CylinderMesh_5ydoh")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=335806744]
 avoidance_enabled = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://m3sigj8s4nmg" path="res://player.tscn" id="1_a202f"]
 [ext_resource type="Script" uid="uid://1a20jnor4x2t" path="res://scripts/game.gd" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://cxd17xto40u2i" path="res://enemies/absolute_sphere.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://crdlhuohh2d3w" path="res://enemies/snow_man.tscn" id="5_7jktm"]
 [ext_resource type="PackedScene" uid="uid://c4d1vn0itpmdx" path="res://forest_arena.tscn" id="6_eow3j"]
 
@@ -16,9 +15,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.782625, 3.5926342, -2.7790
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_fc0e3")
 continuous_cd = false
-
-[node name="AbsoluteSphere" parent="." unique_id=1286040135 instance=ExtResource("4_fc0e3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.830345, 11.671169, -24.191729)
 
 [node name="forest arena" parent="." unique_id=2100858950 instance=ExtResource("6_eow3j")]
 
