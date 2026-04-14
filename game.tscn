@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://3ogrr84620rg"]
 
 [ext_resource type="PackedScene" uid="uid://m3sigj8s4nmg" path="res://player.tscn" id="1_a202f"]
-[ext_resource type="Script" uid="uid://1a20jnor4x2t" path="res://scripts/game.gd" id="1_fc0e3"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://crdlhuohh2d3w" path="res://enemies/snow_man.tscn" id="5_7jktm"]
 [ext_resource type="PackedScene" uid="uid://c4d1vn0itpmdx" path="res://forest_arena.tscn" id="6_eow3j"]
 

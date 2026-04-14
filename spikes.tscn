@@ -1,14 +1,18 @@
 [gd_scene format=3 uid="uid://yibnm3rujw7e"]
 
+[ext_resource type="Script" uid="uid://y8an8iqbiuen" path="res://spikes.gd" id="1_s0g1x"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s0g1x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nrdsm"]
+
 [node name="spikes" type="Node3D" unique_id=1000033756]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=1622606644]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3762207, 0)
-radius = 0.097
-height = 0.5
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1419556687]
+script = ExtResource("1_s0g1x")
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="." unique_id=706441803]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7724612, 0)
-radius = 0.2
-height = 0.29589844
-cone = true
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=674419517]
+mesh = SubResource("CylinderMesh_s0g1x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1355474400]
+shape = SubResource("CapsuleShape3D_nrdsm")
