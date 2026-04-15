@@ -19,7 +19,7 @@ var curr_hp: float:
 signal health_changed(current_hp: float, max_hp: float)
 signal died
 
-@onready var player = get_tree().get_first_node_in_group("player")
+@onready var player = get_tree().get_first_node_in_group("Player")
 
 
 func _ready() -> void:
@@ -60,7 +60,7 @@ func movement_tracking(delta: float) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("player") and body.has_method("deal_damage"):
+	if body.is_in_group("Player") and body.has_method("deal_damage"):
 		take_damage(body.deal_damage())
 		
 func take_damage(amount: float) -> void:
@@ -78,10 +78,6 @@ func take_damage(amount: float) -> void:
 func deal_damage() -> float:
 	return enemy_damage
 
-		
-func _on_hitbox_body_entered(body: Node) -> void:
-	if body.is_in_group("player") and body.has_method("deal_damage"):
-		take_damage(body.deal_damage())
 		
 				
 func die():

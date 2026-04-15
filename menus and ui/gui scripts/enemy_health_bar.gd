@@ -1,6 +1,7 @@
 extends Control
 
 @onready var bar: ProgressBar = $Bar
+@onready var player = get_parent().get_parent()
 var enemy_bars: Dictionary = {}
 var tracked_enemies: Array = []
 
@@ -8,6 +9,7 @@ const ENEMY_GROUP := "Enemies"
 const BAR_SIZE := Vector2(72, 8)
 const SCREEN_OFFSET := Vector2(36, 22)
 const DEFAULT_HEAD_OFFSET := Vector3(0.0, 2.2, 0.0)
+const SHOW_DISTANCE := 20.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -101,6 +103,11 @@ func _update_enemy_bars() -> void:
 			continue
 
 		var bar: ProgressBar = enemy_bars[enemy]
+		#creates a show distance for bars
+		if player and enemy.global_position.distance_to(player.global_position) > SHOW_DISTANCE:
+			bar.visible = false
+			continue
+			
 		var world_pos: Vector3 = enemy.global_position + _enemy_head_offset(enemy)
 		if cam.is_position_behind(world_pos):
 			bar.visible = false

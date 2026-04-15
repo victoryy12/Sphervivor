@@ -32,7 +32,7 @@ height = 0.12
 radius = 0.3881836
 height = 1.2581867
 
-[node name="Basic_Enemy" type="RigidBody3D" unique_id=894703537]
+[node name="Basic_Enemy" type="RigidBody3D" unique_id=894703537 groups=["Enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08788657, 0)
 mass = 1000.0
 contact_monitor = true

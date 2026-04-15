@@ -14,7 +14,7 @@ extends RigidBody3D
 
 @export var charge_power = 0.0
 var charging = false 
-var max_charge = 5000.0; var charge_speed = 25000
+var max_charge = 2500.0; var charge_speed = 25000
 
 @export var mouse_sensitivity := 0.002
 
@@ -77,9 +77,11 @@ func player_movement(delta):
 			apply_central_impulse(Vector3.UP * jump_force)
 			#reduces slam angular velocity
 			angular_velocity.y /= 1.2
-
-	if Input.is_action_pressed("slam") and !onFloor:
-		apply_central_force(Vector3.DOWN * slam_speed)
+	if !onFloor:
+		if Input.is_action_pressed("slam") and !onFloor:
+			apply_central_force(Vector3.DOWN * slam_speed)
+			linear_velocity.x *= 0.9
+			linear_velocity.z *= 0.9
 	#bullet time charge
 	if charging:
 		charge_arrow()

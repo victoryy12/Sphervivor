@@ -1,6 +1,7 @@
 extends CanvasLayer
 
-#onready var player_stats = get_parent().get_parent()
+@onready var player_stats = get_parent().get_parent()
+@onready var player_ui = get_parent().get_node("userInterface")
 var pausedCheck = false
 
 func _input(event: InputEvent) -> void:
@@ -16,6 +17,8 @@ func pause_and_unpause():
 	pausedCheck = !pausedCheck
 	get_tree().paused = pausedCheck
 	self.visible = pausedCheck
+	
+	player_ui.visible = !pausedCheck
 	
 	if pausedCheck:
 		#display_stats()
