@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	arrow.global_transform.origin = global_transform.origin
 	player_death() 
 	player_movement(delta)
-	
+	print(rolling_force)
 	
 func player_movement(delta):
 	cam.rotation.y = yaw

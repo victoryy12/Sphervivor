@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cln3wo4yxnt1b"]
 
-[ext_resource type="Script" path="res://scripts/experience_point.gd" id="1_ex3lp"]
+[ext_resource type="Script" uid="uid://dayhjdmec0hvo" path="res://scripts/experience_point.gd" id="1_sun7t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xdsq"]
 transparency = 1
@@ -19,7 +19,7 @@ albedo_color = Color(0.32156864, 1, 1, 0.23529412)
 radius = 0.6597426
 
 [node name="experiencePoint" type="Area3D" unique_id=1086687023]
-script = ExtResource("1_ex3lp")
+script = ExtResource("1_sun7t")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1359464866]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
