@@ -1,53 +1,68 @@
 [gd_scene format=3 uid="uid://bokohp2p07r84"]
 
-[ext_resource type="Script" uid="uid://yuqmcjw7xv8u" path="res://scripts/advanced_enemy.gd" id="1_u6gt7"]
+[ext_resource type="Script" path="res://scripts/enemy_ai_RB.gd" id="1_u6gt7"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_775av"]
-albedo_color = Color(0.22352941, 0.7176471, 0.8901961, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6gt7"]
+albedo_color = Color(0.2901961, 0.08627451, 0.13333334, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_car4b"]
-albedo_color = Color(1, 0.019607844, 0, 1)
+[sub_resource type="CylinderMesh" id="CylinderMesh_mxt8n"]
+material = SubResource("StandardMaterial3D_u6gt7")
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.75
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_je8x2"]
-albedo_color = Color(0.22352941, 0.7176471, 0.8901961, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ao7rc"]
+albedo_color = Color(1, 0.019607844, 0.047058824, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_56mdf"]
-albedo_color = Color(0.10980392, 0, 0.83137256, 1)
+[sub_resource type="TorusMesh" id="TorusMesh_gqxu6"]
+material = SubResource("StandardMaterial3D_ao7rc")
+inner_radius = 0.45
+outer_radius = 0.25
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_huxek"]
-height = 1.1645508
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i7w5e"]
+albedo_color = Color(0.11372549, 1, 1, 1)
+metallic = 0.96
+metallic_specular = 0.42
 
-[node name="Advance_enemy" type="CharacterBody3D" unique_id=128083926]
+[sub_resource type="BoxMesh" id="BoxMesh_qa8b2"]
+material = SubResource("StandardMaterial3D_i7w5e")
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4s5g1"]
+albedo_color = Color(0.07058824, 0.03529412, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2ri5i"]
+material = SubResource("StandardMaterial3D_4s5g1")
+top_radius = 0.0
+bottom_radius = 0.085
+height = 0.25
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u6gt7"]
+radius = 0.4506836
+height = 1.0630043
+
+[node name="Advance_enemy" type="RigidBody3D" unique_id=2013695041]
 script = ExtResource("1_u6gt7")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=1193692188]
+[node name="CSGCylinder3D" type="MeshInstance3D" parent="." unique_id=1645191848]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
-use_collision = true
-radius = 0.25
-height = 0.75
-material = SubResource("StandardMaterial3D_775av")
+mesh = SubResource("CylinderMesh_mxt8n")
 
-[node name="CSGTorus3D" type="CSGTorus3D" parent="." unique_id=872446786]
+[node name="CSGTorus3D" type="MeshInstance3D" parent="." unique_id=790899847]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
-use_collision = true
-inner_radius = 0.25
-outer_radius = 0.5
-material = SubResource("StandardMaterial3D_car4b")
+mesh = SubResource("TorusMesh_gqxu6")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=316735757]
+[node name="CSGBox3D" type="MeshInstance3D" parent="." unique_id=2107698972]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
-use_collision = true
-size = Vector3(0.25, 0.25, 0.25)
-material = SubResource("StandardMaterial3D_je8x2")
+mesh = SubResource("BoxMesh_qa8b2")
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="." unique_id=1852862966]
+[node name="CSGCylinder3D2" type="MeshInstance3D" parent="." unique_id=1276858410]
 transform = Transform3D(2.9802322e-08, 1, 0, -1, 2.9802322e-08, 0, 0, 0, 1, 0.25, 0.85, 0)
-use_collision = true
-radius = 0.085
-height = 0.25
-cone = true
-material = SubResource("StandardMaterial3D_56mdf")
+mesh = SubResource("CylinderMesh_2ri5i")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1070613075]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4177246, 0)
-shape = SubResource("CapsuleShape3D_huxek")
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=542971595]
+avoidance_enabled = true
+
+[node name="collisionBox" type="CollisionShape3D" parent="." unique_id=322381400]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5043737, 0)
+shape = SubResource("CapsuleShape3D_u6gt7")
