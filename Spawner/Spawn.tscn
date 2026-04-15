@@ -13,7 +13,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67508197, 0)
 script = ExtResource("1_n6xch")
 enemy_scenes = Array[PackedScene]([ExtResource("2_6uhls"), ExtResource("3_8ti2y"), ExtResource("4_aw3h4"), ExtResource("5_dmt5u")])
 max_per_type = Array[int]([6, 3, 2, 1])
-wave_size = 10
+wave_size = 3
+time_between_spawns = 5.0
+time_between_waves = 3.0
 
 [node name="SpawnPoint" type="Marker3D" parent="spawn" unique_id=642416224]
 
