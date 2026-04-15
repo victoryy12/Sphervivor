@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cln3wo4yxnt1b"]
+
+[ext_resource type="Script" path="res://scripts/experience_point.gd" id="1_ex3lp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xdsq"]
+transparency = 1
+depth_draw_mode = 2
+depth_test = 1
+albedo_color = Color(0.18431373, 0.44705883, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ex3lp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pod4q"]
+albedo_color = Color(0.32156864, 1, 1, 0.23529412)
+
+[sub_resource type="SphereMesh" id="SphereMesh_3e4lw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wnho6"]
+radius = 0.6597426
+
+[node name="experiencePoint" type="Area3D" unique_id=1086687023]
+script = ExtResource("1_ex3lp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1359464866]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_2xdsq")
+mesh = SubResource("SphereMesh_ex3lp")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=856996712]
+transform = Transform3D(0.34142134, -0.058578648, 0.19999999, 0.19999999, 0.19999999, -0.28284273, -0.058578648, 0.34142134, 0.19999999, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_pod4q")
+mesh = SubResource("SphereMesh_3e4lw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=197805933]
+shape = SubResource("SphereShape3D_wnho6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

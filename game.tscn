@@ -1,29 +1,3 @@
 [gd_scene format=3 uid="uid://3ogrr84620rg"]
 
-[ext_resource type="PackedScene" uid="uid://m3sigj8s4nmg" path="res://player.tscn" id="1_a202f"]
-[ext_resource type="Script" uid="uid://1a20jnor4x2t" path="res://scripts/game.gd" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://yibnm3rujw7e" path="res://spikes.tscn" id="5_ryrav"]
-[ext_resource type="PackedScene" uid="uid://c4d1vn0itpmdx" path="res://forest_arena.tscn" id="6_eow3j"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fc0e3"]
-
-[node name="game" type="Node3D" unique_id=437148300]
-script = ExtResource("1_fc0e3")
-
-[node name="Player" parent="." unique_id=1314071749 groups=["player"] instance=ExtResource("1_a202f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.782625, 3.5926342, -2.7790384)
-mass = 100.0
-physics_material_override = SubResource("PhysicsMaterial_fc0e3")
-continuous_cd = false
-
-[node name="forest arena" parent="." unique_id=2100858950 instance=ExtResource("6_eow3j")]
-
-[node name="Spikes" parent="." unique_id=1419556687 instance=ExtResource("5_ryrav")]
-<<<<<<< HEAD
-transform = Transform3D(1, 0, 0, 0, 0.41033694, -0.911934, 0, 0.911934, 0.41033694, -38.68866, 0.9178587, -5.600592)
-=======
-transform = Transform3D(1, 0, 0, 0, 0.402507, -0.9154169, 0, 0.9154169, 0.402507, -38.364952, 0.5752865, -5.2660995)
-
-[node name="enemy_spawner" parent="." unique_id=1852112187 instance=ExtResource("6_ryrav")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.04158, 0)
->>>>>>> 1abf1561c8ae81e529f33f2d8fd246a7ba076548
+[node name="game" type="Node3D" unique_id=466450601]
