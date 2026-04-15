@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://crdlhuohh2d3w" path="res://enemies/snow_man.tscn" id="5_7jktm"]
 [ext_resource type="PackedScene" uid="uid://yibnm3rujw7e" path="res://spikes.tscn" id="5_ryrav"]
 [ext_resource type="PackedScene" uid="uid://c4d1vn0itpmdx" path="res://forest_arena.tscn" id="6_eow3j"]
-[ext_resource type="PackedScene" uid="uid://ch0exdx0a55dy" path="res://Spawner/Spawn.tscn" id="6_ryrav"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fc0e3"]
 
@@ -24,4 +23,4 @@ continuous_cd = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9096453, 2.6243398, -10.088634)
 
 [node name="Spikes" parent="." unique_id=1419556687 instance=ExtResource("5_ryrav")]
-transform = Transform3D(1, 0, 0, 0, 0.402507, -0.9154169, 0, 0.9154169, 0.402507, -38.364952, 0.5752865, -5.2660995)
+transform = Transform3D(1, 0, 0, 0, 0.41033694, -0.911934, 0, 0.911934, 0.41033694, -38.68866, 0.5363282, -5.600592)
