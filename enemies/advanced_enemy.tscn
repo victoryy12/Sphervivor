@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bokohp2p07r84"]
 
-[ext_resource type="Script" path="res://scripts/enemy_ai_RB.gd" id="1_u6gt7"]
+[ext_resource type="Script" uid="uid://d2s7x407y180s" path="res://scripts/enemy_ai_RB.gd" id="1_u6gt7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6gt7"]
 albedo_color = Color(0.2901961, 0.08627451, 0.13333334, 1)
@@ -38,7 +38,7 @@ bottom_radius = 0.085
 height = 0.25
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u6gt7"]
-radius = 0.4506836
+radius = 0.49951172
 height = 1.0630043
 
 [node name="Advance_enemy" type="RigidBody3D" unique_id=2013695041]

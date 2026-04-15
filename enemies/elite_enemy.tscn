@@ -45,7 +45,7 @@ bottom_radius = 0.12
 height = 0.4
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gy784"]
-radius = 0.4506836
+radius = 0.4765625
 height = 1.4180329
 
 [node name="elite_enemy" type="RigidBody3D" unique_id=1721088939]
