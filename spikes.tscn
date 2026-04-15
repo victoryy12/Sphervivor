@@ -10,6 +10,7 @@ top_radius = 0.0
 height = 0.837
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nrdsm"]
+height = 2.4824219
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrdsm"]
 albedo_color = Color(0, 0, 0, 1)
@@ -31,6 +32,7 @@ material_overlay = SubResource("StandardMaterial3D_s0g1x")
 mesh = SubResource("CylinderMesh_s0g1x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1355474400]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13183594, 0)
 shape = SubResource("CapsuleShape3D_nrdsm")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=796978863]
