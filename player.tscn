@@ -19,7 +19,6 @@ material = SubResource("StandardMaterial3D_i3pqv")
 text = "-------->"
 
 [node name="Player" type="RigidBody3D" unique_id=1714944700 groups=["Player"]]
-mass = 200.0
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
 continuous_cd = true
 contact_monitor = true
