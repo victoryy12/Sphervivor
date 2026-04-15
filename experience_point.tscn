@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dayhjdmec0hvo" path="res://scripts/experience_point.gd" id="1_sun7t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xdsq"]
-transparency = 1
 depth_draw_mode = 2
 depth_test = 1
 albedo_color = Color(0.18431373, 0.44705883, 1, 1)
@@ -16,7 +15,7 @@ albedo_color = Color(0.32156864, 1, 1, 0.23529412)
 [sub_resource type="SphereMesh" id="SphereMesh_3e4lw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wnho6"]
-radius = 0.6597426
+radius = 0.46415627
 
 [node name="experiencePoint" type="Area3D" unique_id=1086687023]
 script = ExtResource("1_sun7t")

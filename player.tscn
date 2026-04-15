@@ -15,8 +15,8 @@ material = SubResource("StandardMaterial3D_i3pqv")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hqtel"]
 
-[sub_resource type="TextMesh" id="TextMesh_i3pqv"]
-text = "-------->"
+[sub_resource type="SphereShape3D" id="SphereShape3D_i3pqv"]
+radius = 5.6612096
 
 [node name="player" type="RigidBody3D" unique_id=1714944700 groups=["Player"]]
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
@@ -42,8 +42,10 @@ current = true
 
 [node name="gui" parent="." unique_id=659538166 instance=ExtResource("3_i3pqv")]
 
-[node name="arrow" type="MeshInstance3D" parent="." unique_id=556300033]
-transform = Transform3D(2.1855696e-08, 0.50000006, 0.8660254, 1, -4.371139e-08, 0, 3.7855173e-08, 0.8660254, -0.50000006, 0, 0, 0)
-mesh = SubResource("TextMesh_i3pqv")
+[node name="damageAura" type="Area3D" parent="." unique_id=220112435]
+
+[node name="auaraRange" type="CollisionShape3D" parent="damageAura" unique_id=1498920748]
+shape = SubResource("SphereShape3D_i3pqv")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="damageAura" to="." method="_on_damage_aura_body_entered"]

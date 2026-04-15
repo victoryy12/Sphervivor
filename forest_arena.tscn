@@ -139,10 +139,10 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="enemy_spawner" parent="." unique_id=1852112187 instance=ExtResource("2_vqyi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.80137, 14.708278, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.12188, 2.55027, 0)
 
 [node name="enemy_spawner2" parent="." unique_id=1203849665 instance=ExtResource("2_vqyi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.844101, 10.5483885, 61.286247)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.666355, 2.5999851, 28.2303)
 
 [node name="enemy_spawner3" parent="." unique_id=1579509703 instance=ExtResource("2_vqyi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.452385, 14.96683, -69.66059)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.509285, 2.5264482, -31.060066)

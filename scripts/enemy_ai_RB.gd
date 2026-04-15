@@ -7,6 +7,8 @@ extends RigidBody3D
 @export var current_hp = 1000.0
 @export var head_offset: Vector3 = Vector3(0, 2.0, 0)
 
+var experience_drop = preload("res://experience_point.tscn")
+
 # Compatibility aliases for UI/scripts expecting max_hp/curr_hp names.
 var max_hp: float:
 	get:
@@ -81,5 +83,9 @@ func deal_damage() -> float:
 		
 				
 func die():
+	var exp = experience_drop.instantiate()
+	get_tree().current_scene.add_child(exp)
+	exp.global_position = global_position
+	
 	died.emit()
 	queue_free() 

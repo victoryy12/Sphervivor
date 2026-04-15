@@ -1,12 +1,16 @@
 extends RigidBody3D
 
 @onready var cam = $CameraRig
-@onready var arrow = $arrow
 
 @export var rolling_force = 30.0
-@export var jump_force = 150.0
+@export var jump_force = 70.0
+@export var impact_mult = 450.0
+
 @export var slam_speed = 5000.0
-@export var impact_damage = 100.0
+@export var slam_damage = 50
+var slam_height = 0.0
+var is_slamming := false
+var was_in_air := false
 
 @export var max_hp = 1000.0
 @export var curr_hp = 1000.0
@@ -23,9 +27,7 @@ var pitch := 0.0 # up/down
 
 func _ready() -> void:
 	cam.top_level = true
-	arrow.top_level = true
 	$touchingFloor.top_level = true
-	arrow.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health_regen()
 
@@ -43,16 +45,24 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	cam.global_transform.origin = global_transform.origin
 	$touchingFloor.global_transform.origin = global_transform.origin
-	arrow.global_transform.origin = global_transform.origin
 	player_death() 
 	player_movement(delta)
-	print(rolling_force)
+
 	
 func player_movement(delta):
+	var onFloor =  $touchingFloor.is_colliding()
+	
+	if !onFloor:
+		was_in_air = true
+	if onFloor and was_in_air:
+		if is_slamming:
+			slam_impact()  
+		is_slamming = false
+		was_in_air = false
+		
 	cam.rotation.y = yaw
 	cam.rotation.x = pitch
 	
-	var onFloor =  $touchingFloor.is_colliding()
 	var x_input = Input.get_axis("down", "up")
 	var z_input = Input.get_axis("right", "left")
 	# Get camera directions
@@ -77,14 +87,12 @@ func player_movement(delta):
 			apply_central_impulse(Vector3.UP * jump_force)
 			#reduces slam angular velocity
 			angular_velocity.y /= 1.2
-	if !onFloor:
-		if Input.is_action_pressed("slam") and !onFloor:
-			apply_central_force(Vector3.DOWN * slam_speed)
-			linear_velocity.x *= 0.9
-			linear_velocity.z *= 0.9
+			
+	if !onFloor:		
+		slam(onFloor)
+	
 	#bullet time charge
 	if charging:
-		charge_arrow()
 		charge_power += charge_speed * delta
 		charge_power = clamp(charge_power, 0, max_charge)
 		linear_velocity *= 0.999
@@ -98,23 +106,14 @@ func bullet_time_launch():
 
 func charge_input(event):
 	if event.is_action_pressed("charge ball"):
-		arrow.visible = true
 		charging = true
 		charge_power = 0.0
 		Engine.time_scale = 0.2
 	
 	if event.is_action_released("charge ball"):
-		arrow.visible = false
 		bullet_time_launch()
 		charging = false
 		Engine.time_scale = 1.0
-
-
-func charge_arrow():
-		var scale_amount = lerp(0.5, 5.0, charge_power / max_charge)
-		var cam_forward = -cam.global_transform.basis.x
-		arrow.look_at(global_position + cam_forward, Vector3.UP)
-		arrow.scale = Vector3(scale_amount, scale_amount, scale_amount)
 	
 	
 func _on_body_entered(body):
@@ -123,21 +122,58 @@ func _on_body_entered(body):
 			take_damage(body.enemy_damage)
 
 
+func slam_impact():
+	var fall_distance = slam_height - global_position.y
+	fall_distance = max(fall_distance, 0)
+	
+	var damage = (slam_damage + fall_distance) * 5.0
+	
+	for body in $damageAura.get_overlapping_bodies():
+		if body.is_in_group("Enemies"):
+			body.take_damage(damage)
+			
+			var dir = (body.global_position - global_position).normalized()
+			body.apply_impulse(Vector3.UP * 80 + dir * 50)
+
+
+func slam(onFloor):
+	if !onFloor:
+		was_in_air = true
+		
+	if onFloor and was_in_air:
+		if is_slamming:
+			slam_impact()  
+		is_slamming = false
+		was_in_air = false
+	
+	if !onFloor:
+		was_in_air = true
+		if Input.is_action_pressed("slam"):
+			is_slamming = true
+			slam_height = global_position.y
+			
+			apply_central_force(Vector3.DOWN * slam_speed)
+			linear_velocity.x *= 0.9
+			linear_velocity.z *= 0.9
+
+
 func deal_damage() -> float:
-	return impact_damage
+	return impact_mult
 	
 		
 func take_damage(amount):
 	curr_hp -= amount
 	print("took damage:", amount)
 
-
+func get_impact_damage() -> float:
+	return linear_velocity.length() * impact_mult
+	
+	
 func health_regen():
 	while true:
 		await get_tree().create_timer(0.1).timeout
 		curr_hp += hp_regen
 		curr_hp = min(curr_hp, max_hp)
-		print(curr_hp)
 		
 	
 func player_death():
