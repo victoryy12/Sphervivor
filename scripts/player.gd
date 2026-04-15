@@ -119,12 +119,11 @@ func _on_body_entered(body):
 	if body.is_in_group("Enemies"):
 		if int(linear_velocity.length()) < 10:
 			take_damage(body.enemy_damage)
-		elif body.has_method("take_damage"):
-			body.take_damage(impact_damage)
 
 
 func deal_damage() -> float:
 	return impact_damage
+	
 		
 func take_damage(amount):
 	curr_hp -= amount
