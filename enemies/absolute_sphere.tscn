@@ -33,7 +33,7 @@ inner_radius = 0.95
 [node name="AbsoluteSphere" type="Node3D" unique_id=1286040135 groups=["Enemies"]]
 script = ExtResource("1_inppo")
 
-[node name="BossBody" type="RigidBody3D" parent="." unique_id=145609100 groups=["Enemies"]]
+[node name="BossBody" type="RigidBody3D" parent="." unique_id=145609100 groups=["Boss", "Enemies"]]
 mass = 1000.0
 script = ExtResource("2_inppo")
 
@@ -74,3 +74,6 @@ hit_back_faces = false
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1827137215]
 avoidance_enabled = true
+
+[connection signal="body_entered" from="BossBody" to="BossBody" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="BossBody" to="BossBody" method="_on_body_shape_entered"]

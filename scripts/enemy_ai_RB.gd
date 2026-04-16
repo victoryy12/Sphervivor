@@ -126,3 +126,7 @@ func _play_attack_sfx() -> void:
 	if attack_sfx and attack_sfx.stream:
 		attack_sfx.pitch_scale = randf_range(0.95, 1.05)
 		attack_sfx.play()
+
+
+func _on_body_shape_entered(body_rid: RID, body: Node, body_shape_index: int, local_shape_index: int) -> void:
+	pass # Replace with function body.
