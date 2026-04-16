@@ -25,6 +25,9 @@ var max_charge = 2500.0; var charge_speed = 25000
 var yaw := 0.0   # left/right
 var pitch := 0.0 # up/down
 
+@onready var jump_sfx: AudioStreamPlayer3D = $JumpSFX
+@onready var slam_sfx: AudioStreamPlayer3D = $SlamSFX
+
 func _ready() -> void:
 	cam.top_level = true
 	$touchingFloor.top_level = true
@@ -85,9 +88,11 @@ func player_movement(delta):
 		
 		if Input.is_action_pressed("jump"):
 			apply_central_impulse(Vector3.UP * jump_force)
-			#reduces slam angular velocity
 			angular_velocity.y /= 1.2
-			
+			if jump_sfx and jump_sfx.stream:
+				jump_sfx.pitch_scale = randf_range(0.97, 1.03)
+				jump_sfx.play()
+				
 	if !onFloor:		
 		slam(onFloor)
 	
@@ -125,6 +130,10 @@ func _on_body_entered(body):
 func slam_impact():
 	var fall_distance = slam_height - global_position.y
 	fall_distance = max(fall_distance, 0)
+	
+	if slam_sfx and slam_sfx.stream:
+		slam_sfx.pitch_scale = randf_range(0.95, 1.05)
+		slam_sfx.play()
 	
 	var damage = (slam_damage + fall_distance) * 5.0
 	

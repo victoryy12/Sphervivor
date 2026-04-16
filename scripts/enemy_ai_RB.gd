@@ -6,6 +6,11 @@ extends RigidBody3D
 @export var enemy_hp = 1000.0 # max HP for this enemy
 @export var current_hp = 1000.0
 @export var head_offset: Vector3 = Vector3(0, 2.0, 0)
+@export var hit_sound: AudioStream
+@export var attack_sound: AudioStream
+
+@onready var hit_sfx = get_node_or_null("HitsSFX") as AudioStreamPlayer3D
+@onready var attack_sfx = get_node_or_null("AttacksSFX") as AudioStreamPlayer3D
 
 var experience_drop = preload("res://experience_point.tscn")
 
@@ -35,6 +40,8 @@ func _ready() -> void:
 	
 	current_hp = clamp(current_hp, 0.0, enemy_hp)
 	health_changed.emit(current_hp, max_hp)
+
+	_setup_sfx()
 	
 func _physics_process(delta: float) -> void:
 	movement_tracking(delta)
@@ -63,11 +70,14 @@ func movement_tracking(delta: float) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("Player") and body.has_method("deal_damage"):
+		_play_attack_sfx()
 		take_damage(body.deal_damage())
 		
 func take_damage(amount: float) -> void:
 	if amount <= 0.0:
 		return
+
+	_play_hit_sfx()
 	
 	current_hp = maxf(current_hp - amount, 0.0)
 	health_changed.emit(current_hp, max_hp)
@@ -78,6 +88,7 @@ func take_damage(amount: float) -> void:
 
 
 func deal_damage() -> float:
+	_play_attack_sfx()
 	return enemy_damage
 
 		
@@ -86,6 +97,32 @@ func die():
 	var exp = experience_drop.instantiate()
 	get_tree().current_scene.add_child(exp)
 	exp.global_position = global_position
-	
+
 	died.emit()
 	queue_free() 
+
+
+func _setup_sfx() -> void:
+	if not hit_sfx:
+		push_warning("Missing child node 'HitsSFX' on enemy.")
+	elif hit_sound:
+		# Only overwrite node stream if an exported sound was provided.
+		hit_sfx.stream = hit_sound
+
+	if not attack_sfx:
+		push_warning("Missing child node 'AttacksSFX' on enemy.")
+	elif attack_sound:
+		# Only overwrite node stream if an exported sound was provided.
+		attack_sfx.stream = attack_sound
+
+
+func _play_hit_sfx() -> void:
+	if hit_sfx and hit_sfx.stream:
+		hit_sfx.pitch_scale = randf_range(0.95, 1.05)
+		hit_sfx.play()
+
+
+func _play_attack_sfx() -> void:
+	if attack_sfx and attack_sfx.stream:
+		attack_sfx.pitch_scale = randf_range(0.95, 1.05)
+		attack_sfx.play()

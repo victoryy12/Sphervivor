@@ -14,7 +14,7 @@ grow_vertical = 2
 script = ExtResource("1_86byn")
 
 [node name="Bar" type="ProgressBar" parent="." unique_id=1212333806]
-custom_minimum_size = Vector2(80, 10)
+custom_minimum_size = Vector2(160, 20)
 layout_mode = 0
 offset_left = -109.0
 offset_top = 21.0

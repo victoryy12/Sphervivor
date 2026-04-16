@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bokohp2p07r84"]
 
 [ext_resource type="Script" uid="uid://d2s7x407y180s" path="res://scripts/enemy_ai_RB.gd" id="1_u6gt7"]
+[ext_resource type="AudioStream" uid="uid://c2oym1p6whys2" path="res://assets/hit.mp3" id="2_ao7rc"]
+[ext_resource type="AudioStream" uid="uid://dyvvem0y4l8a8" path="res://assets/attack.mp3" id="3_gqxu6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6gt7"]
 albedo_color = Color(0.2901961, 0.08627451, 0.13333334, 1)
@@ -66,5 +68,17 @@ avoidance_enabled = true
 [node name="collisionBox" type="CollisionShape3D" parent="." unique_id=322381400]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5043737, 0)
 shape = SubResource("CapsuleShape3D_u6gt7")
+
+[node name="HitsSFX" type="AudioStreamPlayer3D" parent="." unique_id=1958014864]
+stream = ExtResource("2_ao7rc")
+volume_db = -6.0
+max_distance = 20.0
+bus = &"SFX"
+
+[node name="AttacksSFX" type="AudioStreamPlayer3D" parent="." unique_id=947138169]
+stream = ExtResource("3_gqxu6")
+volume_db = -6.0
+max_distance = 20.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
