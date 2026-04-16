@@ -2,7 +2,7 @@ extends RigidBody3D
 
 @export var speed = 4.0
 @export var accel = 10.0
-@export var enemy_damage = 10.0
+@export var enemy_damage = 100.0
 @export var enemy_hp = 1000.0 # max HP for this enemy
 @export var current_hp = 1000.0
 @export var head_offset: Vector3 = Vector3(0, 2.0, 0)
