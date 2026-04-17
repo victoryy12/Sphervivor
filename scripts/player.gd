@@ -2,12 +2,16 @@ extends RigidBody3D
 
 @onready var cam = $CameraRig
 
+@export var level = 1
+@export var curr_exp = 0
+@export var exp_to_lvl = 100
+
 @export var rolling_force = 30.0
 @export var jump_force = 70.0
 @export var impact_mult = 450.0
 
 @export var slam_speed = 5000.0
-@export var slam_damage = 50
+@export var slam_damage = 100
 var slam_height = 0.0
 var is_slamming := false
 var was_in_air := false
