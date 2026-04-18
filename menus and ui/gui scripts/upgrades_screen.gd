@@ -67,6 +67,9 @@ func _input(event: InputEvent) -> void:
 func _ready() -> void:
 	self.visible = false
 	
+	if player_stats:
+		player_stats.connect("leveled_up", Callable(self, "showUpgrades"))
+	
 	
 func _process(_delta: float) -> void:
 	pass

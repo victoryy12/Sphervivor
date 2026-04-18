@@ -14,7 +14,7 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 5
 shadow_color = Color(0.078431375, 0, 0, 0.7607843)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health_bg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sb0x1"]
 bg_color = Color(0.08, 0.06, 0.08, 0.95)
 border_width_left = 2
 border_width_top = 2
@@ -26,7 +26,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health_fill"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1c1m"]
 bg_color = Color(0.84, 0.09, 0.2, 1)
 corner_radius_top_left = 7
 corner_radius_top_right = 7
@@ -41,6 +41,25 @@ outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 3
 shadow_color = Color(0, 0, 0, 0.65)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health_bg"]
+bg_color = Color(0.08, 0.06, 0.08, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health_fill"]
+bg_color = Color(0, 0.09019608, 1, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
 
 [node name="userInterface" type="CanvasLayer" unique_id=1682813763]
 layer = 2
@@ -63,9 +82,9 @@ label_settings = SubResource("LabelSettings_i7dvk")
 [node name="playerHealth" type="ProgressBar" parent="." unique_id=1671027482]
 custom_minimum_size = Vector2(388, 34)
 offset_right = 472.0
-offset_bottom = 68.0
-theme_override_styles/background = SubResource("StyleBoxFlat_health_bg")
-theme_override_styles/fill = SubResource("StyleBoxFlat_health_fill")
+offset_bottom = 49.0
+theme_override_styles/background = SubResource("StyleBoxFlat_sb0x1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_e1c1m")
 show_percentage = false
 
 [node name="HealthLabel" type="Label" parent="." unique_id=962200732]
@@ -75,3 +94,13 @@ offset_right = 119.0
 offset_bottom = 33.0
 text = "Health"
 label_settings = SubResource("LabelSettings_health")
+
+[node name="expBar" type="ProgressBar" parent="." unique_id=211724166]
+custom_minimum_size = Vector2(388, 34)
+offset_left = 1.0
+offset_top = 49.0
+offset_right = 473.0
+offset_bottom = 83.0
+theme_override_styles/background = SubResource("StyleBoxFlat_health_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_health_fill")
+show_percentage = false

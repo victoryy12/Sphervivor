@@ -4,17 +4,24 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	playerHealthBar()	
+	player_health_bar()
+	experience_bar()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	speedometer()
-	playerHealthBar() 
+	player_health_bar()
+	experience_bar()
 	
 	
-func playerHealthBar():
+func player_health_bar():
 	$playerHealth.max_value = player_stats.max_hp
 	$playerHealth.value = player_stats.curr_hp
+
+
+func experience_bar():
+	$expBar.max_value = player_stats.exp_to_lvl
+	$expBar.value = player_stats.curr_exp
 	
 	
 func speedometer():

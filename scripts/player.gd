@@ -5,6 +5,7 @@ extends RigidBody3D
 @export var level = 1
 @export var curr_exp = 0
 @export var exp_to_lvl = 100
+signal leveled_up
 
 @export var rolling_force = 30.0
 @export var jump_force = 70.0
@@ -187,8 +188,24 @@ func health_regen():
 		await get_tree().create_timer(0.1).timeout
 		curr_hp += hp_regen
 		curr_hp = min(curr_hp, max_hp)
-		
 	
+		
+func add_exp(amount):
+	curr_exp += amount
+	
+	while curr_exp >= exp_to_lvl:
+		curr_exp -= exp_to_lvl
+		level_up()
+
+
+func level_up() -> void:
+	level += 1
+	exp_to_lvl = int(exp_to_lvl * 1.2)
+	max_hp += 100
+	
+	emit_signal("leveled_up")
+	
+		
 func player_death():
 	death_plane()
 	if curr_hp <= 0:
