@@ -7,7 +7,7 @@ extends RigidBody3D
 @export var exp_to_lvl = 100
 signal leveled_up
 
-@export var rolling_force = 30.0
+@export var rolling_force = 1000.0
 @export var jump_force = 70.0
 @export var impact_mult = 450.0
 
@@ -59,39 +59,34 @@ func _physics_process(delta: float) -> void:
 
 	
 func player_movement(delta):
-	var onFloor =  $touchingFloor.is_colliding()
-	
-	if !onFloor:
-		was_in_air = true
-	if onFloor and was_in_air:
-		if is_slamming:
-			slam_impact()  
-		is_slamming = false
-		was_in_air = false
-		
+	var onFloor = $touchingFloor.is_colliding()
+
 	cam.rotation.y = yaw
 	cam.rotation.x = pitch
-	
-	var x_input = Input.get_axis("down", "up")
-	var z_input = Input.get_axis("right", "left")
-	# Get camera directions
+
+	var x_input = Input.get_axis("left", "right")
+	var z_input = Input.get_axis("down", "up")
+
 	var forward = -cam.global_transform.basis.z
 	var right = cam.global_transform.basis.x
 
-	# Flatten so we don't move up/down
 	forward.y = 0
 	right.y = 0
+
 	forward = forward.normalized()
 	right = right.normalized()
-	
+
 	var direction = (forward * z_input + right * x_input).normalized()
-	var move_velocity = direction * rolling_force
-	
-	if onFloor:
-		angular_velocity.x -= direction.x * rolling_force * delta
-		angular_velocity.z -= direction.z * rolling_force * delta
-		apply_central_impulse(move_velocity * delta)
-		
+
+	if onFloor and direction != Vector3.ZERO:
+		apply_central_force(direction * rolling_force)
+
+		# Steering correction
+		var horizontal_vel = Vector3(linear_velocity.x, 0, linear_velocity.z)
+		var desired = direction * horizontal_vel.length()
+		var steer = (desired - horizontal_vel) * 5.0
+		apply_central_force(steer)
+			
 		if Input.is_action_pressed("jump"):
 			apply_central_impulse(Vector3.UP * jump_force)
 			angular_velocity.y /= 1.2
@@ -99,8 +94,7 @@ func player_movement(delta):
 				jump_sfx.pitch_scale = randf_range(0.97, 1.03)
 				jump_sfx.play()
 				
-	if !onFloor:		
-		slam(onFloor)
+	slam(onFloor)
 	
 	#bullet time charge
 	if charging:
