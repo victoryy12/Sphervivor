@@ -17,9 +17,9 @@ anchors_preset = -1
 anchor_right = 0.9990001
 anchor_bottom = 1.0
 offset_left = 2.0
-offset_top = -10.0
+offset_top = 1.0
 offset_right = 2.1518555
-offset_bottom = -10.0
+offset_bottom = 1.0
 
 [node name="pauseOptions" type="PanelContainer" parent="." unique_id=846360465]
 anchors_preset = -1
@@ -57,7 +57,7 @@ offset_right = 386.0
 offset_bottom = 173.0
 grow_horizontal = 2
 
-[node name="displayStats" type="RichTextLabel" parent="stats" unique_id=169024059]
+[node name="displayStats" type="Label" parent="stats" unique_id=2077793431]
 layout_mode = 2
 
 [connection signal="pressed" from="pauseOptions/VBoxContainer/resumeButton" to="." method="_on_resume_button_pressed"]

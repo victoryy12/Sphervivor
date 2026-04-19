@@ -16,6 +16,7 @@ signal leveled_up
 var slam_height = 0.0
 var is_slamming := false
 var was_in_air := false
+var slam_on_cooldown = false
 
 @export var max_hp = 1000.0
 @export var curr_hp = 1000.0
@@ -167,8 +168,6 @@ func slam(onFloor):
 			slam_height = global_position.y
 			
 			apply_central_force(Vector3.DOWN * slam_speed)
-			linear_velocity.x *= 0.9
-			linear_velocity.z *= 0.9
 
 
 func deal_damage() -> float:

@@ -14,12 +14,16 @@ grow_vertical = 2
 script = ExtResource("1_86byn")
 
 [node name="Bar" type="ProgressBar" parent="." unique_id=1212333806]
+visible = false
 custom_minimum_size = Vector2(160, 20)
-layout_mode = 0
-offset_left = -109.0
-offset_top = 21.0
-offset_right = -29.0
-offset_bottom = 48.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.075
+anchor_bottom = 0.062000003
+offset_left = -390.6
+offset_top = 201.0
+offset_right = -317.0
+offset_bottom = 187.824
 theme = SubResource("Theme_fuq12")
 value = 100.0
 show_percentage = false

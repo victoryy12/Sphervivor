@@ -21,15 +21,18 @@ func pause_and_unpause():
 	player_ui.visible = !pausedCheck
 	
 	if pausedCheck:
-		#display_stats()
+		display_stats()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
-#func display_stats():
-#	$stats/displayStats.text = ("Speed " + str(int(player_stats.rolling_force))+ "\n" + 
-#	" Jump " + str(int(player_stats.jump_force)))
+func display_stats():
+	$stats/displayStats.text = " Speed: %d\n Jump: %d\n Regen/s: %d" % [
+	player_stats.rolling_force,
+	player_stats.jump_force,
+	player_stats.hp_regen
+	]
 
 
 func _on_resume_button_pressed() -> void:
