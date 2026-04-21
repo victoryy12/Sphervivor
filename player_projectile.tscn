@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b7ddw0m3bkxwe"]
+
+[ext_resource type="Script" uid="uid://qbvcs6p3t2j4" path="res://scripts/player_projectile.gd" id="1_0gc0p"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_73r22"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dbwdf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0gc0p"]
+size = Vector3(1, 1.3736572, 2.4829102)
+
+[node name="playerProjectile" type="Area3D" unique_id=393559453]
+script = ExtResource("1_0gc0p")
+projectile_scene = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1653227038]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_73r22")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1509640910]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_dbwdf")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1382474018]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.026077986, 0.17384091, -0.15646243)
+shape = SubResource("BoxShape3D_0gc0p")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

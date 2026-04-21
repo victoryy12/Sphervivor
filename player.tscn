@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://ddnof5bh4mt4" path="res://assets/jump.mp3" id="4_sweqy"]
 [ext_resource type="AudioStream" uid="uid://de7faa6haiww1" path="res://assets/slam.mp3" id="5_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://dsvwubwuqta43" path="res://assets/death.mp3" id="6_2hs0m"]
+[ext_resource type="PackedScene" uid="uid://b7ddw0m3bkxwe" path="res://player_projectile.tscn" id="7_1jxqw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_onrkg"]
 bounce = 0.24
@@ -27,6 +28,7 @@ continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_onrkg")
+projectile_scene = ExtResource("7_1jxqw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=428767]
 mesh = SubResource("SphereMesh_hqtel")
@@ -60,6 +62,8 @@ stream = ExtResource("6_2hs0m")
 volume_db = -6.0
 
 [node name="gui" parent="." unique_id=659538166 instance=ExtResource("3_i3pqv")]
+
+[node name="playerProjectile" parent="." unique_id=393559453 instance=ExtResource("7_1jxqw")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="damageAura" to="." method="_on_damage_aura_body_entered"]

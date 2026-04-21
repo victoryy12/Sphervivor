@@ -9,7 +9,7 @@
 [node name="forest arena" parent="." unique_id=2100858950 instance=ExtResource("1_e2o6t")]
 
 [node name="Player" parent="." unique_id=1714944700 instance=ExtResource("2_feb5d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.781025, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1226559, 0)
 mass = 100.0
 
 [node name="snowman" parent="." unique_id=363226556 instance=ExtResource("3_feb5d")]

@@ -39,6 +39,7 @@ func _ready() -> void:
 	$touchingFloor.top_level = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health_regen()
+	auto_fire()
 
 	
 func _input(event: InputEvent) -> void:
@@ -87,12 +88,12 @@ func player_movement(delta):
 		var steer = (desired - horizontal_vel) * 5.0
 		apply_central_force(steer)
 			
-		if Input.is_action_pressed("jump"):
-			apply_central_impulse(Vector3.UP * jump_force)
-			angular_velocity.y /= 1.2
-			if jump_sfx and jump_sfx.stream:
-				jump_sfx.pitch_scale = randf_range(0.97, 1.03)
-				jump_sfx.play()
+	if onFloor and Input.is_action_pressed("jump"):
+		apply_central_impulse(Vector3.UP * jump_force)
+		angular_velocity.y /= 1.2
+		if jump_sfx and jump_sfx.stream:
+			jump_sfx.pitch_scale = randf_range(0.97, 1.03)
+			jump_sfx.play()
 				
 	slam(onFloor)
 	
@@ -210,3 +211,23 @@ func death_plane():
 	if global_position.y < deathBarrierDepth:
 		#set player spawn point and respawn with reduced hp
 		take_damage(10)
+
+
+@export var projectile_scene: PackedScene
+@export var fire_rate := 3.0
+
+
+func auto_fire():
+	while true:
+		await get_tree().create_timer(fire_rate).timeout
+		spawn_projectile()
+
+
+func spawn_projectile():
+	var projectile = projectile_scene.instantiate()
+
+	# Spawn slightly in front of player
+	var forward = -global_transform.basis.z
+	projectile.global_position = global_position + forward * 2.0
+
+	get_tree().current_scene.add_child(projectile)
