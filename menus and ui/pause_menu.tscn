@@ -2,6 +2,9 @@
 
 [ext_resource type="Shader" uid="uid://el6ke6iu8ynn" path="res://shaders/puaseMenu.gdshader" id="1_hdmo1"]
 [ext_resource type="Script" uid="uid://hl3uq38xk0hv" path="res://menus and ui/gui scripts/pause_menu.gd" id="1_nwcfo"]
+[ext_resource type="Texture2D" uid="uid://dl8k0rybbby80" path="res://assets/resume.png" id="3_14738"]
+[ext_resource type="Texture2D" uid="uid://br80b721wlr5l" path="res://assets/restart.png" id="4_v63wl"]
+[ext_resource type="Texture2D" uid="uid://b05uajxej5eq" path="res://assets/quit3.png" id="5_lblxi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nwcfo"]
 shader = ExtResource("1_hdmo1")
@@ -37,16 +40,25 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Resume"
+icon = ExtResource("3_14738")
+icon_alignment = 1
+expand_icon = true
 
 [node name="restartButton" type="Button" parent="pauseOptions/VBoxContainer" unique_id=1277501890]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Restart"
+icon = ExtResource("4_v63wl")
+icon_alignment = 1
+expand_icon = true
 
 [node name="quitButton" type="Button" parent="pauseOptions/VBoxContainer" unique_id=398176399]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Quit"
+icon = ExtResource("5_lblxi")
+icon_alignment = 1
+expand_icon = true
 
 [node name="stats" type="PanelContainer" parent="." unique_id=1978131070]
 anchors_preset = 5

@@ -1,15 +1,16 @@
 [gd_scene format=3 uid="uid://bkiesf1tiyrjb"]
 
 [ext_resource type="Script" uid="uid://cvr0l3ebritj3" path="res://menus and ui/gui scripts/user_interface.gd" id="1_kxhmu"]
+[ext_resource type="FontFile" uid="uid://wf1lm3oelgmo" path="res://assets/Inlanders Demo.otf" id="2_e1c1m"]
 
 [sub_resource type="SystemFont" id="SystemFont_sb0x1"]
-font_names = PackedStringArray("Britannic")
+font_names = PackedStringArray("Futura")
 subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_i7dvk"]
 font = SubResource("SystemFont_sb0x1")
-font_size = 30
-outline_size = 5
+font_size = 90
+outline_size = 15
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 5
 shadow_color = Color(0.078431375, 0, 0, 0.7607843)
@@ -33,15 +34,6 @@ corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 
-[sub_resource type="LabelSettings" id="LabelSettings_health"]
-font = SubResource("SystemFont_sb0x1")
-font_size = 40
-font_color = Color(1, 0.92, 0.92, 1)
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 3
-shadow_color = Color(0, 0, 0, 0.65)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health_bg"]
 bg_color = Color(0.08, 0.06, 0.08, 0.95)
 border_width_left = 2
@@ -60,6 +52,14 @@ corner_radius_top_left = 7
 corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
+
+[sub_resource type="LabelSettings" id="LabelSettings_ukq5f"]
+font = ExtResource("2_e1c1m")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_vho06"]
+font = ExtResource("2_e1c1m")
+font_size = 25
 
 [node name="userInterface" type="CanvasLayer" unique_id=1682813763]
 layer = 2
@@ -87,14 +87,6 @@ theme_override_styles/background = SubResource("StyleBoxFlat_sb0x1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_e1c1m")
 show_percentage = false
 
-[node name="HealthLabel" type="Label" parent="." unique_id=962200732]
-offset_left = 10.0
-offset_top = 4.0
-offset_right = 119.0
-offset_bottom = 33.0
-text = "Health"
-label_settings = SubResource("LabelSettings_health")
-
 [node name="expBar" type="ProgressBar" parent="." unique_id=211724166]
 custom_minimum_size = Vector2(388, 34)
 offset_left = 1.0
@@ -104,3 +96,22 @@ offset_bottom = 83.0
 theme_override_styles/background = SubResource("StyleBoxFlat_health_bg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_health_fill")
 show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="." unique_id=509513826]
+offset_left = 7.0
+offset_top = 1.0
+offset_right = 143.0
+offset_bottom = 44.0
+text = "Health"
+label_settings = SubResource("LabelSettings_ukq5f")
+
+[node name="ManaLabel" type="Label" parent="." unique_id=1742752379]
+anchors_preset = -1
+anchor_right = 0.019000001
+anchor_bottom = 0.035
+offset_left = 6.0
+offset_top = 54.0
+offset_right = 62.112
+offset_bottom = 64.32
+text = "Mana"
+label_settings = SubResource("LabelSettings_vho06")
