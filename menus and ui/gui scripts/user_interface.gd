@@ -12,6 +12,7 @@ func _process(_delta: float) -> void:
 	speedometer()
 	player_health_bar()
 	experience_bar()
+	energy_bar()
 	
 	
 func player_health_bar():
@@ -22,6 +23,11 @@ func player_health_bar():
 func experience_bar():
 	$expBar.max_value = player_stats.exp_to_lvl
 	$expBar.value = player_stats.curr_exp
+
+
+func energy_bar():
+	$energyBar.max_value = player_stats.max_energy
+	$energyBar.value = player_stats.energy
 	
 	
 func speedometer():
