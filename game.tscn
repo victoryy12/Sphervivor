@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://crdlhuohh2d3w" path="res://enemies/snow_man.tscn" id="3_feb5d"]
 
 [node name="game" type="Node3D" unique_id=466450601]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.031096458, 0, 0)
 
 [node name="forest arena" parent="." unique_id=2100858950 instance=ExtResource("1_e2o6t")]
 

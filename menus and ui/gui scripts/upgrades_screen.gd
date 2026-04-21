@@ -1,6 +1,12 @@
 extends CanvasLayer
 
 @onready var player_stats = get_parent().get_parent()
+@onready var speedometer: Label = get_parent().get_node_or_null("userInterface/speedometer")
+@onready var upgrade_buttons: Array[Button] = [
+	$CenterContainer/VBoxContainer/HBoxContainer/upgrade1,
+	$CenterContainer/VBoxContainer/HBoxContainer/upgrade2,
+	$CenterContainer/VBoxContainer/HBoxContainer/upgrade3
+]
 var current_choices = []	
 var upgrades_open = false
 
@@ -32,18 +38,16 @@ func showUpgrades():
 	upgrades_open = !upgrades_open
 	get_tree().paused = upgrades_open
 	self.visible = upgrades_open
+	if speedometer:
+		speedometer.visible = !upgrades_open
 	
 	if upgrades_open:
 		current_choices = get_random_upgrades()
-		
-		var upgrade_buttons = [
-			$CenterContainer/VBoxContainer/HBoxContainer/upgrade1,
-			$CenterContainer/VBoxContainer/HBoxContainer/upgrade2,
-			$CenterContainer/VBoxContainer/HBoxContainer/upgrade3
-		]
-		
+
 		for i in range(len(upgrade_buttons)):
-			upgrade_buttons[i].text = current_choices[i].name + "\n\n" + current_choices[i].desc
+			upgrade_buttons[i].text = "%s\n%s" % [current_choices[i].name, current_choices[i].desc]
+			# Give the text breathing room while keeping it in the upper part of each card.
+			upgrade_buttons[i].add_theme_constant_override("h_separation", 8)
 
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
@@ -70,6 +74,8 @@ func _input(event: InputEvent) -> void:
 		
 func _ready() -> void:
 	self.visible = false
+	get_viewport().size_changed.connect(_update_upgrade_ui_scale)
+	_update_upgrade_ui_scale()
 	
 	if player_stats:
 		player_stats.connect("leveled_up", Callable(self, "showUpgrades"))
@@ -92,3 +98,14 @@ func _on_upgrade_2_pressed() -> void:
 func _on_upgrade_3_pressed() -> void:
 	applyUpgrade(2)
 	print(current_choices[2])
+
+
+func _update_upgrade_ui_scale() -> void:
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	var base_size: float = min(viewport_size.x, viewport_size.y)
+	var font_size: int = int(clampf(base_size * 0.035, 16.0, 44.0))
+	var min_height: float = clampf(base_size * 0.22, 160.0, 360.0)
+
+	for button in upgrade_buttons:
+		button.custom_minimum_size.y = min_height
+		button.add_theme_font_size_override("font_size", font_size)
