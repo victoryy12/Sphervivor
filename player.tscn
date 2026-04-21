@@ -24,6 +24,9 @@ radius = 5.6612096
 
 [sub_resource type="SphereMesh" id="SphereMesh_1jxqw"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1jxqw"]
+albedo_color = Color(0.85, 0.85, 0.85, 1)
+
 [sub_resource type="Animation" id="Animation_1jxqw"]
 resource_name = "Pulse"
 loop_mode = 1
@@ -106,6 +109,7 @@ volume_db = -6.0
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1535636547]
 mesh = SubResource("SphereMesh_1jxqw")
+surface_material_override/0 = SubResource("StandardMaterial3D_1jxqw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MeshInstance3D2" unique_id=865025967]
 root_node = NodePath("../..")
