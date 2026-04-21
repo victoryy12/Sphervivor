@@ -1,36 +1,70 @@
 [gd_scene format=3 uid="uid://sx8x7j8icr1p"]
 
 [ext_resource type="Script" uid="uid://b2gl7af8mfeg" path="res://menus and ui/gui scripts/upgrades_screen.gd" id="1_5h2bv"]
+[ext_resource type="Texture2D" uid="uid://diqt45xwc8jj5" path="res://assets/level-up.png" id="2_aaomk"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_aaomk"]
 
 [node name="upgrades_screen" type="CanvasLayer" unique_id=1374553911]
 script = ExtResource("1_5h2bv")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1913079543]
-offset_left = 171.0
-offset_top = 121.0
-offset_right = 1019.0
-offset_bottom = 484.0
+[node name="CenterContainer" type="MarginContainer" parent="." unique_id=188113299]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 48
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=198776501]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="upgrade1" type="Button" parent="HBoxContainer" unique_id=1116031215]
-custom_minimum_size = Vector2(250, 120)
+[node name="LevelUp" type="TextureRect" parent="CenterContainer/VBoxContainer" unique_id=1753141490]
+custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_aaomk")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1913079543]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="upgrade1" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1116031215]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 autowrap_mode = 3
 
-[node name="upgrade2" type="Button" parent="HBoxContainer" unique_id=437269172]
-custom_minimum_size = Vector2(250, 10)
+[node name="upgrade2" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=437269172]
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 icon = SubResource("CanvasTexture_aaomk")
 autowrap_mode = 3
 
-[node name="upgrade3" type="Button" parent="HBoxContainer" unique_id=1460339691]
-custom_minimum_size = Vector2(250, 10)
+[node name="upgrade3" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1460339691]
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 icon = SubResource("CanvasTexture_aaomk")
 autowrap_mode = 3
 
-[connection signal="pressed" from="HBoxContainer/upgrade1" to="." method="_on_upgrade_1_pressed"]
-[connection signal="pressed" from="HBoxContainer/upgrade2" to="." method="_on_upgrade_2_pressed"]
-[connection signal="pressed" from="HBoxContainer/upgrade3" to="." method="_on_upgrade_3_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/upgrade1" to="." method="_on_upgrade_1_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/upgrade2" to="." method="_on_upgrade_2_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/upgrade3" to="." method="_on_upgrade_3_pressed"]

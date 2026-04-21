@@ -36,7 +36,11 @@ func showUpgrades():
 	if upgrades_open:
 		current_choices = get_random_upgrades()
 		
-		var upgrade_buttons = [$HBoxContainer/upgrade1, $HBoxContainer/upgrade2, $HBoxContainer/upgrade3]
+		var upgrade_buttons = [
+			$CenterContainer/VBoxContainer/HBoxContainer/upgrade1,
+			$CenterContainer/VBoxContainer/HBoxContainer/upgrade2,
+			$CenterContainer/VBoxContainer/HBoxContainer/upgrade3
+		]
 		
 		for i in range(len(upgrade_buttons)):
 			upgrade_buttons[i].text = current_choices[i].name + "\n\n" + current_choices[i].desc

@@ -105,7 +105,7 @@ offset_bottom = 44.0
 text = "Health"
 label_settings = SubResource("LabelSettings_ukq5f")
 
-[node name="ManaLabel" type="Label" parent="." unique_id=1742752379]
+[node name="XPLabel" type="Label" parent="." unique_id=1742752379]
 anchors_preset = -1
 anchor_right = 0.019000001
 anchor_bottom = 0.035
@@ -113,5 +113,5 @@ offset_left = 6.0
 offset_top = 54.0
 offset_right = 62.112
 offset_bottom = 64.32
-text = "Mana"
+text = "Experience"
 label_settings = SubResource("LabelSettings_vho06")
