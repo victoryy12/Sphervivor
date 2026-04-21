@@ -22,6 +22,15 @@ material = SubResource("StandardMaterial3D_i3pqv")
 [sub_resource type="SphereShape3D" id="SphereShape3D_i3pqv"]
 radius = 5.6612096
 
+[sub_resource type="Animation" id="Animation_1jxqw"]
+resource_name = "Pulse"
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dw050"]
+_data = {
+&"Pulse": SubResource("Animation_1jxqw")
+}
+
 [node name="player" type="RigidBody3D" unique_id=1714944700 groups=["Player"]]
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
 continuous_cd = true
@@ -64,6 +73,10 @@ volume_db = -6.0
 [node name="gui" parent="." unique_id=659538166 instance=ExtResource("3_i3pqv")]
 
 [node name="playerProjectile" parent="." unique_id=393559453 instance=ExtResource("7_1jxqw")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=865025967]
+libraries/ = SubResource("AnimationLibrary_dw050")
+autoplay = &"Pulse"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="damageAura" to="." method="_on_damage_aura_body_entered"]
