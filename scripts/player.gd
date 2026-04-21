@@ -11,6 +11,11 @@ signal leveled_up
 @export var jump_force = 70.0
 @export var impact_mult = 450.0
 
+@export var max_energy = 5.0
+@export var energy = max_energy
+@export var regen_time := 2.0
+var can_regen := true
+
 @export var slam_speed = 5000.0
 @export var slam_damage = 100
 var slam_height = 0.0
@@ -40,6 +45,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health_regen()
 	auto_fire()
+	energy_loop()
 
 	
 func _input(event: InputEvent) -> void:
@@ -95,7 +101,7 @@ func player_movement(delta):
 			jump_sfx.pitch_scale = randf_range(0.97, 1.03)
 			jump_sfx.play()
 				
-	slam(onFloor)
+	slam()
 	
 	#bullet time charge
 	if charging:
@@ -117,15 +123,9 @@ func charge_input(event):
 		Engine.time_scale = 0.2
 	
 	if event.is_action_released("charge ball"):
-		bullet_time_launch()
+		try_charge()
 		charging = false
 		Engine.time_scale = 1.0
-	
-	
-func _on_body_entered(body):
-	if body.is_in_group("Enemies"):
-		if int(linear_velocity.length()) < 10:
-			take_damage(body.enemy_damage)
 
 
 func slam_impact():
@@ -146,7 +146,9 @@ func slam_impact():
 			body.apply_impulse(Vector3.UP * 80 + dir * 50)
 
 
-func slam(onFloor):
+func slam():
+	var onFloor = $touchingFloor.is_colliding()
+	
 	if !onFloor:
 		was_in_air = true
 		
@@ -158,11 +160,52 @@ func slam(onFloor):
 	
 	if !onFloor:
 		was_in_air = true
+		if Input.is_action_just_pressed("slam"):
+			try_slam()
 		if Input.is_action_pressed("slam"):
-			is_slamming = true
-			slam_height = global_position.y
-			
 			apply_central_force(Vector3.DOWN * slam_speed)
+
+func try_slam():
+	if energy <= 0:
+		return
+	
+	use_energy(1)
+	is_slamming = true
+	slam_height = global_position.y
+	apply_central_force(Vector3.DOWN * slam_speed)
+
+
+func try_charge():
+	if energy <= 0:
+		return
+
+	use_energy(1)
+	bullet_time_launch()
+
+
+func use_energy(amount):
+	energy -= amount
+	energy = max(energy, 0)
+
+	# Optional: pause regen briefly after use
+	can_regen = false
+	await get_tree().create_timer(regen_time).timeout
+	can_regen = true
+
+
+func energy_loop():
+	while is_inside_tree():
+		await get_tree().create_timer(regen_time).timeout
+
+		if can_regen and energy < max_energy:
+			energy += 1
+			energy = min(energy, max_energy)
+
+
+func _on_body_entered(body):
+	if body.is_in_group("Enemies"):
+		if int(linear_velocity.length()) < 10:
+			take_damage(body.enemy_damage)
 
 
 func deal_damage() -> float:
