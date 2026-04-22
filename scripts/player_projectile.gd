@@ -41,6 +41,9 @@ func find_closest_target() -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
+	if body.is_in_group("BossShield"):
+		queue_free()
+		return
 	if body.is_in_group("Enemies"):
 		body.take_damage(damage)
-		queue_free() 
+		queue_free()
