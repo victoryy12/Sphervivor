@@ -26,7 +26,7 @@ var upgrades = [
 	}, {
 		"name": "Slo-mo glasses",
 		"desc": 'Press and hold the "E" key to use a bullet-time ability',
-		"apply": func(player): player.jump_force += 10
+		"apply": func(player): slow_mo_glassse(player)
 	}, {
 		"name": "Candy heart",
 		"desc": 'Increases health regen',
@@ -34,6 +34,12 @@ var upgrades = [
 	}
 ]
 
+
+func slow_mo_glassse(player):
+	player.max_charge += 750
+	player.charge_speed += 333
+	
+	
 func showUpgrades():
 	upgrades_open = !upgrades_open
 	get_tree().paused = upgrades_open

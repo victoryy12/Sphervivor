@@ -176,10 +176,10 @@ func try_slam():
 
 
 func try_charge():
-	if energy <= 0:
+	if energy <= 1:
 		return
 
-	use_energy(1)
+	use_energy(2)
 	bullet_time_launch()
 
 

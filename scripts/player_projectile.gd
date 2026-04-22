@@ -2,7 +2,7 @@ extends Area3D
 
 @export var speed: float = 10.0
 @export var turn_speed: float = 5.0  
-@export var damage: float = 100.0
+@export var damage: float = 250.0
 @export var projectile_scene: PackedScene
 
 var target: Node3D = null
