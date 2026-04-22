@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2gl7af8mfeg" path="res://menus and ui/gui scripts/upgrades_screen.gd" id="1_5h2bv"]
 [ext_resource type="Texture2D" uid="uid://diqt45xwc8jj5" path="res://assets/level-up.png" id="2_aaomk"]
-[ext_resource type="FontFile" path="res://assets/Inlanders Demo.otf" id="3_font0"]
+[ext_resource type="FontFile" uid="uid://wf1lm3oelgmo" path="res://assets/Inlanders Demo.otf" id="3_font0"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_aaomk"]
 
@@ -48,33 +48,48 @@ custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 0
-vertical_icon_alignment = 0
 theme_override_fonts/font = ExtResource("3_font0")
+alignment = 0
 autowrap_mode = 3
+vertical_icon_alignment = 0
 
 [node name="upgrade2" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=437269172]
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 0
-vertical_icon_alignment = 0
 theme_override_fonts/font = ExtResource("3_font0")
 icon = SubResource("CanvasTexture_aaomk")
+alignment = 0
 autowrap_mode = 3
+vertical_icon_alignment = 0
 
 [node name="upgrade3" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1460339691]
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 0
-vertical_icon_alignment = 0
 theme_override_fonts/font = ExtResource("3_font0")
 icon = SubResource("CanvasTexture_aaomk")
+alignment = 0
 autowrap_mode = 3
+vertical_icon_alignment = 0
+
+[node name="refreshButton" type="Button" parent="." unique_id=1640723067]
+custom_minimum_size = Vector2(50, 50)
+offset_left = 974.0
+offset_top = 395.0
+offset_right = 1060.0
+offset_bottom = 445.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_font0")
+icon = SubResource("CanvasTexture_aaomk")
+alignment = 0
+autowrap_mode = 3
+vertical_icon_alignment = 0
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/upgrade1" to="." method="_on_upgrade_1_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/upgrade2" to="." method="_on_upgrade_2_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/upgrade3" to="." method="_on_upgrade_3_pressed"]
+[connection signal="pressed" from="refreshButton" to="." method="_on_refresh_button_pressed"]

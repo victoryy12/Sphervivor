@@ -11,7 +11,7 @@ material = SubResource("StandardMaterial3D_0gc0p")
 [sub_resource type="SphereShape3D" id="SphereShape3D_dbwdf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0gc0p"]
-size = Vector3(1, 1.3736572, 2.4829102)
+size = Vector3(0.5045166, 0.58010864, 0.73394775)
 
 [node name="playerProjectile" type="Area3D" unique_id=393559453]
 script = ExtResource("1_0gc0p")
@@ -25,7 +25,8 @@ transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-
 shape = SubResource("SphereShape3D_dbwdf")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1382474018]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.026077986, 0.17384091, -0.15646243)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06581187, 0.001981169, 0.0001232624)
 shape = SubResource("BoxShape3D_0gc0p")
+debug_color = Color(0.95912963, 0.15941796, 0.33013502, 0.41960785)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dayhjdmec0hvo" path="res://scripts/experience_point.gd" id="1_sun7t"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wnho6"]
-radius = 0.44382
+radius = 1.8473507
 
 [sub_resource type="SphereMesh" id="SphereMesh_3e4lw"]
 

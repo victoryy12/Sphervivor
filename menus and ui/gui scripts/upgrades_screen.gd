@@ -14,7 +14,7 @@ var upgrades = [
 	{
 		"name": "Rolling Greese",
 		"desc": "roll faster",
-		"apply": func(player): player.rolling_force += 10
+		"apply": func(player): player.rolling_force += 150
 	}, {
 		"name": "Rocket Jump",
 		"desc": "Jump higher",
@@ -38,7 +38,16 @@ var upgrades = [
 func slow_mo_glassse(player):
 	player.max_charge += 750
 	player.charge_speed += 333
-	
+
+
+func refresh_upgrades():
+	var allowed_refresh = 1
+	$refreshButton.text = "str(allowed_refresh)"
+	current_choices = get_random_upgrades()
+
+	for i in range(len(upgrade_buttons)):
+		upgrade_buttons[i].text = "%s\n%s" % [current_choices[i].name, current_choices[i].desc]
+		upgrade_buttons[i].add_theme_constant_override("h_separation", 8)
 	
 func showUpgrades():
 	upgrades_open = !upgrades_open
@@ -104,6 +113,10 @@ func _on_upgrade_2_pressed() -> void:
 func _on_upgrade_3_pressed() -> void:
 	applyUpgrade(2)
 	print(current_choices[2])
+
+
+func _on_refresh_button_pressed() -> void:
+	refresh_upgrades()
 
 
 func _update_upgrade_ui_scale() -> void:

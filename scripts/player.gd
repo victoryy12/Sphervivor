@@ -7,9 +7,9 @@ extends RigidBody3D
 @export var exp_to_lvl = 100
 signal leveled_up
 
-@export var rolling_force = 1000.0
-@export var jump_force = 70.0
-@export var impact_mult = 450.0
+@export var rolling_force = 350.0
+@export var jump_force = 50.0
+@export var impact_mult = 200.0
 
 @export var max_energy = 5.0
 @export var energy = max_energy
@@ -42,6 +42,8 @@ var pitch := 0.0 # up/down
 func _ready() -> void:
 	cam.top_level = true
 	$touchingFloor.top_level = true
+	$spinAttack.top_level = true
+	$spinAttack.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health_regen()
 	auto_fire()
@@ -56,13 +58,16 @@ func _input(event: InputEvent) -> void:
 		pitch = clamp(pitch, deg_to_rad(-80), deg_to_rad(80))
 	
 	charge_input(event)
+	spin_input(event)
 	
 	
 func _physics_process(delta: float) -> void:
 	cam.global_transform.origin = global_transform.origin
 	$touchingFloor.global_transform.origin = global_transform.origin
+	$spinAttack.global_transform.origin = global_transform.origin
 	player_death() 
 	player_movement(delta)
+	spin_attack(delta)
 
 	
 func player_movement(delta):
@@ -91,9 +96,9 @@ func player_movement(delta):
 		# Steering correction
 		var horizontal_vel = Vector3(linear_velocity.x, 0, linear_velocity.z)
 		var desired = direction * horizontal_vel.length()
-		var steer = (desired - horizontal_vel) * 5.0
+		var steer = (desired - horizontal_vel) * 8.0
 		apply_central_force(steer)
-			
+	
 	if onFloor and Input.is_action_pressed("jump"):
 		apply_central_impulse(Vector3.UP * jump_force)
 		angular_velocity.y /= 1.2
@@ -258,6 +263,7 @@ func death_plane():
 
 @export var projectile_scene: PackedScene
 @export var fire_rate := 3.0
+@export var projectile_count = 1
 
 
 func auto_fire():
@@ -267,10 +273,42 @@ func auto_fire():
 
 
 func spawn_projectile():
-	var projectile = projectile_scene.instantiate()
+	for i in range(projectile_count):
+		var projectile = projectile_scene.instantiate()
+		# Spawn slightly in front of player
+		var forward = -global_transform.basis.z
+		
+		projectile.global_position = global_position + forward * 2.0
+		get_tree().current_scene.add_child(projectile)
+		await get_tree().create_timer(0.1).timeout
 
-	# Spawn slightly in front of player
-	var forward = -global_transform.basis.z
-	projectile.global_position = global_position + forward * 2.0
 
-	get_tree().current_scene.add_child(projectile)
+@export var spin_force := 10.0
+@export var max_spin := 50.0
+@export var spin_accel := 40.0
+@export var spin_damage := 100.0
+
+var spinning := false
+
+func spin_attack(delta):
+	if spinning:
+		$spinAttack.visible = true
+		$spinAttack.rotate_y(angular_velocity.y * delta)
+		for body in $spinAttack.get_overlapping_bodies():
+			if body.is_in_group("Enemies"):
+				body.take_damage(spin_damage)
+				
+		angular_velocity.y += spin_accel * delta
+		# clamp max spin
+		angular_velocity.y = clamp(angular_velocity.y, -max_spin, max_spin)
+	else:
+		$spinAttack.visible = false
+		# slow down when not spinning
+		angular_velocity.y = lerp(angular_velocity.y, 0.0, 5.0 * delta)
+
+func spin_input(event):
+	if event.is_action_pressed("spin"):
+		spinning = true
+
+	if event.is_action_released("spin"):
+		spinning = false

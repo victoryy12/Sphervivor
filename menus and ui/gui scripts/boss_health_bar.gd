@@ -28,7 +28,6 @@ var _label_settings_template: LabelSettings
 
 
 func _ready() -> void:
-	name_label.text = boss_display_name
 	_cache_theme_resources()
 	_set_visible(false)
 	_try_bind_to_boss()
@@ -130,10 +129,12 @@ func _apply_phase_bar_colors() -> void:
 	if not _fill_style:
 		return
 	if _boss_is_weak:
+		name_label.text = boss_display_name + " (weak)"
 		_fill_style.bg_color = fill_color_weak
 		if _bg_style:
 			_bg_style.bg_color = background_color_weak
 	else:
+		name_label.text = boss_display_name + " (sheilded)"
 		_fill_style.bg_color = fill_color_normal
 		if _bg_style:
 			_bg_style.bg_color = background_color_normal

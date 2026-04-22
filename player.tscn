@@ -20,7 +20,7 @@ material = SubResource("StandardMaterial3D_i3pqv")
 [sub_resource type="SphereShape3D" id="SphereShape3D_hqtel"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i3pqv"]
-radius = 5.6612096
+radius = 3.0426686
 
 [sub_resource type="SphereMesh" id="SphereMesh_1jxqw"]
 
@@ -60,6 +60,11 @@ _data = {
 &"Pulse": SubResource("Animation_1jxqw"),
 &"RESET": SubResource("Animation_dw050")
 }
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1jxqw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1jxqw"]
+height = 2.3579102
 
 [node name="player" type="RigidBody3D" unique_id=1714944700 groups=["Player"]]
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
@@ -113,6 +118,16 @@ mesh = SubResource("SphereMesh_1jxqw")
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_dw050")
 autoplay = &"Pulse"
+
+[node name="spinAttack" type="Area3D" parent="." unique_id=1125207784]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spinAttack" unique_id=2034927104]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.5239736, 0, 0)
+mesh = SubResource("CapsuleMesh_1jxqw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="spinAttack" unique_id=563377521]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.7029287, -7.822375e-09, 0)
+shape = SubResource("CapsuleShape3D_1jxqw")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="damageAura" to="." method="_on_damage_aura_body_entered"]

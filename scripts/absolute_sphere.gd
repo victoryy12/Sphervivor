@@ -2,9 +2,9 @@ extends Node3D
 
 const _RingDamageAreaScript = preload("res://scripts/boss_ring_damage_area.gd")
 
-@export var ring_a_speed := 0.6
-@export var ring_b_speed := -0.9
-@export var ring_c_speed := 1.2
+@export var ring_a_speed := 15
+@export var ring_b_speed := -22
+@export var ring_c_speed := 15
 
 ## Seconds of fast spinning shield phase before the boss opens up.
 @export var shield_phase_duration := 30.0
@@ -12,7 +12,7 @@ const _RingDamageAreaScript = preload("res://scripts/boss_ring_damage_area.gd")
 @export var vulnerable_ring_speed_mult := 0.12
 ## How long (seconds) to ease ring rotation down after the shield drops.
 @export var ring_slow_blend_duration := 2.5
-@export var ring_contact_damage := 75.0
+@export var ring_contact_damage := 250.0
 @export var ring_damage_cooldown_sec := 0.45
 
 @onready var boss_body: Node = $BossBody
