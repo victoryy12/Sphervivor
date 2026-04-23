@@ -306,6 +306,7 @@ func apply_projectile_damage(body):
 @export var max_spin := 50.0
 @export var spin_accel := 20.0
 @export var spin_damage := 100.0
+@export var spin_knockback := 2.0
 var spin_hit_enemies = {}
 var spinning := false
 var spin_cooldown := false
@@ -339,6 +340,9 @@ func spin_attack(delta):
 
 
 func _on_spin_attack_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Enemies") and Input.is_action_pressed("spin"):
+		body.launch(global_position, spin_knockback)
+		
 	if body.is_in_group("Enemies") and body.has_method("take_damage"):
 		body.take_damage(spin_damage)
 		print(spin_hit_enemies)

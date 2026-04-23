@@ -94,9 +94,6 @@ func take_damage(amount) -> void:
 	health_changed.emit(current_hp, max_hp)
 	print("Enemy HP:", current_hp)
 	
-	if player:
-		launch(player.global_position, 5.0)
-	
 	if current_hp <= 0:
 		die()
 
