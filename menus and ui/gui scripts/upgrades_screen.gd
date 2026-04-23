@@ -18,23 +18,52 @@ var upgrades = [
 	}, {
 		"name": "Rocket Jump",
 		"desc": "Jump higher",
-		"apply": func(player): player.jump_force += 10
+		"apply": func(player): player.jump_force += 15
 	}, {
-		"name": "Wumbo beam",
-		"desc": "increase your mass",
-		"apply": func(player): player.jump_force += 10
+		"name": "slam",
+		"desc": "increase slam damage and radius",
+		"apply": func(player): player.slam_damage += 50
 	}, {
 		"name": "Slo-mo glasses",
-		"desc": 'Press and hold the "E" key to use a bullet-time ability',
+		"desc": 'glasses that improves your launch',
 		"apply": func(player): slow_mo_glassse(player)
 	}, {
 		"name": "Candy heart",
-		"desc": 'Increases health regen',
-		"apply": func(player): player.hp_regen += 0.15
+		"desc": 'Increases health and regen',
+		"apply": func(player): candy_heart(player)
+	}, {
+		"name": "Automatic Missiles",
+		"desc": 'Increases missile potency',
+		"apply": func(player): automatic_missiles(player)
+	}, {
+		"name": "Spinning Jimmy",
+		"desc": 'Increases spin attack potency',
+		"apply": func(player): spinning_jimmy(player)
+	}, {
+		"name": "Aerobics Training",
+		"desc": 'Increases engery',
+		"apply": func(player): aerobics_training(player)
 	}
 ]
 
-
+func aerobics_training(player):
+	player.max_energy += 1
+	player.regen_time -= 0.05
+	
+func spinning_jimmy(player):
+	player.spin_damage += 50
+	player.spin_force += 10
+	player.max_spin += 10
+	player.spin_accel += 5
+	
+func automatic_missiles(player):
+	player.projectile_count += 1
+	player.projectile_damage *= 1.2
+	
+func candy_heart(player):
+	player.hp_regen += 0.15
+	player.max_hp += 200
+	
 func slow_mo_glassse(player):
 	player.max_charge += 750
 	player.charge_speed += 333

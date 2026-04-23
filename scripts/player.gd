@@ -13,7 +13,8 @@ signal leveled_up
 
 @export var max_energy = 5.0
 @export var energy = max_energy
-@export var regen_time := 2.0
+@export var regen_time := 0.25
+@export var energy_regen = 0.1
 var can_regen := true
 
 @export var slam_speed = 5000.0
@@ -58,7 +59,6 @@ func _input(event: InputEvent) -> void:
 		pitch = clamp(pitch, deg_to_rad(-80), deg_to_rad(80))
 	
 	charge_input(event)
-	spin_input(event)
 	
 	
 func _physics_process(delta: float) -> void:
@@ -116,9 +116,13 @@ func player_movement(delta):
 
 
 func bullet_time_launch():
+	if energy <= 1:
+		return
+
 	var direction = -cam.global_transform.basis.z
 	direction =direction.normalized()
 	apply_central_impulse(direction * charge_power)
+	use_energy(2)
 
 
 func charge_input(event):
@@ -128,7 +132,7 @@ func charge_input(event):
 		Engine.time_scale = 0.2
 	
 	if event.is_action_released("charge ball"):
-		try_charge()
+		bullet_time_launch()
 		charging = false
 		Engine.time_scale = 1.0
 
@@ -180,14 +184,6 @@ func try_slam():
 	apply_central_force(Vector3.DOWN * slam_speed)
 
 
-func try_charge():
-	if energy <= 1:
-		return
-
-	use_energy(2)
-	bullet_time_launch()
-
-
 func use_energy(amount):
 	energy -= amount
 	energy = max(energy, 0)
@@ -203,7 +199,7 @@ func energy_loop():
 		await get_tree().create_timer(regen_time).timeout
 
 		if can_regen and energy < max_energy:
-			energy += 1
+			energy += energy_regen
 			energy = min(energy, max_energy)
 
 
@@ -264,6 +260,7 @@ func death_plane():
 @export var projectile_scene: PackedScene
 @export var fire_rate := 3.0
 @export var projectile_count = 1
+@export var projectile_damage = 200
 
 
 func auto_fire():
@@ -275,6 +272,7 @@ func auto_fire():
 func spawn_projectile():
 	for i in range(projectile_count):
 		var projectile = projectile_scene.instantiate()
+		projectile.shooter = self
 		# Spawn slightly in front of player
 		var forward = -global_transform.basis.z
 		
@@ -282,33 +280,48 @@ func spawn_projectile():
 		get_tree().current_scene.add_child(projectile)
 		await get_tree().create_timer(0.1).timeout
 
-
+func apply_projectile_damage(body):
+	if body.is_in_group("Enemies"):
+		body.take_damage(projectile_damage)
+		
+ 
 @export var spin_force := 10.0
 @export var max_spin := 50.0
-@export var spin_accel := 40.0
+@export var spin_accel := 5.0
 @export var spin_damage := 100.0
-
+var spin_hit_enemies = {}
 var spinning := false
+var spin_cooldown := false
+
 
 func spin_attack(delta):
-	if spinning:
-		$spinAttack.visible = true
-		$spinAttack.rotate_y(angular_velocity.y * delta)
-		for body in $spinAttack.get_overlapping_bodies():
-			if body.is_in_group("Enemies"):
-				body.take_damage(spin_damage)
-				
-		angular_velocity.y += spin_accel * delta
-		# clamp max spin
-		angular_velocity.y = clamp(angular_velocity.y, -max_spin, max_spin)
-	else:
-		$spinAttack.visible = false
-		# slow down when not spinning
-		angular_velocity.y = lerp(angular_velocity.y, 0.0, 5.0 * delta)
-
-func spin_input(event):
-	if event.is_action_pressed("spin"):
+	if energy <= 0:
+		return
+		
+	if Input.is_action_just_pressed("spin"):
+		spin_hit_enemies.clear()
+		
+	if Input.is_action_pressed("spin"):
+		use_energy(0.01)
 		spinning = true
 
-	if event.is_action_released("spin"):
+		$spinAttack.visible = true
+
+		# rotate hitbox visually (optional)
+		$spinAttack.rotate_y(angular_velocity.y * delta)
+
+		angular_velocity.y += spin_accel * delta
+		angular_velocity.y = clamp(angular_velocity.y, -max_spin, max_spin)
+
+	elif Input.is_action_just_released("spin"):
 		spinning = false
+		$spinAttack.visible = false
+
+		angular_velocity.y = lerp(angular_velocity.y, 0.0, 5.0 * delta)
+
+
+
+func _on_spin_attack_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Enemies") and body.has_method("take_damage"):
+		body.take_damage(spin_damage)
+		print(spin_hit_enemies)

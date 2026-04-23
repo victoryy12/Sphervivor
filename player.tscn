@@ -131,3 +131,4 @@ shape = SubResource("CapsuleShape3D_1jxqw")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="damageAura" to="." method="_on_damage_aura_body_entered"]
+[connection signal="body_entered" from="spinAttack" to="." method="_on_spin_attack_body_entered"]
