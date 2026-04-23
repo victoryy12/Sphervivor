@@ -56,14 +56,14 @@ func _apply_viewport_scale() -> void:
 	for child in _vbox.get_children():
 		if child is HBoxContainer:
 			var row_node := child as Node
-			var vw: float = value_w_mouse if row_node.get_node_or_null("MouseValue") else value_w_default
+			var row_value_w: float = value_w_mouse if row_node.get_node_or_null("MouseValue") else value_w_default
 			_scale_option_row(
 				child as HBoxContainer,
 				vp,
 				slider_w,
 				slider_h,
 				label_w,
-				vw,
+				row_value_w,
 				row_sep,
 				body_fs,
 				outline
