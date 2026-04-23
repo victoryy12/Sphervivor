@@ -12,6 +12,8 @@
 shader = ExtResource("1_hdmo1")
 shader_parameter/lod = 0.158000007505
 
+[sub_resource type="Texture2DRD" id="Texture2DRD_lblxi"]
+
 [node name="pause menu" type="CanvasLayer" unique_id=1817232568]
 process_mode = 3
 script = ExtResource("1_nwcfo")
@@ -82,6 +84,16 @@ icon = ExtResource("4_v63wl")
 icon_alignment = 1
 expand_icon = true
 
+[node name="helpButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=940401608]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 28
+text = "Help"
+icon = SubResource("Texture2DRD_lblxi")
+icon_alignment = 1
+expand_icon = true
+
 [node name="quitButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=398176399]
 custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
@@ -104,4 +116,5 @@ autowrap_mode = 3
 
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/resumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/helpButton" to="." method="_on_help_button_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/quitButton" to="." method="_on_quit_button_pressed"]

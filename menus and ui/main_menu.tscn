@@ -50,7 +50,15 @@ text = "Start"
 custom_minimum_size = Vector2(220, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 24
 text = "Settings"
+
+[node name="helpButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=625340205]
+custom_minimum_size = Vector2(220, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 28
+text = "Help"
 
 [node name="exitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1690058898]
 custom_minimum_size = Vector2(220, 50)
@@ -60,4 +68,5 @@ text = "Exit"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/startButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/settingButton" to="." method="_on_setting_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/helpButton" to="." method="_on_help_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/exitButton" to="." method="_on_exit_button_pressed"]
