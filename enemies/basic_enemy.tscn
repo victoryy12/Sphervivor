@@ -30,9 +30,9 @@ top_radius = 0.0
 bottom_radius = 0.1
 height = 0.12
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ubayq"]
-radius = 0.3881836
-height = 1.2581867
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5xrap"]
+radius = 0.39892578
+height = 1.5600586
 
 [node name="Basic_Enemy" type="RigidBody3D" unique_id=894703537 groups=["Enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08788657, 0)
@@ -48,26 +48,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92282546, 0)
 mesh = SubResource("SphereMesh_6ofcp")
 
 [node name="CSGCylinder3D2" type="MeshInstance3D" parent="." unique_id=327212471]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.28, 0.923, 0)
+transform = Transform3D(1.9106855e-15, 9.911229e-08, 0.9349878, 1, -9.911229e-08, 0, 4.371139e-08, 2.2674248, -4.0869615e-08, 0.0065370835, 0.95264274, 0.25)
 mesh = SubResource("CylinderMesh_li1hj")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1137182418]
 avoidance_enabled = true
 
-[node name="collisionBox" type="CollisionShape3D" parent="." unique_id=1845888202]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44289932, 0)
-shape = SubResource("CapsuleShape3D_ubayq")
-
 [node name="AttacksSFX" type="AudioStreamPlayer3D" parent="." unique_id=1170146433]
 stream = ExtResource("2_5xrap")
 volume_db = -6.0
 max_distance = 20.0
-bus = &"SFX"
 
 [node name="HitsSFX" type="AudioStreamPlayer3D" parent="." unique_id=35701471]
 stream = ExtResource("3_li1hj")
 volume_db = -6.0
 max_distance = 20.0
-bus = &"SFX"
+
+[node name="collisionBox" type="CollisionShape3D" parent="." unique_id=416835735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31166625, 0)
+shape = SubResource("CapsuleShape3D_5xrap")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

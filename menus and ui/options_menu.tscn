@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxcexrj52ax3"]
+[gd_scene format=3 uid="uid://bxcexrj52ax3"]
 
 [ext_resource type="Script" path="res://menus and ui/gui scripts/options_menu.gd" id="1_script"]
 [ext_resource type="FontFile" path="res://assets/Inlanders Demo.otf" id="2_font0"]
