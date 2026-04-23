@@ -36,10 +36,11 @@ script = ExtResource("1_2m5ss")
 
 [node name="Root" type="Control" parent="." unique_id=1756467290]
 layout_mode = 3
+anchor_top = 0.84
 anchor_right = 1.0
-anchor_bottom = 0.16
+anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 1
 
 [node name="Name" type="Label" parent="Root" unique_id=1918591892]
 layout_mode = 1

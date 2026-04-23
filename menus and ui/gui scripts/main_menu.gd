@@ -12,12 +12,14 @@ func _ready() -> void:
 
 
 func _update_button_scale() -> void:
-	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	var base_size: float = min(viewport_size.x, viewport_size.y)
-	var button_width: float = clampf(viewport_size.x * 0.24, 220.0, 520.0)
-	var button_height: float = clampf(base_size * 0.095, 50.0, 110.0)
-	var font_size: int = int(clampf(base_size * 0.05, 24.0, 56.0))
-	var spacing: int = int(clampf(base_size * 0.018, 10.0, 24.0))
+	var vp := get_viewport()
+	var viewport_size: Vector2 = vp.get_visible_rect().size
+	var base_size: float = UiResponsive.short_side(vp)
+	var r: float = UiResponsive.ratio(vp)
+	var button_width: float = clampf(viewport_size.x * 0.24, 200.0 * r, 560.0 * r)
+	var button_height: float = clampf(base_size * 0.095, 44.0 * r, 120.0 * r)
+	var font_size: int = int(clampf(base_size * 0.05, 20.0 * r, 64.0 * r))
+	var spacing: int = int(clampf(base_size * 0.018, 8.0 * r, 28.0 * r))
 
 	vbox.add_theme_constant_override("separation", spacing)
 	for button in [start_button, settings_button, exit_button]:

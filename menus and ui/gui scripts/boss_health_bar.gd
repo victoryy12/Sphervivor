@@ -32,7 +32,24 @@ func _ready() -> void:
 	_set_visible(false)
 	_try_bind_to_boss()
 	_apply_title_scale()
-	get_viewport().size_changed.connect(_apply_title_scale)
+	_apply_bar_layout()
+	get_viewport().size_changed.connect(_on_viewport_resized)
+
+
+func _on_viewport_resized() -> void:
+	_apply_title_scale()
+	_apply_bar_layout()
+
+
+func _apply_bar_layout() -> void:
+	var vp := get_viewport()
+	var h: float = vp.get_visible_rect().size.y
+	if h <= 1.0:
+		return
+	var band: float = clampf(168.0 / h, 0.09, 0.26)
+	root.anchor_top = 1.0 - band
+	root.anchor_bottom = 1.0
+	bar.custom_minimum_size.y = float(UiResponsive.scale_i_clamped(vp, 26.0, 10, 48))
 
 
 func _cache_theme_resources() -> void:

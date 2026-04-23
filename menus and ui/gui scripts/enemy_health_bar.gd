@@ -6,14 +6,34 @@ var enemy_bars: Dictionary = {}
 var tracked_enemies: Array = []
 
 const ENEMY_GROUP := "Enemies"
-const BAR_SIZE := Vector2(72, 8)
-const SCREEN_OFFSET := Vector2(36, 22)
 const DEFAULT_HEAD_OFFSET := Vector3(0.0, 2.2, 0.0)
-const SHOW_DISTANCE := 20.0
+
+var _bar_size: Vector2 = Vector2(72, 8)
+var _screen_offset: Vector2 = Vector2(36, 22)
+var _show_distance: float = 20.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	get_viewport().size_changed.connect(_apply_bar_metrics)
+	_apply_bar_metrics()
 	_register_existing_enemies()
+
+
+func _apply_bar_metrics() -> void:
+	var vp := get_viewport()
+	_bar_size = Vector2(
+		UiResponsive.scale_px_clamped(vp, 72.0, 40.0, 160.0),
+		UiResponsive.scale_px_clamped(vp, 8.0, 4.0, 22.0)
+	)
+	_screen_offset = Vector2(
+		UiResponsive.scale_px_clamped(vp, 36.0, 18.0, 80.0),
+		UiResponsive.scale_px_clamped(vp, 22.0, 10.0, 48.0)
+	)
+	_show_distance = UiResponsive.scale_px_clamped(vp, 20.0, 12.0, 56.0)
+	for b in enemy_bars.values():
+		if is_instance_valid(b):
+			b.custom_minimum_size = _bar_size
+			b.size = _bar_size
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -47,8 +67,8 @@ func _try_register_enemy(enemy: Node) -> void:
 	var bar := ProgressBar.new()
 	bar.show_percentage = false
 	bar.min_value = 0.0
-	bar.custom_minimum_size = BAR_SIZE
-	bar.size = BAR_SIZE
+	bar.custom_minimum_size = _bar_size
+	bar.size = _bar_size
 	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(bar)
 
@@ -104,7 +124,7 @@ func _update_enemy_bars() -> void:
 
 		var bar: ProgressBar = enemy_bars[enemy]
 		#creates a show distance for bars
-		if player and enemy.global_position.distance_to(player.global_position) > SHOW_DISTANCE:
+		if player and enemy.global_position.distance_to(player.global_position) > _show_distance:
 			bar.visible = false
 			continue
 			
@@ -114,7 +134,7 @@ func _update_enemy_bars() -> void:
 			continue
 
 		var screen_pos: Vector2 = cam.unproject_position(world_pos)
-		bar.position = screen_pos - SCREEN_OFFSET
+		bar.position = screen_pos - _screen_offset
 		if bar.value > 0.0:
 			bar.visible = true
 

@@ -7,6 +7,11 @@ extends CanvasLayer
 	$CenterContainer/VBoxContainer/HBoxContainer/upgrade2,
 	$CenterContainer/VBoxContainer/HBoxContainer/upgrade3
 ]
+@onready var _center_margin: MarginContainer = $CenterContainer
+@onready var _main_vbox: VBoxContainer = $CenterContainer/VBoxContainer
+@onready var _level_banner: TextureRect = $CenterContainer/VBoxContainer/LevelUp
+@onready var _upgrade_row: HBoxContainer = $CenterContainer/VBoxContainer/HBoxContainer
+@onready var _refresh_button: Button = $refreshButton
 
 var allowed_refresh = 1
 var current_choices = []	
@@ -150,11 +155,31 @@ func _on_refresh_button_pressed() -> void:
 
 
 func _update_upgrade_ui_scale() -> void:
-	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	var base_size: float = min(viewport_size.x, viewport_size.y)
-	var font_size: int = int(clampf(base_size * 0.035, 16.0, 44.0))
-	var min_height: float = clampf(base_size * 0.22, 160.0, 360.0)
+	var vp := get_viewport()
+	var viewport_size: Vector2 = vp.get_visible_rect().size
+	var base_size: float = UiResponsive.short_side(vp)
+	var r: float = UiResponsive.ratio(vp)
+
+	var mg: int = UiResponsive.scale_i_clamped(vp, 64.0, 12, 120)
+	_center_margin.add_theme_constant_override("margin_left", mg)
+	_center_margin.add_theme_constant_override("margin_top", UiResponsive.scale_i_clamped(vp, 48.0, 8, 100))
+	_center_margin.add_theme_constant_override("margin_right", mg)
+	_center_margin.add_theme_constant_override("margin_bottom", UiResponsive.scale_i_clamped(vp, 48.0, 8, 100))
+	_main_vbox.add_theme_constant_override("separation", UiResponsive.scale_i_clamped(vp, 20.0, 8, 44))
+	_upgrade_row.add_theme_constant_override("separation", UiResponsive.scale_i_clamped(vp, 20.0, 6, 40))
+
+	_level_banner.custom_minimum_size.y = clampf(base_size * 0.48, 140.0 * r, 520.0 * r)
+
+	var font_size: int = int(clampf(base_size * 0.035, 12.0 * r, 52.0 * r))
+	var min_height: float = clampf(base_size * 0.22, 120.0 * r, 420.0 * r)
 
 	for button in upgrade_buttons:
 		button.custom_minimum_size.y = min_height
 		button.add_theme_font_size_override("font_size", font_size)
+
+	var ref: float = UiResponsive.scale_px_clamped(vp, 76.0, 44.0, 120.0)
+	_refresh_button.add_theme_font_size_override("font_size", UiResponsive.scale_i_clamped(vp, 22.0, 12, 36))
+	_refresh_button.offset_top = UiResponsive.scale_px_clamped(vp, 20.0, 8.0, 48.0)
+	_refresh_button.offset_bottom = _refresh_button.offset_top + ref
+	_refresh_button.offset_right = UiResponsive.scale_px_clamped(vp, -20.0, -8.0, -36.0)
+	_refresh_button.offset_left = _refresh_button.offset_right - ref

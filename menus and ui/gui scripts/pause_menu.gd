@@ -10,6 +10,9 @@ extends CanvasLayer
 @onready var resume_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/resumeButton
 @onready var restart_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/restartButton
 @onready var quit_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/quitButton
+@onready var _main_layout: MarginContainer = $MainLayout
+@onready var _root_vbox: VBoxContainer = $MainLayout/RootVBox
+@onready var _pause_vbox: VBoxContainer = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer
 var pausedCheck = false
 
 func _input(event: InputEvent) -> void:
@@ -48,15 +51,25 @@ func display_stats():
 
 
 func _update_ui_scale() -> void:
-	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	var base_size: float = min(viewport_size.x, viewport_size.y)
+	var vp := get_viewport()
+	var viewport_size: Vector2 = vp.get_visible_rect().size
+	var base_size: float = UiResponsive.short_side(vp)
+	var r: float = UiResponsive.ratio(vp)
 
-	var button_font_size: int = int(clampf(base_size * 0.045, 20.0, 54.0))
-	var stats_font_size: int = int(clampf(base_size * 0.032, 16.0, 42.0))
-	var button_height: float = clampf(base_size * 0.125, 72.0, 180.0)
-	var logo_height: float = clampf(viewport_size.y * 0.2, 90.0, 280.0)
-	var panel_width: float = clampf(viewport_size.x * 0.58, 460.0, 1200.0)
-	var stats_height: float = clampf(base_size * 0.20, 90.0, 240.0)
+	var mg: int = UiResponsive.scale_i_clamped(vp, 40.0, 10, 96)
+	_main_layout.add_theme_constant_override("margin_left", mg)
+	_main_layout.add_theme_constant_override("margin_top", UiResponsive.scale_i_clamped(vp, 24.0, 6, 64))
+	_main_layout.add_theme_constant_override("margin_right", mg)
+	_main_layout.add_theme_constant_override("margin_bottom", UiResponsive.scale_i_clamped(vp, 24.0, 6, 64))
+	_root_vbox.add_theme_constant_override("separation", UiResponsive.scale_i_clamped(vp, 20.0, 8, 40))
+	_pause_vbox.add_theme_constant_override("separation", UiResponsive.scale_i_clamped(vp, 14.0, 6, 32))
+
+	var button_font_size: int = int(clampf(base_size * 0.045, 18.0 * r, 58.0 * r))
+	var stats_font_size: int = int(clampf(base_size * 0.032, 14.0 * r, 48.0 * r))
+	var button_height: float = clampf(base_size * 0.125, 56.0 * r, 200.0 * r)
+	var logo_height: float = clampf(viewport_size.y * 0.2, 72.0 * r, 320.0 * r)
+	var panel_width: float = clampf(viewport_size.x * 0.58, 320.0 * r, 1280.0 * r)
+	var stats_height: float = clampf(base_size * 0.20, 72.0 * r, 280.0 * r)
 
 	logo.custom_minimum_size.y = logo_height
 	pause_panel.custom_minimum_size.x = panel_width
