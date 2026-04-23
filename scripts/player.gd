@@ -287,7 +287,7 @@ func apply_projectile_damage(body):
  
 @export var spin_force := 10.0
 @export var max_spin := 50.0
-@export var spin_accel := 5.0
+@export var spin_accel := 20.0
 @export var spin_damage := 100.0
 var spin_hit_enemies = {}
 var spinning := false

@@ -33,7 +33,6 @@ bottom_radius = 0.1
 height = 0.1
 
 [node name="snowman" type="RigidBody3D" unique_id=363226556 groups=["Enemies"]]
-mass = 100.0
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_r0uwl")

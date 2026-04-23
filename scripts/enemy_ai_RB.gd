@@ -95,7 +95,7 @@ func take_damage(amount) -> void:
 	print("Enemy HP:", current_hp)
 	
 	if player:
-		launch(player.global_position, 500.0)
+		launch(player.global_position, 5.0)
 	
 	if current_hp <= 0:
 		die()
