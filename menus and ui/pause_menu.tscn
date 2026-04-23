@@ -2,11 +2,11 @@
 
 [ext_resource type="Shader" uid="uid://el6ke6iu8ynn" path="res://shaders/puaseMenu.gdshader" id="1_hdmo1"]
 [ext_resource type="Script" uid="uid://hl3uq38xk0hv" path="res://menus and ui/gui scripts/pause_menu.gd" id="1_nwcfo"]
-[ext_resource type="FontFile" path="res://assets/Inlanders Demo.otf" id="2_font0"]
+[ext_resource type="FontFile" uid="uid://wf1lm3oelgmo" path="res://assets/Inlanders Demo.otf" id="2_font0"]
 [ext_resource type="Texture2D" uid="uid://dl8k0rybbby80" path="res://assets/resume.png" id="3_14738"]
 [ext_resource type="Texture2D" uid="uid://br80b721wlr5l" path="res://assets/restart.png" id="4_v63wl"]
 [ext_resource type="Texture2D" uid="uid://b05uajxej5eq" path="res://assets/quit3.png" id="5_lblxi"]
-[ext_resource type="Texture2D" path="res://assets/spherevivor-logo.png" id="6_l0g0"]
+[ext_resource type="Texture2D" uid="uid://doq2uwd0tyitn" path="res://assets/spherevivor-logo.png" id="6_l0g0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nwcfo"]
 shader = ExtResource("1_hdmo1")
@@ -57,8 +57,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="pauseOptions" type="PanelContainer" parent="MainLayout/RootVBox/ButtonsCenter" unique_id=846360465]
-layout_mode = 2
 custom_minimum_size = Vector2(460, 260)
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions" unique_id=1666072527]
 layout_mode = 2
@@ -67,8 +67,8 @@ theme_override_constants/separation = 14
 [node name="resumeButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=841365209]
 custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
-text = "Resume"
 theme_override_fonts/font = ExtResource("2_font0")
+text = "Resume"
 icon = ExtResource("3_14738")
 icon_alignment = 1
 expand_icon = true
@@ -76,8 +76,8 @@ expand_icon = true
 [node name="restartButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=1277501890]
 custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
-text = "Restart"
 theme_override_fonts/font = ExtResource("2_font0")
+text = "Restart"
 icon = ExtResource("4_v63wl")
 icon_alignment = 1
 expand_icon = true
@@ -85,16 +85,16 @@ expand_icon = true
 [node name="quitButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=398176399]
 custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
-text = "Quit"
 theme_override_fonts/font = ExtResource("2_font0")
+text = "Quit"
 icon = ExtResource("5_lblxi")
 icon_alignment = 1
 expand_icon = true
 
 [node name="stats" type="PanelContainer" parent="MainLayout/RootVBox" unique_id=1978131070]
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 120)
 
 [node name="displayStats" type="Label" parent="MainLayout/RootVBox/stats" unique_id=2077793431]
 layout_mode = 2
