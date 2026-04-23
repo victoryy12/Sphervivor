@@ -20,7 +20,13 @@ material = SubResource("StandardMaterial3D_i3pqv")
 [sub_resource type="SphereShape3D" id="SphereShape3D_hqtel"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i3pqv"]
-radius = 3.0426686
+radius = 4.26226
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1jxqw"]
+inherit_velocity_ratio = 3.0
+direction = Vector3(0, 1, 0)
+spread = 90.0
+color = Color(0.24405202, 0.24405205, 0.24405202, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_1jxqw"]
 
@@ -61,10 +67,11 @@ _data = {
 &"RESET": SubResource("Animation_dw050")
 }
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_1jxqw"]
+[sub_resource type="TorusMesh" id="TorusMesh_1jxqw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1jxqw"]
-height = 2.3579102
+radius = 0.57177734
+height = 3.6617432
 
 [node name="player" type="RigidBody3D" unique_id=1714944700 groups=["Player"]]
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
@@ -94,6 +101,12 @@ current = true
 [node name="auaraRange" type="CollisionShape3D" parent="damageAura" unique_id=1498920748]
 shape = SubResource("SphereShape3D_i3pqv")
 
+[node name="slamParticles" type="GPUParticles3D" parent="damageAura" unique_id=880223122]
+emitting = false
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_1jxqw")
+
 [node name="JumpSFX" type="AudioStreamPlayer3D" parent="." unique_id=1384958039]
 stream = ExtResource("4_sweqy")
 
@@ -122,11 +135,11 @@ autoplay = &"Pulse"
 [node name="spinAttack" type="Area3D" parent="." unique_id=1125207784]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="spinAttack" unique_id=2034927104]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.5239736, 0, 0)
-mesh = SubResource("CapsuleMesh_1jxqw")
+transform = Transform3D(-0.9998677, -0.016265834, 0, 0.016265834, -0.9998677, 0, 0, 0, 1, 1.5239736, 0, 0)
+mesh = SubResource("TorusMesh_1jxqw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="spinAttack" unique_id=563377521]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.7029287, -7.822375e-09, 0)
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.0510122, 2.06738e-08, 0)
 shape = SubResource("CapsuleShape3D_1jxqw")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

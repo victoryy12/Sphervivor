@@ -7,6 +7,8 @@ extends CanvasLayer
 	$CenterContainer/VBoxContainer/HBoxContainer/upgrade2,
 	$CenterContainer/VBoxContainer/HBoxContainer/upgrade3
 ]
+
+var allowed_refresh = 1
 var current_choices = []	
 var upgrades_open = false
 
@@ -70,7 +72,6 @@ func slow_mo_glassse(player):
 
 
 func refresh_upgrades():
-	var allowed_refresh = 1
 	$refreshButton.text = "str(allowed_refresh)"
 	current_choices = get_random_upgrades()
 

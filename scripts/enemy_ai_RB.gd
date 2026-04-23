@@ -14,6 +14,8 @@ extends RigidBody3D
 
 var experience_drop = preload("res://experience_point.tscn")
 
+var knockback_timer := 0.0
+@export var knockback_duration := 0.25
 # Compatibility aliases for UI/scripts expecting max_hp/curr_hp names.
 var max_hp: float:
 	get:
@@ -44,28 +46,37 @@ func _ready() -> void:
 	_setup_sfx()
 	
 func _physics_process(delta: float) -> void:
+	if knockback_timer > 0:
+		knockback_timer -= delta
+		return
+		
 	movement_tracking(delta)
+	
 
 func movement_tracking(delta: float) -> void:
 	if not player:
 		return
-	
+
 	var direction = player.global_position - global_position
 	direction.y = 0
 
-	if direction.length() > 0.001:
-		direction = direction.normalized()
-		
-		# rotate toward player
-		var target_rotation = atan2(direction.x, direction.z)
-		rotation.y = lerp_angle(rotation.y, target_rotation, delta * 5.0)
+	if direction.length() < 0.001:
+		return
 
-		# desired velocity
-		var target_velocity = direction * speed
-		
-		# smooth acceleration
-		linear_velocity.x = lerp(linear_velocity.x, target_velocity.x, accel * delta)
-		linear_velocity.z = lerp(linear_velocity.z, target_velocity.z, accel * delta)
+	direction = direction.normalized()
+
+	# rotate toward player
+	var target_rotation = atan2(direction.x, direction.z)
+	rotation.y = lerp_angle(rotation.y, target_rotation, delta * 5.0)
+
+	var target_velocity = direction * speed
+
+	# keep Y velocity untouched (VERY IMPORTANT)
+	var new_velocity = linear_velocity
+	new_velocity.x = lerp(linear_velocity.x, target_velocity.x, accel * delta)
+	new_velocity.z = lerp(linear_velocity.z, target_velocity.z, accel * delta)
+
+	linear_velocity = new_velocity
 
 
 func _on_body_entered(body: Node) -> void:
@@ -73,7 +84,7 @@ func _on_body_entered(body: Node) -> void:
 		_play_attack_sfx()
 		take_damage(body.deal_damage())
 		
-func take_damage(amount: float) -> void:
+func take_damage(amount) -> void:
 	if amount <= 0.0:
 		return
 
@@ -82,7 +93,10 @@ func take_damage(amount: float) -> void:
 	current_hp = maxf(current_hp - amount, 0.0)
 	health_changed.emit(current_hp, max_hp)
 	print("Enemy HP:", current_hp)
-
+	
+	if player:
+		launch(player.global_position, 500.0)
+	
 	if current_hp <= 0:
 		die()
 
@@ -91,6 +105,15 @@ func deal_damage() -> float:
 	_play_attack_sfx()
 	return enemy_damage
 
+
+func launch(from_position: Vector3, force: float, upward_bias: float = 0.4) -> void:
+	var dir = (global_position - from_position).normalized()
+	dir.y = upward_bias
+	dir = dir.normalized()
+
+	apply_impulse(dir * force)
+	
+	knockback_timer = knockback_duration
 		
 				
 func die():

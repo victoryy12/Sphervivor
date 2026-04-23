@@ -146,13 +146,13 @@ func slam_impact():
 		slam_sfx.play()
 	
 	var damage = (slam_damage + fall_distance) * 5.0
+	var launch_power = clamp(fall_distance * 100.0, 80.0, 600.0)
 	
 	for body in $damageAura.get_overlapping_bodies():
 		if body.is_in_group("Enemies"):
 			body.take_damage(damage)
 			
-			var dir = (body.global_position - global_position).normalized()
-			body.apply_impulse(Vector3.UP * 80 + dir * 50)
+			body.launch(global_position, launch_power)
 
 
 func slam():
