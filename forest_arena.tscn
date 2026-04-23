@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://o7n1jjqj0vbw"]
 
+[ext_resource type="Script" path="res://scripts/forest_arena.gd" id="0_farena"]
 [ext_resource type="PackedScene" uid="uid://ci8mmiqe5yk5u" path="res://tree.tscn" id="1_ubfh8"]
 [ext_resource type="PackedScene" uid="uid://ch0exdx0a55dy" path="res://Spawner/Spawn.tscn" id="2_vqyi4"]
 
@@ -32,6 +33,7 @@ material = SubResource("StandardMaterial3D_vqyi4")
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [node name="forest arena" type="Node3D" unique_id=1584540013]
+script = ExtResource("0_farena")
 
 [node name="Trees" type="Node3D" parent="." unique_id=1069072719]
 transform = Transform3D(1.0008829, 0, 0, 0, 1.0008829, 0, 0, 0, 1.0008829, 18.543148, 0.50044906, 20.37115)

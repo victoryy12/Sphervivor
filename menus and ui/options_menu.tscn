@@ -1,0 +1,218 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxcexrj52ax3"]
+
+[ext_resource type="Script" path="res://menus and ui/gui scripts/options_menu.gd" id="1_script"]
+[ext_resource type="FontFile" path="res://assets/Inlanders Demo.otf" id="2_font0"]
+[ext_resource type="FontFile" path="res://assets/Melted Monster.ttf" id="3_font_values"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bg"]
+load_path = "res://.godot/imported/main-menu.png-847ee1b82a40cc8625df7db4122cf193.ctex"
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = SubResource("CompressedTexture2D_bg")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="Title" type="Label" parent="MarginContainer/CenterContainer/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.92)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 78
+text = "Options"
+horizontal_alignment = 1
+
+[node name="VolumeRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="VolumeLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/VolumeRow"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 40
+text = "Main volume"
+
+[node name="VolumeSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/VolumeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+
+[node name="VolumeValue" type="Label" parent="MarginContainer/CenterContainer/VBox/VolumeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_font_values")
+theme_override_font_sizes/font_size = 40
+text = "100%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="FovRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="FovLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/FovRow"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 40
+text = "Field of view"
+
+[node name="FovSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/FovRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 55.0
+max_value = 120.0
+step = 1.0
+
+[node name="FovValue" type="Label" parent="MarginContainer/CenterContainer/VBox/FovRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_font_values")
+theme_override_font_sizes/font_size = 40
+text = "75°"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="DayNightRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="DayNightLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/DayNightRow"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 40
+text = "Day / night"
+
+[node name="DayNightSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/DayNightRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+
+[node name="DayNightValue" type="Label" parent="MarginContainer/CenterContainer/VBox/DayNightRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_font_values")
+theme_override_font_sizes/font_size = 40
+text = "Day"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MouseRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="MouseLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/MouseRow"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 40
+text = "Mouse sensitivity"
+
+[node name="MouseSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/MouseRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+
+[node name="MouseValue" type="Label" parent="MarginContainer/CenterContainer/VBox/MouseRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 52)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_font_values")
+theme_override_font_sizes/font_size = 40
+text = "0.0020"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="MarginContainer/CenterContainer/VBox"]
+custom_minimum_size = Vector2(400, 86)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.96, 0.96, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 44
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBox/BackButton" to="." method="_on_back_pressed"]

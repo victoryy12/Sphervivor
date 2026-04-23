@@ -1,6 +1,7 @@
 extends RigidBody3D
 
 @onready var cam = $CameraRig
+@onready var _player_camera: Camera3D = $CameraRig/Camera3D
 
 @export var level = 1
 @export var curr_exp = 0
@@ -39,6 +40,7 @@ var pitch := 0.0 # up/down
 
 @onready var jump_sfx: AudioStreamPlayer3D = $JumpSFX
 @onready var slam_sfx: AudioStreamPlayer3D = $SlamSFX
+@onready var level_up_sfx: AudioStreamPlayer3D = $LevelUpSFX
 
 func _ready() -> void:
 	cam.top_level = true
@@ -46,11 +48,24 @@ func _ready() -> void:
 	$spinAttack.top_level = true
 	$spinAttack.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	mouse_sensitivity = GameSettings.mouse_sensitivity
+	GameSettings.mouse_sensitivity_changed.connect(_on_mouse_sensitivity_changed)
+	GameSettings.fov_changed.connect(_on_fov_changed)
+	_on_fov_changed(GameSettings.fov_degrees)
 	health_regen()
 	auto_fire()
 	energy_loop()
 
 	
+func _on_mouse_sensitivity_changed(v: float) -> void:
+	mouse_sensitivity = v
+
+
+func _on_fov_changed(degrees: float) -> void:
+	if _player_camera:
+		_player_camera.fov = degrees
+
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		yaw -= event.relative.x * mouse_sensitivity
@@ -240,7 +255,9 @@ func level_up() -> void:
 	level += 1
 	exp_to_lvl = int(exp_to_lvl * 1.2)
 	max_hp += 100
-	
+	if level_up_sfx and level_up_sfx.stream:
+		level_up_sfx.pitch_scale = randf_range(0.97, 1.03)
+		level_up_sfx.play()
 	emit_signal("leveled_up")
 	
 		

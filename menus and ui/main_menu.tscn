@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dat6iyrol62hr"]
 
 [ext_resource type="Script" uid="uid://b7gqepkqvbsjj" path="res://menus and ui/gui scripts/main_menu.gd" id="1_06t4h"]
-[ext_resource type="FontFile" path="res://assets/Inlanders Demo.otf" id="2_font0"]
+[ext_resource type="FontFile" uid="uid://wf1lm3oelgmo" path="res://assets/Inlanders Demo.otf" id="2_font0"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0gfd0"]
 load_path = "res://.godot/imported/main-menu.png-847ee1b82a40cc8625df7db4122cf193.ctex"
@@ -43,20 +43,20 @@ theme_override_constants/separation = 16
 [node name="startButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1256745212]
 custom_minimum_size = Vector2(220, 50)
 layout_mode = 2
-text = "Start"
 theme_override_fonts/font = ExtResource("2_font0")
+text = "Start"
 
 [node name="settingButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1698824037]
 custom_minimum_size = Vector2(220, 50)
 layout_mode = 2
-text = "Settings"
 theme_override_fonts/font = ExtResource("2_font0")
+text = "Settings"
 
 [node name="exitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1690058898]
 custom_minimum_size = Vector2(220, 50)
 layout_mode = 2
-text = "Exit"
 theme_override_fonts/font = ExtResource("2_font0")
+text = "Exit"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/startButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/settingButton" to="." method="_on_setting_button_pressed"]

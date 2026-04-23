@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://ddnof5bh4mt4" path="res://assets/jump.mp3" id="4_sweqy"]
 [ext_resource type="AudioStream" uid="uid://de7faa6haiww1" path="res://assets/slam.mp3" id="5_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://dsvwubwuqta43" path="res://assets/death.mp3" id="6_2hs0m"]
+[ext_resource type="AudioStream" uid="uid://p5c68ur7oxf2" path="res://assets/level-up.mp3" id="8_lvlup"]
 [ext_resource type="PackedScene" uid="uid://b7ddw0m3bkxwe" path="res://player_projectile.tscn" id="7_1jxqw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_onrkg"]
@@ -117,6 +118,10 @@ volume_db = -4.0
 [node name="DeathSFX" type="AudioStreamPlayer3D" parent="." unique_id=1114967181]
 stream = ExtResource("6_2hs0m")
 volume_db = -6.0
+
+[node name="LevelUpSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_lvlup")
+volume_db = -2.0
 
 [node name="gui" parent="." unique_id=659538166 instance=ExtResource("3_i3pqv")]
 

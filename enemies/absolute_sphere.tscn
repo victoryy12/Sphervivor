@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cby55yghtyl3" path="res://scripts/absolute_sphere.gd" id="1_inppo"]
 [ext_resource type="Script" uid="uid://djh7wbcngxv8q" path="res://scripts/absolute_sphere_boss.gd" id="2_inppo"]
+[ext_resource type="AudioStream" uid="uid://dc1ib56g1y1lc" path="res://menus and ui/force-field.mp3" id="3_ff_loop"]
+[ext_resource type="AudioStream" uid="uid://cnnlp7q2nyh8y" path="res://assets/force-field-down.mp3" id="4_ff_down"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_lpwmt"]
 
@@ -69,6 +71,16 @@ surface_material_override/0 = SubResource("StandardMaterial3D_814he")
 target_position = Vector3(0, -2, 0)
 collision_mask = 15
 hit_back_faces = false
+
+[node name="ForceFieldLoop" type="AudioStreamPlayer3D" parent="BossBody"]
+stream = ExtResource("3_ff_loop")
+volume_db = 8.0
+max_distance = 120.0
+
+[node name="ForceFieldDown" type="AudioStreamPlayer3D" parent="BossBody"]
+stream = ExtResource("4_ff_down")
+volume_db = 10.0
+max_distance = 120.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=878252319]
 
