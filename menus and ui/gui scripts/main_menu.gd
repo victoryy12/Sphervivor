@@ -3,6 +3,7 @@ extends Control
 @onready var vbox: VBoxContainer = $CenterContainer/VBoxContainer
 @onready var start_button: Button = $CenterContainer/VBoxContainer/startButton
 @onready var settings_button: Button = $CenterContainer/VBoxContainer/settingButton
+@onready var help_button: Button = $CenterContainer/VBoxContainer/helpButton
 @onready var exit_button: Button = $CenterContainer/VBoxContainer/exitButton
 
 # Called when the node enters the scene tree for the first time.
@@ -22,7 +23,7 @@ func _update_button_scale() -> void:
 	var spacing: int = int(clampf(base_size * 0.018, 8.0 * r, 28.0 * r))
 
 	vbox.add_theme_constant_override("separation", spacing)
-	for button in [start_button, settings_button, exit_button]:
+	for button in [start_button, settings_button, help_button, exit_button]:
 		button.custom_minimum_size = Vector2(button_width, button_height)
 		button.add_theme_font_size_override("font_size", font_size)
 

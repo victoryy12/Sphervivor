@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://3ogrr84620rg"]
 
-[ext_resource type="PackedScene" uid="uid://c4d1vn0itpmdx" path="res://forest_arena.tscn" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://o7n1jjqj0vbw" path="res://forest_arena.tscn" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://m3sigj8s4nmg" path="res://player.tscn" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://crdlhuohh2d3w" path="res://enemies/snow_man.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://cxd17xto40u2i" path="res://enemies/absolute_sphere.tscn" id="4_fc0e3"]
 [ext_resource type="AudioStream" uid="uid://cbg7x8xqsaxd5" path="res://assets/BackgroundMusic.mp3" id="5_7jktm"]
 
 [node name="game" type="Node3D" unique_id=466450601]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.031096458, 0, 0)
+transform = Transform3D(0.99999803, -0.0017100446, 0.0009678385, 0.0017113131, 0.9999978, -0.0012994274, -0.0009655938, 0.0013010963, 0.9999988, 0.031096458, 0, 0)
 
 [node name="forest arena" parent="." unique_id=2100858950 instance=ExtResource("1_e2o6t")]
 

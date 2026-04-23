@@ -7,12 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://br80b721wlr5l" path="res://assets/restart.png" id="4_v63wl"]
 [ext_resource type="Texture2D" uid="uid://b05uajxej5eq" path="res://assets/quit3.png" id="5_lblxi"]
 [ext_resource type="Texture2D" uid="uid://doq2uwd0tyitn" path="res://assets/spherevivor-logo.png" id="6_l0g0"]
+[ext_resource type="Texture2D" uid="uid://cmwgof8hv4ue7" path="res://assets/help3.png" id="7_helppng"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nwcfo"]
 shader = ExtResource("1_hdmo1")
 shader_parameter/lod = 0.158000007505
-
-[sub_resource type="Texture2DRD" id="Texture2DRD_lblxi"]
 
 [node name="pause menu" type="CanvasLayer" unique_id=1817232568]
 process_mode = 3
@@ -67,7 +66,7 @@ layout_mode = 2
 theme_override_constants/separation = 14
 
 [node name="resumeButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=841365209]
-custom_minimum_size = Vector2(0, 72)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_font0")
 text = "Resume"
@@ -76,7 +75,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="restartButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=1277501890]
-custom_minimum_size = Vector2(0, 72)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_font0")
 text = "Restart"
@@ -85,17 +84,16 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="helpButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=940401608]
-custom_minimum_size = Vector2(0, 72)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_font0")
-theme_override_font_sizes/font_size = 28
 text = "Help"
-icon = SubResource("Texture2DRD_lblxi")
+icon = ExtResource("7_helppng")
 icon_alignment = 1
 expand_icon = true
 
 [node name="quitButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=398176399]
-custom_minimum_size = Vector2(0, 72)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_font0")
 text = "Quit"
