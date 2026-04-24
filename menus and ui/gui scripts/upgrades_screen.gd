@@ -1,7 +1,13 @@
 extends CanvasLayer
 
+const CANDY_HEART_ICON: Texture2D = preload("res://assets/candy-heart.png")
+const MISSILES_ICON: Texture2D = preload("res://assets/missiles.png")
+const SPINNING_JIMMY_ICON: Texture2D = preload("res://assets/spinning-jimmy.png")
+const ROCKET_JUMP_ICON: Texture2D = preload("res://assets/rocket-jump.png")
+
 @onready var player_stats = get_parent().get_parent()
 @onready var speedometer: Label = get_parent().get_node_or_null("userInterface/speedometer")
+@onready var boss_health_ui: CanvasLayer = get_parent().get_node_or_null("BossHealthBar") as CanvasLayer
 @onready var upgrade_buttons: Array[Button] = [
 	$CenterContainer/VBoxContainer/HBoxContainer/upgrade1,
 	$CenterContainer/VBoxContainer/HBoxContainer/upgrade2,
@@ -25,6 +31,7 @@ var upgrades = [
 	}, {
 		"name": "Rocket Jump",
 		"desc": "Jump higher",
+		"icon": ROCKET_JUMP_ICON,
 		"apply": func(player): player.jump_force += 15
 	}, {
 		"name": "slam",
@@ -37,14 +44,17 @@ var upgrades = [
 	}, {
 		"name": "Candy heart",
 		"desc": 'Increases health and regen',
+		"icon": CANDY_HEART_ICON,
 		"apply": func(player): candy_heart(player)
 	}, {
 		"name": "Automatic Missiles",
 		"desc": 'Increases missile potency',
+		"icon": MISSILES_ICON,
 		"apply": func(player): automatic_missiles(player)
 	}, {
 		"name": "Spinning Jimmy",
 		"desc": 'Increases spin attack potency',
+		"icon": SPINNING_JIMMY_ICON,
 		"apply": func(player): spinning_jimmy(player)
 	}, {
 		"name": "Aerobics Training",
@@ -76,13 +86,28 @@ func slow_mo_glassse(player):
 	player.charge_speed += 333
 
 
+func _style_upgrade_button(button: Button, upgrade: Dictionary) -> void:
+	button.text = "%s\n%s" % [upgrade.name, upgrade.desc]
+	button.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	button.add_theme_constant_override("h_separation", 8)
+	if upgrade.get("icon", null):
+		button.icon = upgrade["icon"]
+		button.expand_icon = true
+		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	else:
+		button.icon = null
+		button.expand_icon = false
+
+
+func _apply_upgrade_button_labels() -> void:
+	for i in range(len(upgrade_buttons)):
+		_style_upgrade_button(upgrade_buttons[i], current_choices[i])
+
+
 func refresh_upgrades():
 	$refreshButton.text = "str(allowed_refresh)"
 	current_choices = get_random_upgrades()
-
-	for i in range(len(upgrade_buttons)):
-		upgrade_buttons[i].text = "%s\n%s" % [current_choices[i].name, current_choices[i].desc]
-		upgrade_buttons[i].add_theme_constant_override("h_separation", 8)
+	_apply_upgrade_button_labels()
 	
 func showUpgrades():
 	upgrades_open = !upgrades_open
@@ -90,14 +115,12 @@ func showUpgrades():
 	self.visible = upgrades_open
 	if speedometer:
 		speedometer.visible = !upgrades_open
-	
+	if boss_health_ui:
+		boss_health_ui.visible = !upgrades_open
+
 	if upgrades_open:
 		current_choices = get_random_upgrades()
-
-		for i in range(len(upgrade_buttons)):
-			upgrade_buttons[i].text = "%s\n%s" % [current_choices[i].name, current_choices[i].desc]
-			# Give the text breathing room while keeping it in the upper part of each card.
-			upgrade_buttons[i].add_theme_constant_override("h_separation", 8)
+		_apply_upgrade_button_labels()
 
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
@@ -175,6 +198,7 @@ func _update_upgrade_ui_scale() -> void:
 
 	for button in upgrade_buttons:
 		button.custom_minimum_size.y = min_height
+		button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		button.add_theme_font_size_override("font_size", font_size)
 
 	var ref: float = UiResponsive.scale_px_clamped(vp, 76.0, 44.0, 120.0)
