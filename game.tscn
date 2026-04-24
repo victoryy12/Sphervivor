@@ -31,3 +31,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.720127, -87.13305)
 [node name="wave_label" type="Label" parent="CanvasLayer" unique_id=1389576956]
 offset_right = 40.0
 offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true

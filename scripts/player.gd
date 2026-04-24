@@ -293,8 +293,9 @@ func spawn_projectile():
 		# Spawn slightly in front of player
 		var forward = -global_transform.basis.z
 		
-		projectile.global_position = global_position + forward * 2.0
 		get_tree().current_scene.add_child(projectile)
+		projectile.global_position = global_position + forward * 2.0
+		
 		await get_tree().create_timer(0.1).timeout
 
 func apply_projectile_damage(body):
@@ -345,4 +346,3 @@ func _on_spin_attack_body_entered(body: Node3D) -> void:
 		
 	if body.is_in_group("Enemies") and body.has_method("take_damage"):
 		body.take_damage(spin_damage)
-		print(spin_hit_enemies)

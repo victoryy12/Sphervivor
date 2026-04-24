@@ -14,13 +14,16 @@ var elapsed_time: float = 0.0
 var start_position: Vector3
 
 func _ready() -> void:
+	call_deferred("_initialize")
+
+func _initialize() -> void:
 	start_position = global_position
 	find_closest_target()
 	if is_instance_valid(target):
 		direction = (target.global_position - global_position).normalized()
 	else:
 		direction = -global_transform.basis.z
-	projectile_life()
+		projectile_life()
 
 func projectile_life():
 	await get_tree().create_timer(3.0).timeout
