@@ -32,6 +32,7 @@ var slam_on_cooldown = false
 @export var charge_power = 0.0
 var charging = false 
 var max_charge = 2500.0; var charge_speed = 25000
+var _death_shown := false
 
 @export var mouse_sensitivity := 0.002
 
@@ -263,8 +264,13 @@ func level_up() -> void:
 		
 func player_death():
 	death_plane()
-	if curr_hp <= 0:
-		get_tree().reload_current_scene()
+	if curr_hp <= 0 and not _death_shown:
+		_death_shown = true
+		var dm: Node = get_node_or_null("gui/death_menu")
+		if dm and dm.has_method("open"):
+			dm.open()
+		else:
+			get_tree().reload_current_scene()
 	
 	
 func death_plane():

@@ -10,6 +10,8 @@ const _RingDamageAreaScript = preload("res://scripts/boss_ring_damage_area.gd")
 @export var shield_phase_duration := 30.0
 ## Rotation speed multiplier once the vulnerable phase begins (lerps from 1.0 to this).
 @export var vulnerable_ring_speed_mult := 0.12
+## How long (seconds) the boss stays damageable when shields are down, before they return.
+@export var weak_phase_duration: float = 15.0
 ## How long (seconds) to ease ring rotation down after the shield drops.
 @export var ring_slow_blend_duration := 2.5
 @export var ring_contact_damage := 250.0
@@ -21,6 +23,7 @@ const _RingDamageAreaScript = preload("res://scripts/boss_ring_damage_area.gd")
 @onready var ring_c_node: MeshInstance3D = $BossBody/RingRoot/RingC
 
 var _phase_elapsed := 0.0
+var _weak_elapsed := 0.0
 var _vulnerable_phase := false
 var _slow_blend := 0.0
 
@@ -31,9 +34,19 @@ func _ready() -> void:
 	_attach_ring_shield(ring_c_node)
 	if boss_body and boss_body.has_method("set_shields_active"):
 		boss_body.set_shields_active(true)
+	if is_instance_valid(boss_body) and boss_body.has_signal("died"):
+		boss_body.died.connect(_on_boss_body_died, CONNECT_ONE_SHOT)
+
+
+func _on_boss_body_died() -> void:
+	_vulnerable_phase = false
+	_weak_elapsed = 0.0
+	set_process(false)
 
 
 func _attach_ring_shield(ring: MeshInstance3D) -> void:
+	if not is_instance_valid(ring):
+		return
 	var shield := StaticBody3D.new()
 	shield.name = String(ring.name) + "Shield"
 	shield.add_to_group("BossShield")
@@ -58,10 +71,23 @@ func _attach_ring_shield(ring: MeshInstance3D) -> void:
 
 
 func _process(delta: float) -> void:
+	if not is_instance_valid(boss_body):
+		set_process(false)
+		return
 	if not _vulnerable_phase:
 		_phase_elapsed += delta
 		if _phase_elapsed >= shield_phase_duration:
 			_begin_vulnerable_phase()
+		# Do not clear remaining time the same frame we just entered the weak phase.
+		if not _vulnerable_phase and is_instance_valid(boss_body) and boss_body.has_method("set_weak_time_remaining"):
+			boss_body.set_weak_time_remaining(0.0)
+	else:
+		_weak_elapsed += delta
+		if is_instance_valid(boss_body) and boss_body.has_method("set_weak_time_remaining"):
+			boss_body.set_weak_time_remaining(maxf(0.0, weak_phase_duration - _weak_elapsed))
+		if _weak_elapsed >= weak_phase_duration:
+			if is_instance_valid(ring_a_node) and is_instance_valid(ring_b_node) and is_instance_valid(ring_c_node):
+				_end_vulnerable_phase()
 
 	var sa := ring_a_speed
 	var sb := ring_b_speed
@@ -73,11 +99,11 @@ func _process(delta: float) -> void:
 		sb *= slow_t
 		sc *= slow_t
 
-	if ring_a_node:
+	if is_instance_valid(ring_a_node):
 		ring_a_node.rotate_y(sa * delta)
-	if ring_b_node:
+	if is_instance_valid(ring_b_node):
 		ring_b_node.rotate_x(sb * delta)
-	if ring_c_node:
+	if is_instance_valid(ring_c_node):
 		ring_c_node.rotate_z(sc * delta)
 
 
@@ -85,16 +111,45 @@ func _begin_vulnerable_phase() -> void:
 	if _vulnerable_phase:
 		return
 	_vulnerable_phase = true
+	_weak_elapsed = 0.0
 	_slow_blend = 0.0
+	if is_instance_valid(boss_body) and boss_body.has_method("set_weak_time_remaining"):
+		boss_body.set_weak_time_remaining(weak_phase_duration)
 	if boss_body and boss_body.has_method("set_shields_active"):
 		boss_body.set_shields_active(false)
 	_remove_ring_shields()
 
 
+func _end_vulnerable_phase() -> void:
+	if not _vulnerable_phase:
+		return
+	if not is_instance_valid(boss_body):
+		return
+	if not (is_instance_valid(ring_a_node) and is_instance_valid(ring_b_node) and is_instance_valid(ring_c_node)):
+		return
+	_vulnerable_phase = false
+	_weak_elapsed = 0.0
+	_phase_elapsed = 0.0
+	_slow_blend = 0.0
+	if is_instance_valid(boss_body) and boss_body.has_method("set_weak_time_remaining"):
+		boss_body.set_weak_time_remaining(0.0)
+	for ring in [ring_a_node, ring_b_node, ring_c_node]:
+		_remove_ring_shield_if_exists(ring)
+		_attach_ring_shield(ring)
+	if boss_body and boss_body.has_method("set_shields_active"):
+		boss_body.set_shields_active(true)
+
+
 func _remove_ring_shields() -> void:
 	for ring in [ring_a_node, ring_b_node, ring_c_node]:
-		if not ring:
+		if not is_instance_valid(ring):
 			continue
-		var n: Node = ring.get_node_or_null(String(ring.name) + "Shield")
-		if n:
-			n.queue_free()
+		_remove_ring_shield_if_exists(ring)
+
+
+func _remove_ring_shield_if_exists(ring: Node3D) -> void:
+	if not is_instance_valid(ring):
+		return
+	var n: Node = ring.get_node_or_null(String(ring.name) + "Shield")
+	if n:
+		n.queue_free()

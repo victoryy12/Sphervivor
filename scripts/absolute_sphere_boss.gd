@@ -1,15 +1,22 @@
 extends "res://scripts/enemy_ai_RB.gd"
 
+## Defaults to 5x DEFAULT_ENEMY_MAX_HP from enemy_ai_RB (tunable in the inspector).
+@export var boss_max_hp: float = DEFAULT_ENEMY_MAX_HP * 5.0
+
 signal weakness_changed(is_weak: bool)
 
 ## While true, damage from projectiles and contact is blocked (handled here and by ring colliders).
 var shields_active: bool = true
+## Filled by AbsoluteSphere (parent) each frame while vulnerable; used by the boss health bar.
+var weak_time_remaining: float = 0.0
 
 @onready var _shield_loop: AudioStreamPlayer3D = $ForceFieldLoop
 @onready var _shield_down: AudioStreamPlayer3D = $ForceFieldDown
 
 
 func _ready() -> void:
+	enemy_hp = boss_max_hp
+	current_hp = boss_max_hp
 	super._ready()
 	_configure_shield_loop_stream()
 	call_deferred("_start_shield_loop_if_shielded")
@@ -67,6 +74,14 @@ func die() -> void:
 
 func is_boss_weak() -> bool:
 	return not shields_active
+
+
+func get_weak_time_remaining() -> float:
+	return weak_time_remaining
+
+
+func set_weak_time_remaining(s: float) -> void:
+	weak_time_remaining = s
 
 
 func take_damage(amount: float) -> void:

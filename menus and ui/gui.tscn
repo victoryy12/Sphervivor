@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://sx8x7j8icr1p" path="res://menus and ui/upgrades_screen.tscn" id="3_eli7m"]
 [ext_resource type="PackedScene" uid="uid://dl4bftppjrqt1" path="res://menus and ui/enemy_health_bar.tscn" id="4_47e7f"]
 [ext_resource type="PackedScene" path="res://menus and ui/boss_health_bar.tscn" id="5_8b3hb"]
+[ext_resource type="PackedScene" uid="uid://d8n3c7y2death" path="res://menus and ui/death_menu.tscn" id="6_dmenu"]
 
 [node name="gui" type="Control" unique_id=530630216]
 layout_mode = 3
@@ -22,6 +23,10 @@ layer = 2
 
 [node name="userInterface" parent="." unique_id=126740338 instance=ExtResource("3_47e7f")]
 layer = 3
+
+[node name="death_menu" parent="." instance=ExtResource("6_dmenu")]
+process_mode = 3
+layer = 5
 
 [node name="EnemyHealthBar" parent="." unique_id=150761227 instance=ExtResource("4_47e7f")]
 layout_mode = 1

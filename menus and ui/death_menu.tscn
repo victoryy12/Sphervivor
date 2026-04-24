@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://b45yk0ffghyi4"]
+
+[ext_resource type="Script" uid="uid://cbrkmi12ovar8" path="res://menus and ui/gui scripts/death_menu.gd" id="1_d"]
+[ext_resource type="FontFile" uid="uid://bl4n1wf7k1he3" path="res://assets/Storm Gust.ttf" id="2_storm"]
+[ext_resource type="FontFile" uid="uid://wf1lm3oelgmo" path="res://assets/Inlanders Demo.otf" id="3_inland"]
+[ext_resource type="Texture2D" uid="uid://br80b721wlr5l" path="res://assets/restart.png" id="4_3mc2w"]
+[ext_resource type="Texture2D" uid="uid://ehdi02ovveu2" path="res://assets/back-to-menu.png" id="5_liq8l"]
+[ext_resource type="Texture2D" uid="uid://b05uajxej5eq" path="res://assets/quit3.png" id="6_rm47a"]
+[ext_resource type="Texture2D" uid="uid://cmwgof8hv4ue7" path="res://assets/help3.png" id="7_bv6s2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("2_storm")
+font_size = 100
+font_color = Color(0.92, 0.12, 0.14, 1)
+outline_size = 20
+outline_color = Color(0, 0, 0, 0.75)
+
+[node name="death_menu" type="CanvasLayer" unique_id=619416578]
+process_mode = 3
+layer = 5
+script = ExtResource("1_d")
+
+[node name="redTint" type="ColorRect" parent="." unique_id=243621871]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.45, 0.04, 0.06, 0.32)
+
+[node name="MainLayout" type="MarginContainer" parent="." unique_id=1537088822]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 32
+
+[node name="RootVBox" type="VBoxContainer" parent="MainLayout" unique_id=193720549]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="DeathLabel" type="Label" parent="MainLayout/RootVBox" unique_id=1354952216]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "You Died!"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ButtonsCenter" type="CenterContainer" parent="MainLayout/RootVBox" unique_id=1202548580]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="deathOptions" type="PanelContainer" parent="MainLayout/RootVBox/ButtonsCenter" unique_id=881913993]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainLayout/RootVBox/ButtonsCenter/deathOptions" unique_id=1980266906]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="restartButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer" unique_id=146175679]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_inland")
+text = "Restart"
+icon = ExtResource("4_3mc2w")
+icon_alignment = 1
+expand_icon = true
+
+[node name="mainMenuButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer" unique_id=1756287281]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_inland")
+text = "Back to main menu"
+icon = ExtResource("5_liq8l")
+icon_alignment = 1
+expand_icon = true
+
+[node name="quitButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer" unique_id=2054503263]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_inland")
+text = "Quit"
+icon = ExtResource("6_rm47a")
+icon_alignment = 1
+expand_icon = true
+
+[node name="helpButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer" unique_id=1948758976]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_inland")
+text = "Help"
+icon = ExtResource("7_bv6s2")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/mainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/quitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/helpButton" to="." method="_on_help_button_pressed"]

@@ -10,6 +10,7 @@
 transform = Transform3D(0.99999803, -0.0017100446, 0.0009678385, 0.0017113131, 0.9999978, -0.0012994274, -0.0009655938, 0.0013010963, 0.9999988, 0.031096458, 0, 0)
 
 [node name="forest arena" parent="." unique_id=2100858950 instance=ExtResource("1_e2o6t")]
+transform = Transform3D(1, -1.1948487e-10, 0, 2.712568e-10, 1.0000002, 0, -1.1641532e-10, 1.1641532e-10, 1.0000002, 3.3898337, -17.475359, 9.035268)
 
 [node name="Player" parent="." unique_id=1714944700 instance=ExtResource("2_feb5d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1226559, 0)

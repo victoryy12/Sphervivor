@@ -2,7 +2,6 @@ extends CanvasLayer
 
 @onready var player_stats = get_parent().get_parent()
 @onready var player_ui = get_parent().get_node("userInterface")
-@onready var boss_health_ui: CanvasLayer = get_parent().get_node_or_null("BossHealthBar") as CanvasLayer
 @onready var pause_panel: PanelContainer = $MainLayout/RootVBox/ButtonsCenter/pauseOptions
 @onready var logo: TextureRect = $MainLayout/RootVBox/Logo
 @onready var stats_panel: PanelContainer = $MainLayout/RootVBox/stats
@@ -33,8 +32,6 @@ func pause_and_unpause():
 	self.visible = pausedCheck
 	
 	player_ui.visible = !pausedCheck
-	if boss_health_ui:
-		boss_health_ui.visible = !pausedCheck
 
 	if pausedCheck:
 		display_stats()

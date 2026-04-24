@@ -7,7 +7,6 @@ const ROCKET_JUMP_ICON: Texture2D = preload("res://assets/rocket-jump.png")
 
 @onready var player_stats = get_parent().get_parent()
 @onready var speedometer: Label = get_parent().get_node_or_null("userInterface/speedometer")
-@onready var boss_health_ui: CanvasLayer = get_parent().get_node_or_null("BossHealthBar") as CanvasLayer
 @onready var upgrade_buttons: Array[Button] = [
 	$CenterContainer/VBoxContainer/HBoxContainer/upgrade1,
 	$CenterContainer/VBoxContainer/HBoxContainer/upgrade2,
@@ -115,8 +114,6 @@ func showUpgrades():
 	self.visible = upgrades_open
 	if speedometer:
 		speedometer.visible = !upgrades_open
-	if boss_health_ui:
-		boss_health_ui.visible = !upgrades_open
 
 	if upgrades_open:
 		current_choices = get_random_upgrades()
