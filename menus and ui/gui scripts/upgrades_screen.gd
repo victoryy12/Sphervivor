@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 const CANDY_HEART_ICON: Texture2D = preload("res://assets/candy-heart.png")
-const MISSILES_ICON: Texture2D = preload("res://assets/missiles.png")
+const MISSILES_ICON: Texture2D = preload("res://assets/bouncy-ball.png")
 const SPINNING_JIMMY_ICON: Texture2D = preload("res://assets/spinning-wings.png")
 const ROCKET_JUMP_ICON: Texture2D = preload("res://assets/rocket-jump.png")
 const ROLLING_GREASE_ICON: Texture2D = preload("res://assets/rolling-grease.png")
@@ -38,10 +38,10 @@ var upgrades = [
 		"icon": ROCKET_JUMP_ICON,
 		"apply": func(player): player.jump_force += 15
 	}, {
-		"name": "slam",
+		"name": "Slam",
 		"desc": "increase slam damage and radius",
 		"icon": SLAM_ICON,
-		"apply": func(player): player.slam_damage += 50
+		"apply": func(player): player.slam_damage += 100
 	}, {
 		"name": "Slo-mo glasses",
 		"desc": 'glasses that improves your launch',
@@ -53,15 +53,15 @@ var upgrades = [
 		"icon": CANDY_HEART_ICON,
 		"apply": func(player): candy_heart(player)
 	}, {
-		"name": "Automatic Missiles",
-		"desc": 'Increases missile potency',
+		"name": "Bouncy balls",
+		"desc": 'Increases projectile potency',
 		"icon": MISSILES_ICON,
 		"apply": func(player): automatic_missiles(player)
 	}, {
-		"name": "Spinning Jimmy",
+		"name": "Spinning wings",
 		"desc": 'Increases spin attack potency',
 		"icon": SPINNING_JIMMY_ICON,
-		"apply": func(player): spinning_jimmy(player)
+		"apply": func(player): spinning_wings(player)
 	}, {
 		"name": "Aerobics Training",
 		"desc": 'Increases engery',
@@ -74,7 +74,7 @@ func aerobics_training(player):
 	player.max_energy += 1
 	player.regen_time -= 0.05
 	
-func spinning_jimmy(player):
+func spinning_wings(player):
 	player.spin_damage += 50
 	player.spin_force += 10
 	player.max_spin += 10
