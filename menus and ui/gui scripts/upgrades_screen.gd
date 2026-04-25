@@ -4,6 +4,10 @@ const CANDY_HEART_ICON: Texture2D = preload("res://assets/candy-heart.png")
 const MISSILES_ICON: Texture2D = preload("res://assets/missiles.png")
 const SPINNING_JIMMY_ICON: Texture2D = preload("res://assets/spinning-jimmy.png")
 const ROCKET_JUMP_ICON: Texture2D = preload("res://assets/rocket-jump.png")
+const ROLLING_GREASE_ICON: Texture2D = preload("res://assets/rolling-grease.png")
+const SLAM_ICON: Texture2D = preload("res://assets/slam.png")
+const SLO_MO_GLASSES_ICON: Texture2D = preload("res://assets/slo-mo-glasses.png")
+const ENERGY_ICON: Texture2D = preload("res://assets/energy2.png")
 
 @onready var player_stats = get_parent().get_parent()
 @onready var speedometer: Label = get_parent().get_node_or_null("userInterface/speedometer")
@@ -26,6 +30,7 @@ var upgrades = [
 	{
 		"name": "Rolling Greese",
 		"desc": "roll faster",
+		"icon": ROLLING_GREASE_ICON,
 		"apply": func(player): player.rolling_force += 150
 	}, {
 		"name": "Rocket Jump",
@@ -35,10 +40,12 @@ var upgrades = [
 	}, {
 		"name": "slam",
 		"desc": "increase slam damage and radius",
+		"icon": SLAM_ICON,
 		"apply": func(player): player.slam_damage += 50
 	}, {
 		"name": "Slo-mo glasses",
 		"desc": 'glasses that improves your launch',
+		"icon": SLO_MO_GLASSES_ICON,
 		"apply": func(player): slow_mo_glassse(player)
 	}, {
 		"name": "Candy heart",
@@ -58,6 +65,7 @@ var upgrades = [
 	}, {
 		"name": "Aerobics Training",
 		"desc": 'Increases engery',
+		"icon": ENERGY_ICON,
 		"apply": func(player): aerobics_training(player)
 	}
 ]
