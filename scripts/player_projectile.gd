@@ -1,73 +1,57 @@
-extends Area3D
+extends RigidBody3D
 
-@export var speed: float = 10.0
-@export var projectile_scene: PackedScene
-@export var min_height: float = 0.5        # Floor clearance
-@export var arc_height: float = 1.2        # How high the arc peaks
-@export var turn_speed: float = 4.0  
-@export var missile_knockback = 3.0      
+@export var speed := 10.0
+@export var turn_speed := 5.0
+@export var lifetime := 5.0
+@export var damage := 200.0
 
 var target: Node3D = null
-var direction: Vector3 = Vector3.ZERO
-var shooter: Node = null
-var elapsed_time: float = 0.0
-var start_position: Vector3
+var _time := 0.0
+
 
 func _ready() -> void:
-	call_deferred("_initialize")
+	_find_nearest_enemy()
+	# Start moving forward immediately if no target
+	if target == null:
+		linear_velocity = -global_transform.basis.z * speed
 
-func _initialize() -> void:
-	start_position = global_position
-	find_closest_target()
-	if is_instance_valid(target):
-		direction = (target.global_position - global_position).normalized()
-	else:
-		direction = -global_transform.basis.z
-		projectile_life()
-
-func projectile_life():
-	await get_tree().create_timer(3.0).timeout
-	queue_free()
 
 func _physics_process(delta: float) -> void:
-	elapsed_time += delta
+	_time += delta
+	if _time >= lifetime:
+		queue_free()
+		return
 
-	# Smoothly steer toward target instead of locking direction at spawn
 	if is_instance_valid(target):
-		var desired = (target.global_position - global_position).normalized()
-		direction = direction.lerp(desired, turn_speed * delta).normalized()
+		var dir = (target.global_position - global_position).normalized()
+		linear_velocity = linear_velocity.lerp(dir * speed, turn_speed * delta)
+	else:
+		# Re-acquire or just fly straight
+		_find_nearest_enemy()
+		linear_velocity = linear_velocity.normalized() * speed
 
-	global_position += direction * speed * delta
 
-	# Arc: sine curve lifts the missile over its lifetime, then lets it fall
-	var arc_offset = sin(elapsed_time * (PI / 3.0)) * arc_height
-	global_position.y += arc_offset * delta
-
-	# Hard floor clamp — prevents clipping terrain entirely
-	if global_position.y < min_height:
-		global_position.y = min_height
-		direction.y = abs(direction.y)   # Bounce direction upward if it clips
-
-	# Rotate the missile to always face its travel direction
-	if direction.length_squared() > 0.001:
-		look_at(global_position + direction, Vector3.UP)
-
-func find_closest_target() -> void:
+func _find_nearest_enemy() -> void:
 	var enemies = get_tree().get_nodes_in_group("Enemies")
-	var closest_distance: float = INF
+	var closest_dist := INF
+	target = null
+
 	for enemy in enemies:
 		if enemy is Node3D:
-			var dist = global_position.distance_to(enemy.global_position)
-			if dist < closest_distance:
-				closest_distance = dist
+			var d = global_position.distance_to(enemy.global_position)
+			if d < closest_dist:
+				closest_dist = d
 				target = enemy
 
+
 func _on_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Player"):
+		return 
+		
 	if body.is_in_group("BossShield"):
 		queue_free()
 		return
-	if body.is_in_group("Enemies"):
-		if shooter and shooter.has_method("apply_projectile_damage"):
-			shooter.apply_projectile_damage(body)
-			body.launch(global_position, missile_knockback)
+		
+	if body.is_in_group("Enemies") and body.has_method("take_damage"):
+		body.take_damage(damage)
 		queue_free()

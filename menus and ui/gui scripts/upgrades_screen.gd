@@ -2,7 +2,7 @@ extends CanvasLayer
 
 const CANDY_HEART_ICON: Texture2D = preload("res://assets/candy-heart.png")
 const MISSILES_ICON: Texture2D = preload("res://assets/missiles.png")
-const SPINNING_JIMMY_ICON: Texture2D = preload("res://assets/spinning-jimmy.png")
+const SPINNING_JIMMY_ICON: Texture2D = preload("res://assets/spinning-wings.png")
 const ROCKET_JUMP_ICON: Texture2D = preload("res://assets/rocket-jump.png")
 const ROLLING_GREASE_ICON: Texture2D = preload("res://assets/rolling-grease.png")
 const SLAM_ICON: Texture2D = preload("res://assets/slam.png")
@@ -82,7 +82,6 @@ func spinning_jimmy(player):
 	
 func automatic_missiles(player):
 	player.projectile_count += 1
-	player.projectile_damage *= 1.2
 	
 func candy_heart(player):
 	player.hp_regen += 0.15

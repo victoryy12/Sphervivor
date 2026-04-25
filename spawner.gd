@@ -85,7 +85,6 @@ func spawn_enemy(index: int):
 		enemy.set_wave(wave)
 
 	current_counts[index] += 1
-
 	enemy.tree_exited.connect(func():
 		current_counts[index] -= 1
 	)

@@ -71,7 +71,7 @@ _data = {
 [sub_resource type="TorusMesh" id="TorusMesh_1jxqw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1jxqw"]
-radius = 0.57177734
+radius = 0.7675781
 height = 3.6617432
 
 [node name="player" type="RigidBody3D" unique_id=1714944700 groups=["Player"]]
@@ -126,7 +126,7 @@ volume_db = -2.0
 [node name="gui" parent="." unique_id=659538166 instance=ExtResource("3_i3pqv")]
 
 [node name="playerProjectile" parent="." unique_id=393559453 instance=ExtResource("7_1jxqw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2405562, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9010192, 0)
 visible = false
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1535636547]

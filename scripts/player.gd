@@ -54,8 +54,8 @@ func _ready() -> void:
 	GameSettings.fov_changed.connect(_on_fov_changed)
 	_on_fov_changed(GameSettings.fov_degrees)
 	health_regen()
-	auto_fire()
 	energy_loop()
+	
 
 	
 func _on_mouse_sensitivity_changed(v: float) -> void:
@@ -84,6 +84,7 @@ func _physics_process(delta: float) -> void:
 	player_death() 
 	player_movement(delta)
 	spin_attack(delta)
+	handle_projectile_fire(delta)
 
 	
 func player_movement(delta):
@@ -278,37 +279,31 @@ func death_plane():
 	if global_position.y < deathBarrierDepth:
 		#set player spawn point and respawn with reduced hp
 		take_damage(10)
-
-
+		
+			
 @export var projectile_scene: PackedScene
-@export var fire_rate := 3.0
+@export var fire_rate := 1.0
 @export var projectile_count = 1
-@export var projectile_damage = 200
+var fire_timer := 0.0
 
+func handle_projectile_fire(delta: float) -> void:
+	if projectile_scene == null:
+		return
 
-func auto_fire():
-	while true:
-		await get_tree().create_timer(fire_rate).timeout
+	fire_timer += delta
+	if fire_timer >= fire_rate:
+		fire_timer = 0.0
 		spawn_projectile()
 
 
-func spawn_projectile():
-	for i in range(projectile_count):
-		var projectile = projectile_scene.instantiate()
-		projectile.shooter = self
-		# Spawn slightly in front of player
-		var forward = -global_transform.basis.z
-		
-		get_tree().current_scene.add_child(projectile)
-		projectile.global_position = global_position + forward * 2.0
-		
-		await get_tree().create_timer(0.1).timeout
+func spawn_projectile() -> void:
+	for i in projectile_count:
+		var p = projectile_scene.instantiate()
+		get_tree().current_scene.add_child(p)
+		p.global_position = global_position
+		p.global_transform.basis = cam.global_transform.basis
 
-func apply_projectile_damage(body):
-	if body.is_in_group("Enemies"):
-		body.take_damage(projectile_damage)
-		
- 
+
 @export var spin_force := 10.0
 @export var max_spin := 50.0
 @export var spin_accel := 20.0
