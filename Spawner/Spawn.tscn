@@ -15,8 +15,8 @@ enemy_scenes = Array[PackedScene]([ExtResource("2_6uhls"), ExtResource("3_8ti2y"
 unlock_waves = Array[int]([3, 5, 8, 9])
 max_per_type = Array[int]([6, 3, 2, 1])
 wave_size = 3
-time_between_spawns = 5.0
-time_between_waves = 3.0
+time_between_spawns = 1.0
+time_between_waves = 8.0
 
 [node name="SpawnPoint" type="Marker3D" parent="spawn" unique_id=642416224]
 

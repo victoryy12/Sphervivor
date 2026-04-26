@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b45yk0ffghyi4"]
+[gd_scene format=3 uid="uid://iqvrac0yq7nt"]
 
 [ext_resource type="Script" uid="uid://cbrkmi12ovar8" path="res://menus and ui/gui scripts/death_menu.gd" id="1_d"]
 [ext_resource type="FontFile" uid="uid://bl4n1wf7k1he3" path="res://assets/Storm Gust.ttf" id="2_storm"]
@@ -14,6 +14,10 @@ font_size = 100
 font_color = Color(0.92, 0.12, 0.14, 1)
 outline_size = 20
 outline_color = Color(0, 0, 0, 0.75)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3mc2w"]
+bg_color = Color(0.15127608, 0.15127608, 0.15127605, 1)
+border_color = Color(0.16206557, 0.1620656, 0.16206548, 1)
 
 [node name="death_menu" type="CanvasLayer" unique_id=619416578]
 process_mode = 3
@@ -110,7 +114,43 @@ icon = ExtResource("7_bv6s2")
 icon_alignment = 1
 expand_icon = true
 
+[node name="HelpPanel" type="Panel" parent="." unique_id=1107222225]
+custom_minimum_size = Vector2(600, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = 76.0
+offset_right = 244.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(110, 0)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3mc2w")
+
+[node name="Label" type="Label" parent="HelpPanel" unique_id=1110815174]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+autowrap_trim_flags = 0
+justification_flags = 162
+
+[node name="helpButtonBack" type="Button" parent="HelpPanel" unique_id=898224234]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back"
+
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/mainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/quitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/helpButton" to="." method="_on_help_button_pressed"]
+[connection signal="pressed" from="HelpPanel/helpButtonBack" to="." method="_on_help_back_button_pressed"]

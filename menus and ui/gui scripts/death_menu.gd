@@ -10,15 +10,36 @@ extends CanvasLayer
 @onready var _quit: Button = %quitButton
 @onready var _help: Button = %helpButton
 
+# Help UI References
+@onready var help_panel: Control = $HelpPanel 
+@onready var help_label: Label = $HelpPanel/Label
+
 var _label_settings_base: LabelSettings
 
 func _ready() -> void:
 	visible = false
+	help_panel.visible = false # Keep hidden initially
+	
 	if _death_label.label_settings:
 		_label_settings_base = _death_label.label_settings.duplicate() as LabelSettings
+	
 	get_viewport().size_changed.connect(_update_ui_scale)
 	_update_ui_scale()
+	
+	# Set your help text
+	help_label.text = """CONTROLS:
+Movement: W,A,S,D
 
+Jump: Space
+
+Slam: Jump + Shift
+
+Spin: Left Mouse or E
+
+Charge: Right Mouse
+
+Defeat Enemies to obtain expierence points that you can use to level up!
+The Boss is shielded! You have to wait for the shield to go away for you to do damage!"""
 
 func _update_ui_scale() -> void:
 	var vp := get_viewport()
@@ -26,6 +47,7 @@ func _update_ui_scale() -> void:
 	var base_size: float = UiResponsive.short_side(vp)
 	var r: float = UiResponsive.ratio(vp)
 
+	# --- Existing Layout Scaling ---
 	var mg: int = UiResponsive.scale_i_clamped(vp, 40.0, 10, 96)
 	_main_layout.add_theme_constant_override("margin_left", mg)
 	_main_layout.add_theme_constant_override("margin_top", UiResponsive.scale_i_clamped(vp, 24.0, 6, 64))
@@ -53,13 +75,22 @@ func _update_ui_scale() -> void:
 		b.custom_minimum_size.y = button_height
 		b.add_theme_font_size_override("font_size", button_font_size)
 
+	# --- Help Panel Scaling ---
+	help_panel.custom_minimum_size = Vector2(viewport_size.x * 0.8, viewport_size.y * 0.8)
+	var help_font_size: int = int(clampf(base_size * 0.04, 16.0, 36.0))
+	help_label.add_theme_font_size_override("font_size", help_font_size)
+	help_panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_MINSIZE)
+
 
 func open() -> void:
 	visible = true
+	help_panel.visible = false # Ensure help is hidden when the screen first appears
+	_main_layout.visible = true
 	get_tree().paused = true
 	AudioServer.playback_speed_scale = 1.0
 	Engine.time_scale = 1.0
 	_update_ui_scale()
+	
 	if get_parent():
 		for n in ["userInterface", "pause menu"]:
 			var node: Node = get_parent().get_node_or_null(n)
@@ -67,6 +98,29 @@ func open() -> void:
 				node.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+# --- Button Signal Connections ---
+
+func _on_help_button_pressed() -> void:
+	help_panel.visible = true
+	_main_layout.visible = false # Hide death options while reading help
+
+func _on_help_back_button_pressed() -> void:
+	help_panel.visible = false
+	_main_layout.visible = true # Bring back death options
+
+func _on_restart_button_pressed() -> void:
+	_restore_hud_before_scene_change()
+	get_tree().reload_current_scene()
+
+func _on_main_menu_button_pressed() -> void:
+	get_tree().paused = false
+	visible = false
+	get_tree().change_scene_to_file("res://menus and ui/main_menu.tscn")
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
+
+# --- Helper Logic ---
 
 func _restore_hud_before_scene_change() -> void:
 	get_tree().paused = false
@@ -77,22 +131,3 @@ func _restore_hud_before_scene_change() -> void:
 			if node:
 				node.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-
-func _on_restart_button_pressed() -> void:
-	_restore_hud_before_scene_change()
-	get_tree().reload_current_scene()
-
-
-func _on_main_menu_button_pressed() -> void:
-	get_tree().paused = false
-	visible = false
-	get_tree().change_scene_to_file("res://menus and ui/main_menu.tscn")
-
-
-func _on_quit_button_pressed() -> void:
-	get_tree().quit()
-
-
-func _on_help_button_pressed() -> void:
-	pass
