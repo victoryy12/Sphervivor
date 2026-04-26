@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 const CANDY_HEART_ICON: Texture2D = preload("res://assets/candy-heart.png")
-const MISSILES_ICON: Texture2D = preload("res://assets/bouncy-ball.png")
+const MISSILES_ICON: Texture2D = preload("res://assets/bouncy-ball2.png")
 const SPINNING_JIMMY_ICON: Texture2D = preload("res://assets/spinning-wings.png")
 const ROCKET_JUMP_ICON: Texture2D = preload("res://assets/rocket-jump.png")
 const ROLLING_GREASE_ICON: Texture2D = preload("res://assets/rolling-grease.png")
