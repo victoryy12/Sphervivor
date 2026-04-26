@@ -6,6 +6,10 @@
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0gfd0"]
 load_path = "res://.godot/imported/main-menu.png-847ee1b82a40cc8625df7db4122cf193.ctex"
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u6kom"]
+bg_color = Color(0.15127608, 0.15127608, 0.15127605, 1)
+border_color = Color(0.16206557, 0.1620656, 0.16206548, 1)
+
 [node name="Main menu" type="Control" unique_id=1249878023]
 layout_mode = 3
 anchors_preset = 15
@@ -65,7 +69,44 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_font0")
 text = "Exit"
 
+[node name="HelpPanel" type="Panel" parent="." unique_id=797689670]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = 76.0
+offset_right = 244.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(110, 0)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u6kom")
+
+[node name="Label" type="Label" parent="HelpPanel" unique_id=968881175]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+autowrap_trim_flags = 0
+justification_flags = 162
+
+[node name="helpButtonBack" type="Button" parent="HelpPanel" unique_id=85433081]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back"
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/startButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/settingButton" to="." method="_on_setting_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/helpButton" to="." method="_on_help_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/exitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="HelpPanel/helpButtonBack" to="." method="_on_help_back_button_pressed"]

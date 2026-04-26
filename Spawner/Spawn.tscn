@@ -21,3 +21,9 @@ time_between_waves = 3.0
 [node name="SpawnPoint" type="Marker3D" parent="spawn" unique_id=642416224]
 
 [node name="Timer" type="Timer" parent="spawn" unique_id=1439751585]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1677887677]
+
+[node name="WaveLabel" type="Label" parent="CanvasLayer" unique_id=1825200352]
+offset_right = 40.0
+offset_bottom = 23.0
