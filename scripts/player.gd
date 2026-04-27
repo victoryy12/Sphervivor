@@ -259,7 +259,10 @@ func add_exp(amount):
 func level_up() -> void:
 	level += 1
 	exp_to_lvl = int(exp_to_lvl * 1.2)
-	max_hp += 100
+	
+	max_hp += 200
+	energy = max_energy
+	
 	if level_up_sfx and level_up_sfx.stream:
 		level_up_sfx.pitch_scale = randf_range(0.97, 1.03)
 		level_up_sfx.play()
@@ -323,6 +326,9 @@ var spin_cooldown := false
 
 func spin_attack(delta):
 	if energy <= 0:
+		spinning = false
+		$spinAttack.visible = false
+		angular_velocity.y = lerp(angular_velocity.y, 0.0, 5.0 * delta)
 		return
 		
 	if Input.is_action_just_pressed("spin"):
