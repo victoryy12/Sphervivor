@@ -76,6 +76,7 @@ radius = 0.7675781
 height = 3.6617432
 
 [node name="player" type="RigidBody3D" unique_id=1714944700 groups=["Player"]]
+collision_mask = 15
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
 continuous_cd = true
 contact_monitor = true
