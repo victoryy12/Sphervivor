@@ -113,7 +113,7 @@ func bouncy_balls(player):
 	
 	
 func candy_heart(player):
-	player.hp_regen += 0.15
+	player.hp_regen += 5
 	player.max_hp += 350
 	candy_heart_count += 1
 	

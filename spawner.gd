@@ -5,7 +5,7 @@ extends Marker3D
 @export var base_difficulty: float = 10.0
 @export var difficulty_growth: float = 1.15
 
-@export var spawn_interval: float = 0.6
+@export var spawn_interval: float = 5
 
 @export var boss_scene: PackedScene
 @export var boss_interval_seconds: float = 60.0

@@ -25,9 +25,9 @@ var is_slamming := false
 var was_in_air := false
 var slam_on_cooldown = false
 
-@export var max_hp = 1000.0
-@export var curr_hp = 1000.0
-@export var hp_regen = 1
+@export var max_hp = 2000.0
+@export var curr_hp = 2000.0
+@export var hp_regen = 5
 
 @export var charge_power = 0.0
 var charging = false 
@@ -164,7 +164,7 @@ func slam_impact():
 		slam_sfx.play()
 	
 	var damage = (slam_damage + fall_distance) * 5.0
-	var launch_power = clamp(fall_distance * 10.0, 8.0, 6.0)
+	var launch_power = clamp(fall_distance * 20.0, 16.0, 12.0)
 	
 	for body in $damageAura.get_overlapping_bodies():
 		if body.is_in_group("Enemies"):
