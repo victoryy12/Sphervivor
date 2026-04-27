@@ -94,16 +94,6 @@ icon = ExtResource("5_liq8l")
 icon_alignment = 1
 expand_icon = true
 
-[node name="quitButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer" unique_id=2054503263]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_inland")
-text = "Quit"
-icon = ExtResource("6_rm47a")
-icon_alignment = 1
-expand_icon = true
-
 [node name="helpButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer" unique_id=1948758976]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
@@ -111,6 +101,16 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_inland")
 text = "Help"
 icon = ExtResource("7_bv6s2")
+icon_alignment = 1
+expand_icon = true
+
+[node name="quitButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer" unique_id=2054503263]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_inland")
+text = "Quit"
+icon = ExtResource("6_rm47a")
 icon_alignment = 1
 expand_icon = true
 
@@ -151,6 +151,6 @@ text = "Back"
 
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/mainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/quitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/helpButton" to="." method="_on_help_button_pressed"]
+[connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/deathOptions/VBoxContainer/quitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="HelpPanel/helpButtonBack" to="." method="_on_help_back_button_pressed"]

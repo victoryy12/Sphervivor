@@ -44,6 +44,7 @@ var pitch := 0.0 # up/down
 @onready var level_up_sfx: AudioStreamPlayer3D = $LevelUpSFX
 
 func _ready() -> void:
+	add_to_group("player")
 	cam.top_level = true
 	$touchingFloor.top_level = true
 	$spinAttack.top_level = true

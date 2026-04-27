@@ -69,6 +69,7 @@ _data = {
 }
 
 [sub_resource type="TorusMesh" id="TorusMesh_1jxqw"]
+outer_radius = 0.874
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1jxqw"]
 radius = 0.7675781
@@ -141,6 +142,7 @@ autoplay = &"Pulse"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="spinAttack" unique_id=2034927104]
 transform = Transform3D(-0.9998677, -0.016265834, 0, 0.016265834, -0.9998677, 0, 0, 0, 1, 1.5239736, 0, 0)
+transparency = 0.7
 mesh = SubResource("TorusMesh_1jxqw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="spinAttack" unique_id=563377521]

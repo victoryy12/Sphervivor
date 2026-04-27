@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 [autoload]
 
 GameSettings="*res://scripts/game_settings.gd"
+GameState="*uid://b5xieknobe1ua"
 
 [global_group]
 

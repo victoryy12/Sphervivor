@@ -2,9 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c4d1vn0itpmdx" path="res://forest_arena.tscn" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://m3sigj8s4nmg" path="res://player.tscn" id="2_feb5d"]
-[ext_resource type="PackedScene" uid="uid://crdlhuohh2d3w" path="res://enemies/snow_man.tscn" id="3_feb5d"]
-[ext_resource type="PackedScene" uid="uid://cxd17xto40u2i" path="res://enemies/absolute_sphere.tscn" id="4_fc0e3"]
-[ext_resource type="AudioStream" uid="uid://cbg7x8xqsaxd5" path="res://assets/BackgroundMusic.mp3" id="5_7jktm"]
+[ext_resource type="AudioStream" uid="uid://chyvqvrglojp5" path="res://assets/BackgroundMusic.mp3" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://ch0exdx0a55dy" path="res://Spawner/Spawn.tscn" id="6_ryrav"]
 
 [node name="game" type="Node3D" unique_id=466450601]
 transform = Transform3D(0.99999803, -0.0017100446, 0.0009678385, 0.0017113131, 0.9999978, -0.0012994274, -0.0009655938, 0.0013010963, 0.9999988, 0.031096458, 0, 0)
@@ -13,7 +12,7 @@ transform = Transform3D(0.99999803, -0.0017100446, 0.0009678385, 0.0017113131, 0
 transform = Transform3D(1, -1.1948487e-10, 0, 2.712568e-10, 1.0000002, 0, -1.1641532e-10, 1.1641532e-10, 1.0000002, 3.3898337, -17.475359, 9.035268)
 
 [node name="Player" parent="." unique_id=1714944700 instance=ExtResource("2_feb5d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1226559, 0)
+transform = Transform3D(1, -2.842171e-12, 0, 1.5495516e-10, 1.0000001, 0, -5.820766e-11, 1.1641532e-10, 1.0000001, -0.022642804, -12.108648, 0.017193357)
 mass = 100.0
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Player" unique_id=2050070285]
@@ -22,15 +21,5 @@ autoplay = true
 playback_type = 1
 parameters/looping = true
 
-[node name="snowman" parent="." unique_id=363226556 instance=ExtResource("3_feb5d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.845768, 3.7288246, 0)
-
-[node name="AbsoluteSphere" parent="." unique_id=1286040135 instance=ExtResource("4_fc0e3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.720127, -87.13305)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1936685404]
-
-[node name="wave_label" type="Label" parent="CanvasLayer" unique_id=1389576956]
-offset_right = 40.0
-offset_bottom = 23.0
-metadata/_edit_use_anchors_ = true
+[node name="enemy_spawner" parent="." unique_id=1852112187 instance=ExtResource("6_ryrav")]
+transform = Transform3D(1, -4.7032245e-10, 0, 1.0855956e-09, 1.0000011, -3.4924597e-10, -5.2386895e-10, 6.9849193e-10, 1.0000011, 9.351, 1, 0.019)

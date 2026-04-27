@@ -36,6 +36,9 @@ height = 0.1
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_r0uwl")
+speed = 9.0
+enemy_hp = 500.0
+current_hp = 500.0
 hit_sound = ExtResource("2_4uhme")
 attack_sound = ExtResource("3_qkm8t")
 
@@ -70,12 +73,10 @@ avoidance_enabled = true
 stream = ExtResource("2_4uhme")
 volume_db = -6.0
 max_distance = 20.0
-bus = &"SFX"
 
 [node name="AttacksSFX" type="AudioStreamPlayer3D" parent="." unique_id=432679855]
 stream = ExtResource("3_qkm8t")
 volume_db = -6.0
 max_distance = 20.0
-bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
