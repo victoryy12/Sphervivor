@@ -13,7 +13,7 @@ material = SubResource("StandardMaterial3D_0gc0p")
 [sub_resource type="BoxShape3D" id="BoxShape3D_0gc0p"]
 size = Vector3(0.5045166, 0.58010864, 0.73394775)
 
-[node name="playerProjectile" type="Area3D" unique_id=908196865]
+[node name="playerProjectile" type="RigidBody3D" unique_id=1077695817]
 script = ExtResource("1_0gc0p")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1653227038]
