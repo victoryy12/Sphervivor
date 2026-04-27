@@ -109,7 +109,13 @@ func _on_help_back_button_pressed() -> void:
 	_main_layout.visible = true # Bring back death options
 
 func _on_restart_button_pressed() -> void:
-	_restore_hud_before_scene_change()
+	get_tree().paused = false
+	visible = false
+
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+	await get_tree().process_frame
+
 	get_tree().reload_current_scene()
 
 func _on_main_menu_button_pressed() -> void:

@@ -141,7 +141,22 @@ func _on_resume_button_pressed() -> void:
 	pause_and_unpause()
 
 func _on_restart_button_pressed() -> void:
-	pause_and_unpause()
+	# lock game state first
+	GameState.state = GameState.State.PLAY
+
+	# hide UI immediately (avoid dangling references)
+	self.visible = false
+	player_ui = null
+	player_stats = null
+
+	# unpause engine FIRST
+	get_tree().paused = false
+
+	# defer restart safely
+	call_deferred("_do_restart")
+
+
+func _do_restart():
 	get_tree().reload_current_scene()
 
 func _on_quit_button_pressed() -> void:

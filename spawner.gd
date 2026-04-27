@@ -20,11 +20,14 @@ extends Marker3D
 var player: Node3D
 var time_alive: float = 0.0
 var current_difficulty: float = 0.0
-var last_boss_time: float = 0.0
 
+# Boss system
 var boss_instance: Node = null
 var boss_alive := false
-
+var boss_dead_time := 0.0
+var boss_has_spawned := false
+var last_boss_time: float = 0.0
+# enemy costs
 var enemy_costs := {
 	0: 1.0,
 	1: 2.0,
@@ -32,7 +35,9 @@ var enemy_costs := {
 	3: 5.0
 }
 
-
+# ----------------------------
+# READY
+# ----------------------------
 func _ready():
 	print("SPAWNER READY")
 	await wait_for_player()
@@ -42,15 +47,20 @@ func _ready():
 	start_director()
 
 
+# ----------------------------
+# PLAYER FIND
+# ----------------------------
 func wait_for_player():
 	while player == null:
-		print("SEARCHING FOR PLAYER...")
 		player = get_tree().get_first_node_in_group("player")
 		await get_tree().process_frame
 
 	print("PLAYER LOCKED:", player)
 
 
+# ----------------------------
+# MAIN LOOP
+# ----------------------------
 func start_director():
 	print("DIRECTOR STARTED")
 
@@ -59,11 +69,18 @@ func start_director():
 	while true:
 		await get_tree().process_frame
 
-		# HARD GLOBAL GAME STATE GATE
-		if GameState.state != GameState.State.PLAY:
+		var tree := get_tree()
+		if tree == null or not is_instance_valid(tree):
+			return
+
+		# HARD PAUSE / STATE BLOCK
+		if tree.paused:
 			continue
 
-		if player == null:
+		if pause_menu != null and is_instance_valid(pause_menu) and pause_menu.game_paused:
+			continue
+
+		if player == null or !is_instance_valid(player):
 			continue
 
 		var delta := get_process_delta_time()
@@ -74,9 +91,8 @@ func start_director():
 
 		accumulator = 0.0
 
-		# game progression
+		# difficulty scaling
 		time_alive += spawn_interval
-
 		current_difficulty = base_difficulty * pow(difficulty_growth, time_alive / 30.0)
 
 		# boss logic
@@ -84,13 +100,14 @@ func start_director():
 			last_boss_time = time_alive
 			spawn_boss()
 
-		# enemy spawning
+		# enemy spawn
 		spawn_from_budget()
 
-		# UI update
 		update_ui()
 
-
+# ----------------------------
+# ENEMY SPAWNING
+# ----------------------------
 func spawn_from_budget():
 	var budget = current_difficulty
 	var safety = 0
@@ -98,7 +115,7 @@ func spawn_from_budget():
 	while budget > 0.5 and safety < 100:
 		safety += 1
 
-		var index = pick_enemy_by_cost(budget)
+		var index = pick_enemy_by_weight()
 
 		if index == -1:
 			break
@@ -107,31 +124,28 @@ func spawn_from_budget():
 		budget -= enemy_costs.get(index, 1.0)
 
 
-func pick_enemy_by_cost(_budget: float) -> int:
-	var t := time_alive
-
-	# dynamic weights based on time
+func pick_enemy_by_weight() -> int:
 	var weights := {
 		0: 100,
-		1: clamp(10 + t * 1.5, 10, 80),
-		2: clamp(t * 0.8, 0, 60),
-		3: clamp(t * 0.4, 0, 40)
+		1: 25,
+		2: 10,
+		3: 5
 	}
 
-	var total_weight := 0
-
+	var total := 0
 	for i in enemy_scenes.size():
-		total_weight += int(weights.get(i, 1))
+		total += weights.get(i, 1)
 
-	var roll := randi() % total_weight
+	var roll := randi() % total
 	var running := 0
 
 	for i in enemy_scenes.size():
-		running += int(weights.get(i, 1))
+		running += weights.get(i, 1)
 		if roll < running:
 			return i
 
 	return 0
+
 
 func spawn_enemy(index: int):
 	if index < 0 or index >= enemy_scenes.size():
@@ -147,6 +161,9 @@ func spawn_enemy(index: int):
 	enemy.global_position = get_spawn_position()
 
 
+# ----------------------------
+# BOSS SYSTEM (FIXED RESPAWN)
+# ----------------------------
 func spawn_boss():
 	if boss_scene == null or player == null:
 		return
@@ -165,26 +182,32 @@ func spawn_boss():
 
 	boss_instance.global_position = player.global_position + offset
 
-	if boss_instance.has_method("set_wave"):
-		boss_instance.set_wave(time_alive)
-
+	# boss death tracking
 	boss_instance.tree_exited.connect(func():
 		boss_alive = false
 		boss_instance = null
+		boss_dead_time = time_alive
 	)
 
 
+# ----------------------------
+# SPAWN POSITION
+# ----------------------------
 func get_spawn_position() -> Vector3:
 	var angle = randf() * TAU
 	var distance = randf_range(min_spawn_radius, spawn_radius)
 
 	var dir = Vector3(cos(angle), 0, sin(angle))
+
 	var pos = player.global_position + dir * distance
 	pos.y = player.global_position.y
 
 	return pos
 
 
+# ----------------------------
+# UI
+# ----------------------------
 func update_ui():
 	if wave_label:
 		wave_label.text = "Time: " + str(int(time_alive)) + "s | Difficulty: " + str(int(current_difficulty))
