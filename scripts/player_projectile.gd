@@ -3,7 +3,7 @@ extends RigidBody3D
 @export var speed := 10.0
 @export var turn_speed := 5.0
 @export var lifetime := 5.0
-@export var damage := 200.0
+@export var damage := 500.0
 
 
 var target: Node3D = null

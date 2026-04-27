@@ -46,8 +46,15 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukq5f"]
+bg_color = Color(5.390644e-06, 0, 0.9614702, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health_fill"]
-bg_color = Color(5.198121e-06, 0.95385474, 0.28774264, 1)
+bg_color = Color(0, 0.8862745, 0.12156863, 1)
 corner_radius_top_left = 7
 corner_radius_top_right = 7
 corner_radius_bottom_right = 7
@@ -94,7 +101,7 @@ offset_top = 49.0
 offset_right = 473.0
 offset_bottom = 83.0
 theme_override_styles/background = SubResource("StyleBoxFlat_health_bg")
-theme_override_styles/fill = SubResource("StyleBoxFlat_health_fill")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ukq5f")
 show_percentage = false
 
 [node name="energyBar" type="ProgressBar" parent="." unique_id=1573158089]

@@ -110,6 +110,8 @@ func _process(_delta: float) -> void:
 func player_health_bar() -> void:
 	_player_health.max_value = player_stats.max_hp
 	_player_health.value = player_stats.curr_hp
+	
+	$HealthLabel.text = "Health"
 
 
 func experience_bar() -> void:

@@ -46,7 +46,12 @@ func _ready():
 	current_difficulty = base_difficulty
 	start_director()
 
-
+func _process(delta: float) -> void:
+	if get_tree().paused:
+		return
+		
+	time_alive += delta
+	update_ui()
 # ----------------------------
 # PLAYER FIND
 # ----------------------------
