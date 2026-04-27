@@ -2,7 +2,8 @@ extends Node
 
 enum State {
 	PLAY,
-	PAUSED
+	PAUSED,
+	UPGRADE
 }
 
 var state: State = State.PLAY

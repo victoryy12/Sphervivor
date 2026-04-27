@@ -59,8 +59,8 @@ func start_director():
 	while true:
 		await get_tree().process_frame
 
-		# hard pause block (stops everything immediately)
-		if pause_menu and pause_menu.game_paused:
+		# HARD GLOBAL GAME STATE GATE
+		if GameState.state != GameState.State.PLAY:
 			continue
 
 		if player == null:
@@ -74,14 +74,20 @@ func start_director():
 
 		accumulator = 0.0
 
+		# game progression
 		time_alive += spawn_interval
+
 		current_difficulty = base_difficulty * pow(difficulty_growth, time_alive / 30.0)
 
+		# boss logic
 		if not boss_alive and time_alive - last_boss_time >= boss_interval_seconds:
 			last_boss_time = time_alive
 			spawn_boss()
 
+		# enemy spawning
 		spawn_from_budget()
+
+		# UI update
 		update_ui()
 
 

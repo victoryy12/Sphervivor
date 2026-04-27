@@ -24,7 +24,8 @@ const ENERGY_ICON: Texture2D = preload("res://assets/energy2.png")
 
 var allowed_refresh = 1
 var current_choices = []	
-var upgrades_open = false
+static var upgrades_open := false
+
 
 var upgrades = [
 	{
@@ -116,16 +117,19 @@ func refresh_upgrades():
 	_apply_upgrade_button_labels()
 	
 func showUpgrades():
+	
 	upgrades_open = !upgrades_open
+	self.upgrades_open = upgrades_open
+	GameState.state = GameState.State.UPGRADE if upgrades_open else GameState.State.PLAY
 	get_tree().paused = upgrades_open
 	self.visible = upgrades_open
+
 	if speedometer:
 		speedometer.visible = !upgrades_open
 
 	if upgrades_open:
 		current_choices = get_random_upgrades()
 		_apply_upgrade_button_labels()
-
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
