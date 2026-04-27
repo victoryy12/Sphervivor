@@ -54,6 +54,7 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	movement_tracking(delta)
+	linear_velocity.y = min(linear_velocity.y, 0.0)
 	
 
 func movement_tracking(delta: float) -> void:
@@ -115,7 +116,17 @@ func launch(from_position: Vector3, force: float, upward_bias: float = 0.4) -> v
 	
 	knockback_timer = knockback_duration
 		
-				
+
+func apply_difficulty(mult: float) -> void:
+	print("APPLYING DIFFICULTY:", mult)
+	
+	enemy_hp *= mult
+	current_hp = enemy_hp
+	
+	enemy_damage *= pow(mult, 0.8) # softer scaling
+	speed *= clamp(mult, 1.0, 2.5) # don't let speed go crazy
+	
+	
 func die():
 	var exp = experience_drop.instantiate()
 	get_tree().current_scene.add_child(exp)

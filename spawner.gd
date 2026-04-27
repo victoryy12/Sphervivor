@@ -159,7 +159,15 @@ func spawn_enemy(index: int):
 	get_tree().current_scene.add_child(enemy)
 
 	enemy.global_position = get_spawn_position()
+	
+	var difficulty_mult = get_difficulty_multiplier()
 
+	if enemy.has_method("apply_difficulty"):
+		enemy.apply_difficulty(difficulty_mult)
+
+
+func get_difficulty_multiplier() -> float:
+	return current_difficulty / base_difficulty * (1.0 + time_alive / 30.0)
 
 # ----------------------------
 # BOSS SYSTEM (FIXED RESPAWN)
