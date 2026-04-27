@@ -5,10 +5,16 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_wnho6"]
 radius = 0.9446957
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ex3lp"]
+albedo_color = Color(0.42321938, 0.50164443, 0.4877035, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_3e4lw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ex3lp"]
 radius = 0.75257355
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pod4q"]
+albedo_color = Color(0, 0, 0.4862745, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_ex3lp"]
 
@@ -22,6 +28,8 @@ shape = SubResource("SphereShape3D_wnho6")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=856996712]
 transform = Transform3D(0.34142134, -0.058578644, 0.19999997, 0.19999997, 0.19999997, -0.2828427, -0.058578644, 0.34142134, 0.19999997, 0, 0, 0)
+material_overlay = SubResource("StandardMaterial3D_ex3lp")
+transparency = 0.8
 mesh = SubResource("SphereMesh_3e4lw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=516464672]
@@ -30,6 +38,7 @@ shape = SubResource("SphereShape3D_ex3lp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1359464866]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_pod4q")
 mesh = SubResource("SphereMesh_ex3lp")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

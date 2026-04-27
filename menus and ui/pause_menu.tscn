@@ -13,6 +13,9 @@
 shader = ExtResource("1_hdmo1")
 shader_parameter/lod = 0.158000007505
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xtu1v"]
+light_mode = 1
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xtu1v"]
 bg_color = Color(0.15127608, 0.15127608, 0.15127605, 1)
 border_color = Color(0.16206557, 0.1620656, 0.16206548, 1)
@@ -111,6 +114,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="rollingGreese" type="HBoxContainer" parent="MainLayout/RootVBox/stats" unique_id=771547592]
+material = SubResource("CanvasItemMaterial_xtu1v")
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MainLayout/RootVBox/stats/rollingGreese" unique_id=335980749]

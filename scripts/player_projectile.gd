@@ -11,10 +11,11 @@ var _time := 0.0
 
 
 func _ready() -> void:
-	_find_nearest_enemy()
 	# Start moving forward immediately if no target
 	if target == null:
 		linear_velocity = -global_transform.basis.z * speed
+	else:
+		_find_nearest_enemy()
 
 
 func _physics_process(delta: float) -> void:

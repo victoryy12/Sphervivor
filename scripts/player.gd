@@ -25,8 +25,8 @@ var is_slamming := false
 var was_in_air := false
 var slam_on_cooldown = false
 
-@export var max_hp = 2000.0
-@export var curr_hp = 2000.0
+@export var max_hp = 1000.0
+@export var curr_hp = 1000.0
 @export var hp_regen = 5
 
 @export var charge_power = 0.0
@@ -315,8 +315,8 @@ func spawn_projectile() -> void:
 @export var max_spin := 50.0
 @export var spin_accel := 20.0
 @export var spin_damage := 100.0
-@export var spin_knockback := 2.0
-var spin_hit_enemies = {}
+@export var spin_knockback := 1.0
+@export var spin_initial_energy = 0.5
 var spinning := false
 var spin_cooldown := false
 
@@ -326,7 +326,7 @@ func spin_attack(delta):
 		return
 		
 	if Input.is_action_just_pressed("spin"):
-		spin_hit_enemies.clear()
+		use_energy(spin_initial_energy)
 		
 	if Input.is_action_pressed("spin"):
 		use_energy(0.01)
@@ -349,8 +349,9 @@ func spin_attack(delta):
 
 
 func _on_spin_attack_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Enemies") and Input.is_action_pressed("spin"):
-		body.launch(global_position, spin_knockback)
+	if body.is_in_group("Enemies"):
+		if Input.is_action_pressed("spin"):
+			body.launch(global_position, spin_knockback)
 		
 	if body.is_in_group("Enemies") and body.has_method("take_damage"):
 		body.take_damage(spin_damage)
