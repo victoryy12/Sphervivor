@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c4d1vn0itpmdx"]
 
-[ext_resource type="Script" path="res://scripts/forest_arena.gd" id="0_farena"]
+[ext_resource type="Script" uid="uid://ty3v2fnuc4ji" path="res://scripts/forest_arena.gd" id="0_farena"]
 [ext_resource type="PackedScene" uid="uid://ci8mmiqe5yk5u" path="res://tree.tscn" id="1_ubfh8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ubfh8"]
@@ -112,6 +112,8 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="arenaFloor" type="StaticBody3D" parent="." unique_id=450260486]
+collision_layer = 3
+collision_mask = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="arenaFloor" unique_id=29560244]
 transform = Transform3D(247.27711, 0, 0, 0, 26.650587, 0, 0, 0, 252.91026, 0, -13, 0)

@@ -302,6 +302,10 @@ func spawn_projectile() -> void:
 		var p = projectile_scene.instantiate()
 		get_tree().current_scene.add_child(p)
 		p.global_position = global_position
+		
+		#disables collision on player and camerarig
+		p.add_collision_exception_with(self)
+		
 		p.global_transform.basis = cam.global_transform.basis
 
 
