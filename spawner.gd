@@ -167,7 +167,7 @@ func spawn_enemy(index: int):
 
 
 func get_difficulty_multiplier() -> float:
-	return current_difficulty / base_difficulty * (1.0 + time_alive / 30.0)
+	return current_difficulty / base_difficulty
 
 # ----------------------------
 # BOSS SYSTEM (FIXED RESPAWN)

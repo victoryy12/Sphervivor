@@ -102,7 +102,7 @@ func take_damage(amount) -> void:
 		die()
 
 
-func deal_damage() -> float:
+func deal_damage(from_position) -> float:
 	_play_attack_sfx()
 	return enemy_damage
 

@@ -225,6 +225,7 @@ func energy_loop():
 func _on_body_entered(body):
 	if body.is_in_group("Enemies"):
 		if int(linear_velocity.length()) < 10:
+			body.launch(global_position, 10.0)
 			take_damage(body.enemy_damage)
 
 
