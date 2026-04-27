@@ -6,6 +6,8 @@ extends Control
 @onready var _back: Button = $MarginContainer/CenterContainer/VBox/BackButton
 @onready var _volume_slider: HSlider = %VolumeSlider
 @onready var _volume_value: Label = %VolumeValue
+@onready var _music_slider: HSlider = %MusicSlider
+@onready var _music_value: Label = %MusicValue
 @onready var _fov_slider: HSlider = %FovSlider
 @onready var _fov_value: Label = %FovValue
 @onready var _day_slider: HSlider = %DayNightSlider
@@ -19,6 +21,7 @@ func _ready() -> void:
 	_apply_viewport_scale()
 	_sync_sliders_from_settings()
 	_volume_slider.value_changed.connect(_on_volume_slider_changed)
+	_music_slider.value_changed.connect(_on_music_slider_changed)
 	_fov_slider.value_changed.connect(_on_fov_slider_changed)
 	_day_slider.value_changed.connect(_on_day_slider_changed)
 	_mouse_slider.value_changed.connect(_on_mouse_slider_changed)
@@ -105,6 +108,7 @@ func _scale_option_row(
 
 func _sync_sliders_from_settings() -> void:
 	_volume_slider.set_value_no_signal(GameSettings.master_volume_linear * 100.0)
+	_music_slider.set_value_no_signal(GameSettings.music_volume_linear * 100.0)
 	_fov_slider.set_value_no_signal(GameSettings.fov_degrees)
 	_day_slider.set_value_no_signal(GameSettings.day_night * 100.0)
 	var ms := GameSettings.mouse_sensitivity
@@ -114,6 +118,7 @@ func _sync_sliders_from_settings() -> void:
 
 func _refresh_all_labels() -> void:
 	_volume_value.text = str(int(round(_volume_slider.value))) + "%"
+	_music_value.text = str(int(round(_music_slider.value))) + "%"
 	_fov_value.text = str(int(round(_fov_slider.value))) + "°"
 	if _day_slider.value < 15.0:
 		_day_value.text = "Night"
@@ -126,6 +131,11 @@ func _refresh_all_labels() -> void:
 
 func _on_volume_slider_changed(v: float) -> void:
 	GameSettings.set_master_volume_linear(v / 100.0)
+	_refresh_all_labels()
+
+
+func _on_music_slider_changed(v: float) -> void:
+	GameSettings.set_music_volume_linear(v / 100.0)
 	_refresh_all_labels()
 
 

@@ -92,6 +92,43 @@ text = "100%"
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="MusicRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="MusicLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/MusicRow"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 40
+text = "Music volume"
+
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/MusicRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+
+[node name="MusicValue" type="Label" parent="MarginContainer/CenterContainer/VBox/MusicRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 40
+text = "100%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="FovRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 24
