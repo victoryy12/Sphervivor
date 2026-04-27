@@ -7,7 +7,6 @@ extends CanvasLayer
 @onready var pause_panel: PanelContainer = $MainLayout/RootVBox/ButtonsCenter/pauseOptions
 @onready var logo: TextureRect = $MainLayout/RootVBox/Logo
 @onready var stats_panel: HBoxContainer = $MainLayout/RootVBox/stats
-@onready var stats_label: Label = $MainLayout/RootVBox/stats/displayStats
 
 @onready var resume_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/resumeButton
 @onready var restart_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/restartButton
