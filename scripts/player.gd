@@ -201,6 +201,7 @@ func try_slam():
 	slam_height = global_position.y
 	apply_central_force(Vector3.DOWN * slam_speed)
 
+	
 
 func use_energy(amount):
 	energy -= amount

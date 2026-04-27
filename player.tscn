@@ -21,7 +21,7 @@ material = SubResource("StandardMaterial3D_i3pqv")
 [sub_resource type="SphereShape3D" id="SphereShape3D_hqtel"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i3pqv"]
-radius = 4.26226
+radius = 6.7276025
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1jxqw"]
 inherit_velocity_ratio = 3.0
@@ -76,7 +76,6 @@ radius = 0.7675781
 height = 3.6617432
 
 [node name="player" type="RigidBody3D" unique_id=1714944700 groups=["Player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8982124, 0)
 collision_mask = 15
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
 continuous_cd = true

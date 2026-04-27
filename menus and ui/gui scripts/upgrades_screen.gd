@@ -36,17 +36,17 @@ var upgrades = [
 		"name": "Rolling Greese",
 		"desc": "roll faster",
 		"icon": ROLLING_GREASE_ICON,
-		"apply": func(player): player.rolling_force += 150
+		"apply": func(player): rolling_greese(player)
 	}, {
 		"name": "Rocket Jump",
 		"desc": "Jump higher",
 		"icon": ROCKET_JUMP_ICON,
-		"apply": func(player): player.jump_force += 15
+		"apply": func(player): rocket_jump(player)
 	}, {
 		"name": "Slam",
-		"desc": "increase slam damage and radius",
+		"desc": "increase slam damage",
 		"icon": SLAM_ICON,
-		"apply": func(player): player.slam_damage += 100
+		"apply": func(player): slam(player)
 	}, {
 		"name": "Slo-mo glasses",
 		"desc": 'glasses that improves your launch',
@@ -61,7 +61,7 @@ var upgrades = [
 		"name": "Bouncy balls",
 		"desc": 'Increases projectile potency',
 		"icon": MISSILES_ICON,
-		"apply": func(player): automatic_missiles(player)
+		"apply": func(player): bouncy_balls(player)
 	}, {
 		"name": "Spinning wings",
 		"desc": 'Increases spin attack potency',
@@ -74,27 +74,53 @@ var upgrades = [
 		"apply": func(player): aerobics_training(player)
 	}
 ]
+var rolling_count = 0
+var jump_force_count = 0
+var slam_count = 0
+var candy_heart_count = 0
+var slo_mo_count = 0
+var spin_force_count = 0
+var energy_count = 0
+var bounce_ball_count = 0
 
+func rolling_greese(player):
+	player.rolling_force += 200
+	rolling_count += 1
+
+func rocket_jump(player):
+	player.jump_force += 20
+	jump_force_count += 1
+
+func slam(player):
+	player.slam_damage += 100
+	slam_count += 1
+	
 func aerobics_training(player):
 	player.max_energy += 1
 	player.regen_time -= 0.05
+	energy_count += 1
 	
 func spinning_wings(player):
 	player.spin_damage += 50
 	player.spin_force += 10
 	player.max_spin += 10
 	player.spin_accel += 5
+	spin_force_count += 1
 	
-func automatic_missiles(player):
+func bouncy_balls(player):
 	player.projectile_count += 1
+	bounce_ball_count += 1
+	
 	
 func candy_heart(player):
 	player.hp_regen += 0.15
-	player.max_hp += 200
+	player.max_hp += 350
+	candy_heart_count += 1
 	
 func slow_mo_glassse(player):
 	player.max_charge += 750
 	player.charge_speed += 333
+	slo_mo_count += 1
 
 
 func _style_upgrade_button(button: Button, upgrade: Dictionary) -> void:

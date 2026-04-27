@@ -105,16 +105,114 @@ icon = ExtResource("5_lblxi")
 icon_alignment = 1
 expand_icon = true
 
-[node name="stats" type="PanelContainer" parent="MainLayout/RootVBox" unique_id=1978131070]
+[node name="stats" type="HBoxContainer" parent="MainLayout/RootVBox" unique_id=441519511]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="displayStats" type="Label" parent="MainLayout/RootVBox/stats" unique_id=2077793431]
+[node name="rollingGreese" type="HBoxContainer" parent="MainLayout/RootVBox/stats" unique_id=771547592]
 layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
+
+[node name="Label" type="Label" parent="MainLayout/RootVBox/stats/rollingGreese" unique_id=335980749]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainLayout/RootVBox/stats/rollingGreese" unique_id=1570190755]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 5
+
+[node name="RocketJump" type="HBoxContainer" parent="MainLayout/RootVBox/stats" unique_id=829284700]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayout/RootVBox/stats/RocketJump" unique_id=1360076235]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainLayout/RootVBox/stats/RocketJump" unique_id=620876565]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 5
+
+[node name="Slam" type="HBoxContainer" parent="MainLayout/RootVBox/stats" unique_id=262430874]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayout/RootVBox/stats/Slam" unique_id=227311]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainLayout/RootVBox/stats/Slam" unique_id=1502686430]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 5
+
+[node name="SloMo" type="HBoxContainer" parent="MainLayout/RootVBox/stats" unique_id=960536532]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayout/RootVBox/stats/SloMo" unique_id=658049348]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainLayout/RootVBox/stats/SloMo" unique_id=1250089394]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 5
+
+[node name="CandyHeart" type="HBoxContainer" parent="MainLayout/RootVBox/stats" unique_id=923829290]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayout/RootVBox/stats/CandyHeart" unique_id=1837591661]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainLayout/RootVBox/stats/CandyHeart" unique_id=420003645]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 5
+
+[node name="BouncyBalls" type="HBoxContainer" parent="MainLayout/RootVBox/stats" unique_id=765491414]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayout/RootVBox/stats/BouncyBalls" unique_id=1430011453]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainLayout/RootVBox/stats/BouncyBalls" unique_id=1288347436]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 5
+
+[node name="SpinningWings" type="HBoxContainer" parent="MainLayout/RootVBox/stats" unique_id=139047335]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayout/RootVBox/stats/SpinningWings" unique_id=987234871]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainLayout/RootVBox/stats/SpinningWings" unique_id=193022504]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 5
+
+[node name="AerobicTraining" type="HBoxContainer" parent="MainLayout/RootVBox/stats" unique_id=1292896627]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayout/RootVBox/stats/AerobicTraining" unique_id=571603089]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainLayout/RootVBox/stats/AerobicTraining" unique_id=321270010]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 5
 
 [node name="HelpPanel" type="Panel" parent="." unique_id=1995549196]
 custom_minimum_size = Vector2(600, 400)

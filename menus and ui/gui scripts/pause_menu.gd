@@ -1,11 +1,12 @@
 extends CanvasLayer
 
 @onready var player_stats = get_parent().get_parent()
+@onready var upgrades = get_parent().get_node("upgrades_screen")
 @onready var player_ui = get_parent().get_node("userInterface")
 
 @onready var pause_panel: PanelContainer = $MainLayout/RootVBox/ButtonsCenter/pauseOptions
 @onready var logo: TextureRect = $MainLayout/RootVBox/Logo
-@onready var stats_panel: PanelContainer = $MainLayout/RootVBox/stats
+@onready var stats_panel: HBoxContainer = $MainLayout/RootVBox/stats
 @onready var stats_label: Label = $MainLayout/RootVBox/stats/displayStats
 
 @onready var resume_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/resumeButton
@@ -19,6 +20,7 @@ extends CanvasLayer
 
 @onready var help_panel: Control = $HelpPanel 
 @onready var help_label: Label = $HelpPanel/Label
+
 
 # ------------------------------------------------
 # GLOBAL PAUSE STATE
@@ -34,6 +36,8 @@ var pausedCheck := false
 func _ready() -> void:
 	self.visible = false
 	help_panel.visible = false
+	stats_panel.alignment = BoxContainer.ALIGNMENT_CENTER
+	statsImages()
 
 	get_viewport().size_changed.connect(_update_ui_scale)
 	_update_ui_scale()
@@ -80,17 +84,59 @@ func pause_and_unpause():
 		Input.MOUSE_MODE_VISIBLE if pausedCheck else Input.MOUSE_MODE_CAPTURED
 	)
 	if pausedCheck:
-		display_stats()
+		statsLabels()
 
 # ------------------------------------------------
 # STATS
 # ------------------------------------------------
-func display_stats():
-	stats_label.text = " Speed: %d\n Jump: %d\n Regen/s: %d" % [
-		player_stats.rolling_force,
-		player_stats.jump_force,
-		player_stats.hp_regen
-	]
+const CANDY_HEART_ICON: Texture2D = preload("res://assets/candy-heart.png")
+const MISSILES_ICON: Texture2D = preload("res://assets/bouncy-ball2.png")
+const SPINNING_JIMMY_ICON: Texture2D = preload("res://assets/spinning-wings.png")
+const ROCKET_JUMP_ICON: Texture2D = preload("res://assets/rocket-jump.png")
+const ROLLING_GREASE_ICON: Texture2D = preload("res://assets/rolling-grease.png")
+const SLAM_ICON: Texture2D = preload("res://assets/slam.png")
+const SLO_MO_GLASSES_ICON: Texture2D = preload("res://assets/slo-mo-glasses.png")
+const ENERGY_ICON: Texture2D = preload("res://assets/energy2.png")
+const REFRESH_ICON: Texture2D = preload("res://assets/refresh2.png")
+const KOMIKAX_FONT: FontFile = preload("res://assets/KOMIKAX_.ttf")
+
+@onready var label_rolling_greese = $MainLayout/RootVBox/stats/rollingGreese/Label
+@onready var label_jump = $MainLayout/RootVBox/stats/RocketJump/Label
+@onready var label_slam  = $MainLayout/RootVBox/stats/Slam/Label
+@onready var label_slomo = $MainLayout/RootVBox/stats/SloMo/Label
+@onready var label_candy_heart = $MainLayout/RootVBox/stats/CandyHeart/Label
+@onready var label_Bouncy_ball = $MainLayout/RootVBox/stats/BouncyBalls/Label
+@onready var label_spinning = $MainLayout/RootVBox/stats/SpinningWings/Label
+@onready var label_aerobics = $MainLayout/RootVBox/stats/AerobicTraining/Label
+
+@onready var img_rolling_greese = $MainLayout/RootVBox/stats/rollingGreese/TextureRect
+@onready var img_jump = $MainLayout/RootVBox/stats/RocketJump/TextureRect
+@onready var img_slam = $MainLayout/RootVBox/stats/Slam/TextureRect
+@onready var img_slomo = $MainLayout/RootVBox/stats/SloMo/TextureRect
+@onready var img_candy_heart = $MainLayout/RootVBox/stats/CandyHeart/TextureRect
+@onready var img_Bouncy_ball = $MainLayout/RootVBox/stats/BouncyBalls/TextureRect
+@onready var img_spinning = $MainLayout/RootVBox/stats/SpinningWings/TextureRect
+@onready var img_aerobics = $MainLayout/RootVBox/stats/AerobicTraining/TextureRect
+
+func statsLabels():
+	label_rolling_greese.text = str(upgrades.rolling_count)
+	label_jump.text = str(upgrades.jump_force_count)
+	label_slam.text = str(upgrades.slam_count)
+	label_slomo.text = str(upgrades.slo_mo_count)
+	label_candy_heart.text = str(upgrades.candy_heart_count)
+	label_Bouncy_ball.text = str(upgrades.bounce_ball_count)
+	label_spinning.text = str(upgrades.spin_force_count)
+	label_aerobics.text = str(upgrades.energy_count)
+
+func statsImages():
+	img_rolling_greese.texture = ROLLING_GREASE_ICON
+	img_jump.texture = ROCKET_JUMP_ICON
+	img_slam.texture = SLAM_ICON
+	img_slomo.texture = SLO_MO_GLASSES_ICON
+	img_candy_heart.texture = CANDY_HEART_ICON
+	img_Bouncy_ball.texture = MISSILES_ICON
+	img_spinning.texture = SPINNING_JIMMY_ICON
+	img_aerobics.texture = ENERGY_ICON
 
 
 # ------------------------------------------------
@@ -127,11 +173,20 @@ func _update_ui_scale() -> void:
 		button.custom_minimum_size.y = button_height
 		button.add_theme_font_size_override("font_size", button_font_size)
 
-	stats_label.add_theme_font_size_override("font_size", stats_font_size)
+	#stats_label.add_theme_font_size_override("font_size", stats_font_size)
 
 	help_panel.custom_minimum_size = Vector2(viewport_size.x * 0.8, viewport_size.y * 0.8)
 	var help_font_size: int = int(clampf(base_size * 0.04, 16.0, 36.0))
 	help_label.add_theme_font_size_override("font_size", help_font_size)
+	
+	#handles images in stats
+	var icon_size: int = UiResponsive.scale_i_clamped(vp, 48.0, 24, 80)
+
+	for img in [img_rolling_greese, img_jump, img_slam, img_slomo,
+				img_candy_heart, img_Bouncy_ball, img_spinning, img_aerobics]:
+		img.custom_minimum_size = Vector2(icon_size, icon_size)
+		img.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		img.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 
 
 # ------------------------------------------------
