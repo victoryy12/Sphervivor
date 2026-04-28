@@ -147,12 +147,21 @@ func charge_input(event):
 	if event.is_action_pressed("charge ball"):
 		charging = true
 		charge_power = 0.0
-		Engine.time_scale = 0.2
+		# --- Effects On ---
+		Engine.time_scale = 0.2  # Slows game to 20% speed
+		$CPUParticles3D.emitting = true
+		
+		# Compensate for slow-mo (1.0 / 0.2 = 5)
+		# This keeps the smoke moving at a "normal" speed visually
+		$CPUParticles3D.speed_scale = 5.0
 	
 	if event.is_action_released("charge ball"):
 		bullet_time_launch()
 		charging = false
+		# --- Effects Off ---
 		Engine.time_scale = 1.0
+		$CPUParticles3D.emitting = false
+		$CPUParticles3D.speed_scale = 1.0
 
 
 func slam_impact():
