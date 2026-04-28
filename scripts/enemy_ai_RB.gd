@@ -4,7 +4,9 @@ extends RigidBody3D
 const DEFAULT_ENEMY_MAX_HP := 1000.0
 
 @export var speed = 4.0
+@export var max_speed = 10.0
 @export var accel = 10.0
+
 @export var enemy_damage = 100.0
 @export var enemy_hp: float = DEFAULT_ENEMY_MAX_HP
 @export var current_hp: float = DEFAULT_ENEMY_MAX_HP
@@ -49,6 +51,7 @@ func _ready() -> void:
 	_setup_sfx()
 	
 func _physics_process(delta: float) -> void:
+	print(speed)
 	if knockback_timer > 0:
 		knockback_timer -= delta
 		return
@@ -124,7 +127,7 @@ func apply_difficulty(mult: float) -> void:
 	current_hp = enemy_hp
 	
 	enemy_damage *= pow(mult, 0.8) # softer scaling
-	#speed *= clamp(mult, 1.0, 2.0) # don't let speed go crazy
+	speed = lerp(speed, max_speed, 0.1 * (mult - 1.0))
 	
 	
 func die():
