@@ -32,6 +32,22 @@ emission_energy_multiplier = 10.0
 [sub_resource type="TorusMesh" id="TorusMesh_4hqk4"]
 inner_radius = 0.95
 
+[sub_resource type="SphereMesh" id="SphereMesh_shield_aura"]
+radius = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shield_aura"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 0.42, 0.08, 0.085)
+metallic = 0.35
+roughness = 0.22
+emission_enabled = true
+emission = Color(1, 0.55, 0.15, 1)
+emission_energy_multiplier = 1.35
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_shield_aura_damage"]
+radius = 0.5
+
 [node name="AbsoluteSphere" type="Node3D" unique_id=1286040135 groups=["Enemies"]]
 script = ExtResource("1_inppo")
 
@@ -47,6 +63,21 @@ surface_material_override/0 = SubResource("StandardMaterial3D_hexc0")
 [node name="SphereCollision" type="CollisionShape3D" parent="BossBody" unique_id=1367144241]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 shape = SubResource("SphereShape3D_wgjya")
+
+[node name="ShieldAura" type="MeshInstance3D" parent="BossBody"]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_shield_aura")
+surface_material_override/0 = SubResource("StandardMaterial3D_shield_aura")
+
+[node name="ShieldDamageArea" type="Area3D" parent="BossBody/ShieldAura"]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BossBody/ShieldAura/ShieldDamageArea"]
+shape = SubResource("SphereShape3D_shield_aura_damage")
 
 [node name="RingRoot" type="Node3D" parent="BossBody" unique_id=152784977]
 

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c4d1vn0itpmdx" path="res://forest_arena.tscn" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://m3sigj8s4nmg" path="res://player.tscn" id="2_feb5d"]
 [ext_resource type="AudioStream" uid="uid://chyvqvrglojp5" path="res://assets/BackgroundMusic.mp3" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://cxd17xto40u2i" path="res://enemies/absolute_sphere.tscn" id="5_ryrav"]
 [ext_resource type="PackedScene" uid="uid://ch0exdx0a55dy" path="res://Spawner/Spawn.tscn" id="6_ryrav"]
 
 [node name="game" type="Node3D" unique_id=466450601]
@@ -16,11 +17,14 @@ transform = Transform3D(1, -1.1948487e-10, 0, 2.712568e-10, 1.0000002, 0, -1.164
 mass = 100.0
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Player" unique_id=2050070285]
-bus = &"Music"
 stream = ExtResource("5_7jktm")
 autoplay = true
+bus = &"Music"
 playback_type = 1
 parameters/looping = true
 
 [node name="enemy_spawner" parent="." unique_id=1852112187 instance=ExtResource("6_ryrav")]
 transform = Transform3D(1, -4.7032245e-10, 0, 1.0855956e-09, 1.0000011, -3.4924597e-10, -5.2386895e-10, 6.9849193e-10, 1.0000011, 9.351, 1, 0.019)
+
+[node name="AbsoluteSphere" parent="." unique_id=1286040135 instance=ExtResource("5_ryrav")]
+transform = Transform3D(0.99999815, 0.0017113015, -0.00096561416, -0.0017100561, 0.9999977, 0.0013010809, 0.0009678181, -0.0012994424, 0.9999986, -34.404823, -2.1046755, -30.422062)

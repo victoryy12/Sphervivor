@@ -2,9 +2,9 @@ extends RigidBody3D
 
 ## Homing hazard spawned by the Absolute Sphere boss.
 
-@export var speed := 14.0
+@export var speed := 20.0
 @export var homing_accel := 28.0
-@export var damage_to_player := 100.0
+@export var damage_to_player := 200.0
 @export var max_hp := 1000.0
 @export var lifetime := 10.0
 

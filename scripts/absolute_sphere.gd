@@ -3,7 +3,7 @@ extends Node3D
 const _RingDamageAreaScript = preload("res://scripts/boss_ring_damage_area.gd")
 const BOSS_PROJECTILE_SCENE := preload("res://boss_projectile.tscn")
 
-@export var projectile_spawn_interval := 10.0
+@export var projectile_spawn_interval := 5.0
 @export var projectiles_per_wave := 2
 
 @export var ring_a_speed := 15
@@ -82,12 +82,11 @@ func _process(delta: float) -> void:
 		set_process(false)
 		return
 
-	_proj_spawn_elapsed += delta
-	if _proj_spawn_elapsed >= projectile_spawn_interval:
-		_proj_spawn_elapsed = 0.0
-		_spawn_boss_projectile_wave()
-
 	if not _vulnerable_phase:
+		_proj_spawn_elapsed += delta
+		if _proj_spawn_elapsed >= projectile_spawn_interval:
+			_proj_spawn_elapsed = 0.0
+			_spawn_boss_projectile_wave()
 		_phase_elapsed += delta
 		if _phase_elapsed >= shield_phase_duration:
 			_begin_vulnerable_phase()
@@ -127,6 +126,8 @@ func _clear_boss_projectiles() -> void:
 
 
 func _spawn_boss_projectile_wave() -> void:
+	if _vulnerable_phase:
+		return
 	if not is_instance_valid(boss_body):
 		return
 	var root: Node = get_tree().current_scene

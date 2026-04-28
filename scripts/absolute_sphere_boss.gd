@@ -7,6 +7,8 @@ extends "res://scripts/enemy_ai_RB.gd"
 
 ## Defaults to 5x DEFAULT_ENEMY_MAX_HP from enemy_ai_RB (tunable in the inspector).
 @export var boss_max_hp: float = DEFAULT_ENEMY_MAX_HP * 100.0
+## Damage per second to the player while inside the shield aura (shields up).
+@export var shield_aura_dps: float = 100.0
 
 signal weakness_changed(is_weak: bool)
 
@@ -17,6 +19,11 @@ var weak_time_remaining: float = 0.0
 
 @onready var _shield_loop: AudioStreamPlayer3D = $ForceFieldLoop
 @onready var _shield_down: AudioStreamPlayer3D = $ForceFieldDown
+@onready var _shield_aura: MeshInstance3D = $ShieldAura
+@onready var _shield_damage_area: Area3D = $"ShieldAura/ShieldDamageArea"
+
+var _aura_material: StandardMaterial3D
+var _aura_pulse_t: float = 0.0
 
 
 func _ready() -> void:
@@ -27,7 +34,35 @@ func _ready() -> void:
 	current_hp = boss_max_hp
 	super._ready()
 	_configure_shield_loop_stream()
+	if is_instance_valid(_shield_aura):
+		var surf: Material = _shield_aura.get_surface_override_material(0)
+		if surf != null:
+			var dup: Material = surf.duplicate()
+			_shield_aura.set_surface_override_material(0, dup)
+			_aura_material = dup as StandardMaterial3D
+	_sync_shield_aura_visibility()
 	call_deferred("_start_shield_loop_if_shielded")
+
+
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+	if not shields_active:
+		return
+	if not is_instance_valid(_shield_damage_area) or not _shield_damage_area.monitoring:
+		return
+	for body in _shield_damage_area.get_overlapping_bodies():
+		if body.is_in_group("Player") and body.has_method("take_damage"):
+			body.take_damage(shield_aura_dps * delta)
+
+
+func _process(delta: float) -> void:
+	if not shields_active or _aura_material == null:
+		return
+	if not is_instance_valid(_shield_aura) or not _shield_aura.visible:
+		return
+	_aura_pulse_t += delta
+	var base: float = 1.35
+	_aura_material.emission_energy_multiplier = base + 0.35 * sin(_aura_pulse_t * 2.6)
 
 
 func _configure_shield_loop_stream() -> void:
@@ -55,6 +90,14 @@ func set_shields_active(active: bool) -> void:
 			_stop_shield_loop()
 			if _shield_down and _shield_down.stream:
 				_shield_down.play()
+	_sync_shield_aura_visibility()
+
+
+func _sync_shield_aura_visibility() -> void:
+	if is_instance_valid(_shield_aura):
+		_shield_aura.visible = shields_active
+	if is_instance_valid(_shield_damage_area):
+		_shield_damage_area.monitoring = shields_active
 
 
 func _start_shield_loop() -> void:
