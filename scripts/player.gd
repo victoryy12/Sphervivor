@@ -169,8 +169,9 @@ func slam_impact():
 	for body in $damageAura.get_overlapping_bodies():
 		if body.is_in_group("Enemies"):
 			body.take_damage(damage)
-			
 			body.launch(global_position, launch_power)
+		elif body.is_in_group("BossProjectile") and body.has_method("take_damage"):
+			body.take_damage(damage)
 
 
 func slam():
@@ -355,9 +356,11 @@ func spin_attack(delta):
 
 
 func _on_spin_attack_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Enemies"):
+	if body.is_in_group("Enemies") and not body.is_in_group("BossProjectile"):
 		if Input.is_action_pressed("spin"):
 			body.launch(global_position, spin_knockback)
-		
+
 	if body.is_in_group("Enemies") and body.has_method("take_damage"):
+		body.take_damage(spin_damage)
+	elif body.is_in_group("BossProjectile") and body.has_method("take_damage"):
 		body.take_damage(spin_damage)

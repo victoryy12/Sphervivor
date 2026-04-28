@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://db1agvliiesu2"]
+
+[ext_resource type="Script" uid="uid://bfwm8kq7nj43x" path="res://scripts/boss_projectile.gd" id="1_bp"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_711sb"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2kl3"]
+albedo_color = Color(0.8542334, 0, 0.18067321, 1)
+metallic = 1.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.99999994, 0.22953579, 0.17418489, 1)
+emission_energy_multiplier = 0.3
+bent_normal_enabled = true
+ao_enabled = true
+ao_light_affect = 0.37
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bnrtf"]
+radius = 1.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_68ml6"]
+inner_radius = 0.95
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4ry7"]
+albedo_color = Color(1, 0.76524276, 0.501666, 1)
+emission_enabled = true
+emission = Color(0.8117647, 0.5372549, 0, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_ta3bn"]
+inner_radius = 0.95
+
+[node name="bossProjectile" type="RigidBody3D" unique_id=723308603]
+contact_monitor = true
+max_contacts_reported = 8
+script = ExtResource("1_bp")
+
+[node name="SphereMesh" type="MeshInstance3D" parent="." unique_id=491177174]
+mesh = SubResource("SphereMesh_711sb")
+surface_material_override/0 = SubResource("StandardMaterial3D_l2kl3")
+
+[node name="SphereCollision" type="CollisionShape3D" parent="." unique_id=1953726588]
+shape = SubResource("SphereShape3D_bnrtf")
+
+[node name="RingRoot" type="Node3D" parent="." unique_id=1737020255]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RingRoot" unique_id=1381134846]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = SubResource("TorusMesh_68ml6")
+surface_material_override/0 = SubResource("StandardMaterial3D_g4ry7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="RingRoot" unique_id=444936545]
+transform = Transform3D(1.5, 0, 0, 0, 1.299038, -0.75, 0, 0.75, 1.299038, 0, 0, 0)
+mesh = SubResource("TorusMesh_ta3bn")
+surface_material_override/0 = SubResource("StandardMaterial3D_g4ry7")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="RingRoot" unique_id=445112802]
+transform = Transform3D(1.5, 0, 0, 0, 1.299038, 0.75, 0, -0.75, 1.299038, 0, 0, 0)
+mesh = SubResource("TorusMesh_ta3bn")
+surface_material_override/0 = SubResource("StandardMaterial3D_g4ry7")

@@ -36,16 +36,22 @@ func _physics_process(delta: float) -> void:
 
 
 func _find_nearest_enemy() -> void:
-	var enemies = get_tree().get_nodes_in_group("Enemies")
 	var closest_dist := INF
 	target = null
 
-	for enemy in enemies:
+	for enemy in get_tree().get_nodes_in_group("Enemies"):
 		if enemy is Node3D:
 			var d = global_position.distance_to(enemy.global_position)
 			if d < closest_dist:
 				closest_dist = d
 				target = enemy
+
+	for hazard in get_tree().get_nodes_in_group("BossProjectile"):
+		if hazard is Node3D:
+			var d2 = global_position.distance_to(hazard.global_position)
+			if d2 < closest_dist:
+				closest_dist = d2
+				target = hazard
 
 
 func _on_body_entered(body: Node3D) -> void:
@@ -56,6 +62,11 @@ func _on_body_entered(body: Node3D) -> void:
 		queue_free()
 		return
 		
+	if body.is_in_group("BossProjectile") and body.has_method("take_damage"):
+		body.take_damage(damage)
+		queue_free()
+		return
+
 	if body.is_in_group("Enemies") and body.has_method("take_damage"):
 		body.take_damage(damage)
 

@@ -152,7 +152,13 @@ func _sync_refresh_button() -> void:
 	_refresh_button.disabled = left <= 0
 	_refresh_button.modulate = Color(1, 1, 1, 0.5) if left <= 0 else Color.WHITE
 	_refresh_button.text = "Refresh (%d)" % left
-	
+
+
+func refresh_upgrade_hud_visibility() -> void:
+	if speedometer:
+		speedometer.visible = not upgrades_open
+
+
 func showUpgrades():
 	
 	upgrades_open = !upgrades_open
@@ -161,8 +167,7 @@ func showUpgrades():
 	get_tree().paused = upgrades_open
 	self.visible = upgrades_open
 
-	if speedometer:
-		speedometer.visible = !upgrades_open
+	refresh_upgrade_hud_visibility()
 
 	if upgrades_open:
 		current_choices = get_random_upgrades()
@@ -281,6 +286,8 @@ func _update_upgrade_ui_scale() -> void:
 		button.custom_minimum_size.y = min_height
 		button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		button.add_theme_font_size_override("font_size", font_size)
+		button.remove_theme_constant_override("icon_max_width")
+		button.remove_theme_constant_override("icon_max_height")
 
 	# Scale with short side (same idea as upgrade cards) so size tracks resolution; caps keep extremes readable.
 	var ref_h: float = clampf(base_size * 0.14, 54.0 * r, 180.0 * r)

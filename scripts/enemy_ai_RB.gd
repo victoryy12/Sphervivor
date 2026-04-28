@@ -51,7 +51,6 @@ func _ready() -> void:
 	_setup_sfx()
 	
 func _physics_process(delta: float) -> void:
-	print(speed)
 	if knockback_timer > 0:
 		knockback_timer -= delta
 		return
@@ -99,7 +98,6 @@ func take_damage(amount) -> void:
 	
 	current_hp = maxf(current_hp - amount, 0.0)
 	health_changed.emit(current_hp, max_hp)
-	print("Enemy HP:", current_hp)
 	
 	if current_hp <= 0:
 		die()
@@ -121,8 +119,6 @@ func launch(from_position: Vector3, force: float, upward_bias: float = 0.4) -> v
 		
 
 func apply_difficulty(mult: float) -> void:
-	print("APPLYING DIFFICULTY:", mult)
-	
 	enemy_hp *= mult
 	current_hp = enemy_hp
 	

@@ -1,6 +1,10 @@
 extends Node3D
 
 const _RingDamageAreaScript = preload("res://scripts/boss_ring_damage_area.gd")
+const BOSS_PROJECTILE_SCENE := preload("res://boss_projectile.tscn")
+
+@export var projectile_spawn_interval := 10.0
+@export var projectiles_per_wave := 2
 
 @export var ring_a_speed := 15
 @export var ring_b_speed := -22
@@ -27,6 +31,8 @@ var _weak_elapsed := 0.0
 var _vulnerable_phase := false
 var _slow_blend := 0.0
 
+var _proj_spawn_elapsed := 0.0
+
 
 func _ready() -> void:
 	_attach_ring_shield(ring_a_node)
@@ -41,6 +47,7 @@ func _ready() -> void:
 func _on_boss_body_died() -> void:
 	_vulnerable_phase = false
 	_weak_elapsed = 0.0
+	_clear_boss_projectiles()
 	set_process(false)
 
 
@@ -74,6 +81,12 @@ func _process(delta: float) -> void:
 	if not is_instance_valid(boss_body):
 		set_process(false)
 		return
+
+	_proj_spawn_elapsed += delta
+	if _proj_spawn_elapsed >= projectile_spawn_interval:
+		_proj_spawn_elapsed = 0.0
+		_spawn_boss_projectile_wave()
+
 	if not _vulnerable_phase:
 		_phase_elapsed += delta
 		if _phase_elapsed >= shield_phase_duration:
@@ -105,6 +118,33 @@ func _process(delta: float) -> void:
 		ring_b_node.rotate_x(sb * delta)
 	if is_instance_valid(ring_c_node):
 		ring_c_node.rotate_z(sc * delta)
+
+
+func _clear_boss_projectiles() -> void:
+	for hazard in get_tree().get_nodes_in_group("BossProjectile"):
+		if is_instance_valid(hazard):
+			hazard.queue_free()
+
+
+func _spawn_boss_projectile_wave() -> void:
+	if not is_instance_valid(boss_body):
+		return
+	var root: Node = get_tree().current_scene
+	if root == null:
+		return
+	var origin: Vector3 = (boss_body as Node3D).global_position
+	var n: int = maxi(projectiles_per_wave, 1)
+	for i in range(n):
+		var p: Node = BOSS_PROJECTILE_SCENE.instantiate()
+		root.add_child(p)
+		if p is Node3D:
+			var angle := TAU * float(i) / float(n)
+			var ring_off := Vector3(cos(angle), 0.35 + 0.12 * sin(float(i * 2)), sin(angle)) * 16.0
+			(p as Node3D).global_position = origin + ring_off
+			if p is RigidBody3D:
+				(p as RigidBody3D).linear_velocity = ring_off.normalized() * 6.0
+		if p.has_method("setup_after_spawn"):
+			p.call("setup_after_spawn", self, boss_body as PhysicsBody3D)
 
 
 func _begin_vulnerable_phase() -> void:

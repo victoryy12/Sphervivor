@@ -49,8 +49,6 @@ func _on_body_entered(body: Node) -> void:
 		
 func take_damage(amount):
 	enemy_hp -= amount
-	
-	print("Enemy HP:", enemy_hp)
 
 	if enemy_hp <= 0:
 		die()

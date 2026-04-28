@@ -70,20 +70,35 @@ func _input(event: InputEvent) -> void:
 func pause_and_unpause():
 	pausedCheck = !pausedCheck
 
-	# GLOBAL STATE (for spawner + systems)
-	GameState.state = GameState.State.PAUSED if pausedCheck else GameState.State.PLAY
-	game_paused = pausedCheck
-
-	get_tree().paused = pausedCheck
-	self.visible = pausedCheck
-
-	player_ui.visible = !pausedCheck
-
-	Input.set_mouse_mode(
-		Input.MOUSE_MODE_VISIBLE if pausedCheck else Input.MOUSE_MODE_CAPTURED
-	)
 	if pausedCheck:
+		if upgrades.upgrades_open:
+			upgrades.visible = false
+		GameState.state = GameState.State.PAUSED
+		game_paused = true
+		get_tree().paused = true
+		self.visible = true
+		player_ui.visible = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		statsLabels()
+		return
+
+	if upgrades.upgrades_open:
+		GameState.state = GameState.State.UPGRADE
+		game_paused = false
+		get_tree().paused = true
+		self.visible = false
+		upgrades.visible = true
+		upgrades.refresh_upgrade_hud_visibility()
+		player_ui.visible = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		return
+
+	GameState.state = GameState.State.PLAY
+	game_paused = false
+	get_tree().paused = false
+	self.visible = false
+	player_ui.visible = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 # ------------------------------------------------
 # STATS
@@ -98,6 +113,7 @@ const SLO_MO_GLASSES_ICON: Texture2D = preload("res://assets/slo-mo-glasses.png"
 const ENERGY_ICON: Texture2D = preload("res://assets/energy2.png")
 const REFRESH_ICON: Texture2D = preload("res://assets/refresh2.png")
 const KOMIKAX_FONT: FontFile = preload("res://assets/KOMIKAX_.ttf")
+const PR_CONFIDENTIAL_FONT: FontFile = preload("res://assets/PR Confidential.otf")
 
 @onready var label_rolling_greese = $MainLayout/RootVBox/stats/rollingGreese/Label
 @onready var label_jump = $MainLayout/RootVBox/stats/RocketJump/Label
@@ -158,28 +174,44 @@ func _update_ui_scale() -> void:
 	_pause_vbox.add_theme_constant_override("separation", UiResponsive.scale_i_clamped(vp, 10.0, 4, 24))
 
 	var button_font_size: int = int(clampf(base_size * 0.0355, 14.0 * r, 43.0 * r))
-	var stats_font_size: int = int(clampf(base_size * 0.032, 14.0 * r, 48.0 * r))
+	var stats_font_size: int = int(clampf(base_size * 0.038, 15.0 * r, 54.0 * r))
 	var button_height: float = clampf(base_size * 0.094, 44.0 * r, 142.0 * r)
 	var logo_height: float = clampf(viewport_size.y * 0.17, 64.0 * r, 280.0 * r)
 	var panel_width: float = clampf(viewport_size.x * 0.58, 320.0 * r, 1280.0 * r)
-	var stats_height: float = clampf(base_size * 0.17, 60.0 * r, 230.0 * r)
+	var stats_height: float = clampf(base_size * 0.195, 68.0 * r, 248.0 * r)
 
 	logo.custom_minimum_size.y = logo_height
 	pause_panel.custom_minimum_size.x = panel_width
 	stats_panel.custom_minimum_size.y = stats_height
 
+	var stat_outer_sep: int = UiResponsive.scale_i_clamped(vp, 18.0, 10, 34)
+	var stat_inner_sep: int = UiResponsive.scale_i_clamped(vp, 4.0, 2, 8)
+	stats_panel.add_theme_constant_override("separation", stat_outer_sep)
+
+	for row in stats_panel.get_children():
+		if row is HBoxContainer:
+			row.add_theme_constant_override("separation", stat_inner_sep)
+
 	for button in [resume_button, restart_button, help_button, quit_button]:
 		button.custom_minimum_size.y = button_height
 		button.add_theme_font_size_override("font_size", button_font_size)
 
-	#stats_label.add_theme_font_size_override("font_size", stats_font_size)
+	for lbl in [
+		label_rolling_greese, label_jump, label_slam, label_slomo,
+		label_candy_heart, label_Bouncy_ball, label_spinning, label_aerobics,
+	]:
+		lbl.add_theme_font_override("font", PR_CONFIDENTIAL_FONT)
+		lbl.add_theme_font_size_override("font_size", stats_font_size)
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		lbl.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 
 	help_panel.custom_minimum_size = Vector2(viewport_size.x * 0.8, viewport_size.y * 0.8)
 	var help_font_size: int = int(clampf(base_size * 0.04, 16.0, 36.0))
 	help_label.add_theme_font_size_override("font_size", help_font_size)
 	
 	#handles images in stats
-	var icon_size: int = UiResponsive.scale_i_clamped(vp, 48.0, 24, 80)
+	var icon_size: int = UiResponsive.scale_i_clamped(vp, 56.0, 30, 92)
 
 	for img in [img_rolling_greese, img_jump, img_slam, img_slomo,
 				img_candy_heart, img_Bouncy_ball, img_spinning, img_aerobics]:

@@ -13,12 +13,17 @@ extends Marker3D
 @export var min_spawn_radius: float = 10.0
 @export var spawn_radius: float = 25.0
 
+## Multiplier on difficulty-clock advancement while Absolute Sphere is alive (lower = slower difficulty ramp).
+@export_range(0.05, 1.0, 0.05) var boss_difficulty_clock_scale := 0.35
+
 @export var pause_menu: CanvasLayer
 
 @onready var wave_label: Label = get_tree().current_scene.find_child("WaveLabel", true, false)
 
 var player: Node3D
 var time_alive: float = 0.0
+## Feeds current_difficulty pow(); advances slower during boss fights while time_alive stays real-time for UI/boss timers.
+var _difficulty_clock: float = 0.0
 var current_difficulty: float = 0.0
 
 # Boss system
@@ -53,6 +58,7 @@ func _process(delta: float) -> void:
 		return
 		
 	time_alive += delta
+	_difficulty_clock += delta * _boss_difficulty_multiplier()
 	update_ui()
 # ----------------------------
 # PLAYER FIND
@@ -98,9 +104,10 @@ func start_director():
 
 		accumulator = 0.0
 
-		# difficulty scaling
+		# difficulty scaling (clock slows while boss is alive for gentler scaling during that phase)
 		time_alive += spawn_interval
-		current_difficulty = base_difficulty * pow(difficulty_growth, time_alive / 30.0)
+		_difficulty_clock += spawn_interval * _boss_difficulty_multiplier()
+		current_difficulty = base_difficulty * pow(difficulty_growth, _difficulty_clock / 30.0)
 
 		# boss logic
 		if not boss_alive and time_alive - last_boss_time >= boss_interval_seconds:
@@ -116,6 +123,8 @@ func start_director():
 # ENEMY SPAWNING
 # ----------------------------
 func spawn_from_budget():
+	if boss_alive:
+		return
 	var budget = current_difficulty
 	var safety = 0
 
@@ -175,6 +184,10 @@ func spawn_enemy(index: int):
 
 func get_difficulty_multiplier() -> float:
 	return current_difficulty / base_difficulty
+
+
+func _boss_difficulty_multiplier() -> float:
+	return boss_difficulty_clock_scale if boss_alive else 1.0
 
 # ----------------------------
 # BOSS SYSTEM (FIXED RESPAWN)

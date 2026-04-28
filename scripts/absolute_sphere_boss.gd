@@ -1,7 +1,12 @@
 extends "res://scripts/enemy_ai_RB.gd"
 
+## Chase tuning vs base enemy_ai_RB (4 / 10 / 10); boss is not scaled by spawner difficulty.
+@export var boss_move_speed := 5.25
+@export var boss_move_max_speed := 12.0
+@export var boss_move_accel := 11.5
+
 ## Defaults to 5x DEFAULT_ENEMY_MAX_HP from enemy_ai_RB (tunable in the inspector).
-@export var boss_max_hp: float = DEFAULT_ENEMY_MAX_HP * 5.0
+@export var boss_max_hp: float = DEFAULT_ENEMY_MAX_HP * 100.0
 
 signal weakness_changed(is_weak: bool)
 
@@ -15,6 +20,9 @@ var weak_time_remaining: float = 0.0
 
 
 func _ready() -> void:
+	speed = boss_move_speed
+	max_speed = boss_move_max_speed
+	accel = boss_move_accel
 	enemy_hp = boss_max_hp
 	current_hp = boss_max_hp
 	super._ready()
@@ -69,7 +77,16 @@ func _stop_shield_audio() -> void:
 
 func die() -> void:
 	_stop_shield_audio()
-	super.die()
+	var drop_pos := global_position
+	var exp_drop := experience_drop.instantiate()
+	get_tree().current_scene.add_child(exp_drop)
+	exp_drop.global_position = drop_pos
+	died.emit()
+	var sphere_root: Node = get_parent()
+	if sphere_root != null:
+		sphere_root.queue_free()
+	else:
+		queue_free()
 
 
 func is_boss_weak() -> bool:
