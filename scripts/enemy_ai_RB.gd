@@ -124,7 +124,7 @@ func apply_difficulty(mult: float) -> void:
 	current_hp = enemy_hp
 	
 	enemy_damage *= pow(mult, 0.8) # softer scaling
-	speed *= clamp(mult, 1.0, 2.5) # don't let speed go crazy
+	#speed *= clamp(mult, 1.0, 2.0) # don't let speed go crazy
 	
 	
 func die():

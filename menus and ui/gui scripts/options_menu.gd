@@ -108,7 +108,7 @@ func _scale_option_row(
 
 func _sync_sliders_from_settings() -> void:
 	_volume_slider.set_value_no_signal(GameSettings.master_volume_linear * 100.0)
-	_music_slider.set_value_no_signal(GameSettings.music_volume_linear * 100.0)
+	#_music_slider.set_value_no_signal(GameSettings.music_volume_linear * 100.0)
 	_fov_slider.set_value_no_signal(GameSettings.fov_degrees)
 	_day_slider.set_value_no_signal(GameSettings.day_night * 100.0)
 	var ms := GameSettings.mouse_sensitivity

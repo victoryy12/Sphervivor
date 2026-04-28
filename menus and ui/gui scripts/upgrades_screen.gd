@@ -84,11 +84,11 @@ var energy_count = 0
 var bounce_ball_count = 0
 
 func rolling_greese(player):
-	player.rolling_force += 200
+	player.rolling_force += 250
 	rolling_count += 1
 
 func rocket_jump(player):
-	player.jump_force += 20
+	player.jump_force += 25
 	jump_force_count += 1
 
 func slam(player):
@@ -101,7 +101,7 @@ func aerobics_training(player):
 	energy_count += 1
 	
 func spinning_wings(player):
-	player.spin_damage += 50
+	player.spin_damage += 75
 	player.spin_force += 10
 	player.max_spin += 10
 	player.spin_accel += 5

@@ -11,6 +11,7 @@ var _time := 0.0
 
 
 func _ready() -> void:
+	
 	# Start moving forward immediately if no target
 	if target == null:
 		linear_velocity = -global_transform.basis.z * speed
