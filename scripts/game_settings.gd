@@ -19,6 +19,11 @@ signal day_night_changed(t: float)
 
 
 func _ready() -> void:
+	var layout = load("res://default_bus_layout.tres")
+	if layout:
+		AudioServer.set_bus_layout(layout)
+	else:
+		push_error("GameSettings: could not load default_bus_layout.tres")
 	load_settings()
 	apply_master_volume()
 	apply_music_volume()
