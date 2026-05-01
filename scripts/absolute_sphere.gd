@@ -1,7 +1,7 @@
 extends Node3D
 
 const _RingDamageAreaScript = preload("res://scripts/boss_ring_damage_area.gd")
-const BOSS_PROJECTILE_SCENE := preload("res://boss_projectile.tscn")
+const BOSS_PROJECTILE_SCENE := preload("res://enemies/boss_projectile.tscn")
 
 @export var projectile_spawn_interval := 5.0
 @export var projectiles_per_wave := 2

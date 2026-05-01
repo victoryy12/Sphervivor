@@ -1,12 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxcexrj52ax3"]
+[gd_scene format=3 uid="uid://bxcexrj52ax3"]
 
-[ext_resource type="Script" path="res://menus and ui/gui scripts/options_menu.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://nw0sfroawprl" path="res://menus and ui/gui scripts/options_menu.gd" id="1_script"]
 [ext_resource type="FontFile" uid="uid://byd7tr4m2s0c5" path="res://assets/PR Confidential.otf" id="2_font0"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bg"]
-load_path = "res://.godot/imported/main-menu.png-847ee1b82a40cc8625df7db4122cf193.ctex"
-
-[node name="OptionsMenu" type="Control"]
+[node name="OptionsMenu" type="Control" unique_id=1779928583]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=1330788822]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,10 +20,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
-texture = SubResource("CompressedTexture2D_bg")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2111525427]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,14 +34,14 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 20
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" unique_id=721870953]
 layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/CenterContainer" unique_id=479144361]
 layout_mode = 2
 theme_override_constants/separation = 36
 
-[node name="Title" type="Label" parent="MarginContainer/CenterContainer/VBox"]
+[node name="Title" type="Label" parent="MarginContainer/CenterContainer/VBox" unique_id=2013578375]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.95, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0.92)
@@ -55,11 +51,11 @@ theme_override_font_sizes/font_size = 78
 text = "Options"
 horizontal_alignment = 1
 
-[node name="VolumeRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox"]
+[node name="VolumeRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox" unique_id=1601089364]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="VolumeLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/VolumeRow"]
+[node name="VolumeLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/VolumeRow" unique_id=1938090838]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
@@ -69,16 +65,13 @@ theme_override_fonts/font = ExtResource("2_font0")
 theme_override_font_sizes/font_size = 40
 text = "Main volume"
 
-[node name="VolumeSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/VolumeRow"]
+[node name="VolumeSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/VolumeRow" unique_id=1732468430]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(640, 54)
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = 0.0
-max_value = 100.0
-step = 1.0
 
-[node name="VolumeValue" type="Label" parent="MarginContainer/CenterContainer/VBox/VolumeRow"]
+[node name="VolumeValue" type="Label" parent="MarginContainer/CenterContainer/VBox/VolumeRow" unique_id=534250569]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 52)
 layout_mode = 2
@@ -92,11 +85,11 @@ text = "100%"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="MusicRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox"]
+[node name="MusicRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox" unique_id=1140811625]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="MusicLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/MusicRow"]
+[node name="MusicLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/MusicRow" unique_id=1565526258]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
@@ -106,16 +99,13 @@ theme_override_fonts/font = ExtResource("2_font0")
 theme_override_font_sizes/font_size = 40
 text = "Music volume"
 
-[node name="MusicSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/MusicRow"]
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/MusicRow" unique_id=890217784]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(640, 54)
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = 0.0
-max_value = 100.0
-step = 1.0
 
-[node name="MusicValue" type="Label" parent="MarginContainer/CenterContainer/VBox/MusicRow"]
+[node name="MusicValue" type="Label" parent="MarginContainer/CenterContainer/VBox/MusicRow" unique_id=1819677842]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 52)
 layout_mode = 2
@@ -129,11 +119,11 @@ text = "100%"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="FovRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox"]
+[node name="FovRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox" unique_id=996099079]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="FovLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/FovRow"]
+[node name="FovLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/FovRow" unique_id=364064254]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
@@ -143,16 +133,16 @@ theme_override_fonts/font = ExtResource("2_font0")
 theme_override_font_sizes/font_size = 40
 text = "Field of view"
 
-[node name="FovSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/FovRow"]
+[node name="FovSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/FovRow" unique_id=915816967]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(640, 54)
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 55.0
 max_value = 120.0
-step = 1.0
+value = 55.0
 
-[node name="FovValue" type="Label" parent="MarginContainer/CenterContainer/VBox/FovRow"]
+[node name="FovValue" type="Label" parent="MarginContainer/CenterContainer/VBox/FovRow" unique_id=79911010]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 52)
 layout_mode = 2
@@ -166,11 +156,11 @@ text = "75°"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="DayNightRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox"]
+[node name="DayNightRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox" unique_id=1290624559]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="DayNightLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/DayNightRow"]
+[node name="DayNightLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/DayNightRow" unique_id=357794834]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
@@ -180,16 +170,13 @@ theme_override_fonts/font = ExtResource("2_font0")
 theme_override_font_sizes/font_size = 40
 text = "Day / night"
 
-[node name="DayNightSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/DayNightRow"]
+[node name="DayNightSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/DayNightRow" unique_id=1432762333]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(640, 54)
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = 0.0
-max_value = 100.0
-step = 1.0
 
-[node name="DayNightValue" type="Label" parent="MarginContainer/CenterContainer/VBox/DayNightRow"]
+[node name="DayNightValue" type="Label" parent="MarginContainer/CenterContainer/VBox/DayNightRow" unique_id=1637415365]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 52)
 layout_mode = 2
@@ -203,11 +190,11 @@ text = "Day"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="MouseRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox"]
+[node name="MouseRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBox" unique_id=854839998]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="MouseLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/MouseRow"]
+[node name="MouseLabel" type="Label" parent="MarginContainer/CenterContainer/VBox/MouseRow" unique_id=215336802]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
@@ -217,16 +204,13 @@ theme_override_fonts/font = ExtResource("2_font0")
 theme_override_font_sizes/font_size = 40
 text = "Mouse sensitivity"
 
-[node name="MouseSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/MouseRow"]
+[node name="MouseSlider" type="HSlider" parent="MarginContainer/CenterContainer/VBox/MouseRow" unique_id=1652126695]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(640, 54)
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = 0.0
-max_value = 100.0
-step = 1.0
 
-[node name="MouseValue" type="Label" parent="MarginContainer/CenterContainer/VBox/MouseRow"]
+[node name="MouseValue" type="Label" parent="MarginContainer/CenterContainer/VBox/MouseRow" unique_id=1366574132]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 52)
 layout_mode = 2
@@ -240,7 +224,7 @@ text = "0.0020"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="BackButton" type="Button" parent="MarginContainer/CenterContainer/VBox"]
+[node name="BackButton" type="Button" parent="MarginContainer/CenterContainer/VBox" unique_id=1142912644]
 custom_minimum_size = Vector2(400, 86)
 layout_mode = 2
 size_flags_horizontal = 4

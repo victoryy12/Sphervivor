@@ -15,6 +15,8 @@ extends Control
 @onready var _mouse_slider: HSlider = %MouseSlider
 @onready var _mouse_value: Label = %MouseValue
 
+signal back_pressed
+var previous_scene: String = ""
 
 func _ready() -> void:
 	get_viewport().size_changed.connect(_apply_viewport_scale)
@@ -159,4 +161,7 @@ func _sensitivity_from_slider(slider_v: float) -> float:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://menus and ui/main_menu.tscn")
+	if previous_scene != "":
+		get_tree().change_scene_to_file(previous_scene)
+	else:
+		back_pressed.emit()

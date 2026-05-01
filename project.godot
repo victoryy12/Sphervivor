@@ -14,6 +14,10 @@ config/name="Spherevivor"
 run/main_scene="uid://dat6iyrol62hr"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[audio]
+
+buses/default_bus_layout=""
+
 [autoload]
 
 GameSettings="*res://scripts/game_settings.gd"

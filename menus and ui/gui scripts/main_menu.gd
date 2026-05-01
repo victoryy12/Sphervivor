@@ -42,10 +42,22 @@ Move Mouse        - Look Around"""
 
 
 func _on_start_button_pressed():
+	# remove any leftover options menu
+	for child in get_tree().root.get_children():
+		if child.name == "OptionsMenu":
+			child.queue_free()
+	
 	get_tree().change_scene_to_file("res://game.tscn")
 
 func _on_setting_button_pressed():
-	get_tree().change_scene_to_file("res://menus and ui/options_menu.tscn")
+	var current_scene = get_tree().current_scene
+	var scene_path = current_scene.scene_file_path
+
+	var options = preload("res://menus and ui/options_menu.tscn").instantiate()
+	options.previous_scene = scene_path
+
+	get_tree().root.add_child(options)
+	current_scene.queue_free()
 
 func _on_help_button_pressed():
 	help_panel.visible = true

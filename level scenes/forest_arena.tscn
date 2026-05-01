@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c4d1vn0itpmdx"]
 
 [ext_resource type="Script" uid="uid://ty3v2fnuc4ji" path="res://scripts/forest_arena.gd" id="0_farena"]
-[ext_resource type="PackedScene" uid="uid://ci8mmiqe5yk5u" path="res://tree.tscn" id="1_ubfh8"]
+[ext_resource type="PackedScene" uid="uid://ci8mmiqe5yk5u" path="res://level scenes/tree.tscn" id="1_ubfh8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ubfh8"]
 albedo_color = Color(0, 0.7058824, 0.023529412, 1)

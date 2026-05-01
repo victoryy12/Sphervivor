@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b05uajxej5eq" path="res://assets/quit3.png" id="5_lblxi"]
 [ext_resource type="Texture2D" uid="uid://doq2uwd0tyitn" path="res://assets/spherevivor-logo.png" id="6_l0g0"]
 [ext_resource type="Texture2D" uid="uid://cmwgof8hv4ue7" path="res://assets/help3.png" id="7_helppng"]
+[ext_resource type="PackedScene" uid="uid://bxcexrj52ax3" path="res://menus and ui/options_menu.tscn" id="9_rhrh1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nwcfo"]
 shader = ExtResource("1_hdmo1")
@@ -90,6 +91,15 @@ icon = ExtResource("4_v63wl")
 icon_alignment = 1
 expand_icon = true
 
+[node name="settingsButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=1909244875]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font0")
+text = "Settings"
+icon = ExtResource("3_14738")
+icon_alignment = 1
+expand_icon = true
+
 [node name="helpButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=940401608]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -112,8 +122,8 @@ expand_icon = true
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_horizontal = 3
-alignment = 1
 theme_override_constants/separation = 16
+alignment = 1
 
 [node name="rollingGreese" type="HBoxContainer" parent="MainLayout/RootVBox/stats" unique_id=771547592]
 material = SubResource("CanvasItemMaterial_xtu1v")
@@ -263,8 +273,12 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Back"
 
+[node name="OptionsMenu" parent="." unique_id=1683926734 instance=ExtResource("9_rhrh1")]
+
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/resumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/settingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/helpButton" to="." method="_on_help_button_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/quitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="HelpPanel/helpButtonBack" to="." method="_on_help_back_button_pressed"]
+[connection signal="back_pressed" from="OptionsMenu" to="." method="_on_options_menu_back_pressed"]

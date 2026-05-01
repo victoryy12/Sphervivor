@@ -19,7 +19,7 @@ extends CanvasLayer
 
 @onready var help_panel: Control = $HelpPanel 
 @onready var help_label: Label = $HelpPanel/Label
-
+@onready var options_menu: Control = $OptionsMenu
 
 # ------------------------------------------------
 # GLOBAL PAUSE STATE
@@ -35,6 +35,7 @@ var pausedCheck := false
 func _ready() -> void:
 	self.visible = false
 	help_panel.visible = false
+	$OptionsMenu.visible = false
 	stats_panel.alignment = BoxContainer.ALIGNMENT_CENTER
 	statsImages()
 
@@ -99,7 +100,20 @@ func pause_and_unpause():
 	self.visible = false
 	player_ui.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	
+func reset_ui_state() -> void:
+	self.visible = false
 
+	_main_layout.visible = true
+	help_panel.visible = false
+	options_menu.visible = false
+
+	pausedCheck = false
+	game_paused = false
+
+	get_tree().paused = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 # ------------------------------------------------
 # STATS
 # ------------------------------------------------
@@ -223,35 +237,51 @@ func _update_ui_scale() -> void:
 # ------------------------------------------------
 # BUTTONS
 # ------------------------------------------------
+func _on_help_button_pressed() -> void:
+	help_panel.visible = true
+	_main_layout.visible = false
+
+
+func _on_help_back_button_pressed() -> void:
+	help_panel.visible = false
+	_main_layout.visible = true
+
+
+func _on_settings_button_pressed() -> void:
+	options_menu.visible = true
+	_main_layout.visible = false
+
+
+func _on_options_back():
+	options_menu.visible = false
+	_main_layout.visible = true
+
+	# IMPORTANT: restore correct pause UI state
+	if pausedCheck:
+		self.visible = true
+
+
+# ------------------------------------------------
+# BUTTONS
+# ------------------------------------------------
 func _on_resume_button_pressed() -> void:
 	pause_and_unpause()
 
+
 func _on_restart_button_pressed() -> void:
-	# lock game state first
 	GameState.state = GameState.State.PLAY
 
-	# hide UI immediately (avoid dangling references)
 	self.visible = false
 	player_ui = null
 	player_stats = null
 
-	# unpause engine FIRST
 	get_tree().paused = false
-
-	# defer restart safely
 	call_deferred("_do_restart")
 
 
 func _do_restart():
 	get_tree().reload_current_scene()
 
+
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
-
-func _on_help_button_pressed() -> void:
-	help_panel.visible = true
-	_main_layout.visible = false
-
-func _on_help_back_button_pressed() -> void:
-	help_panel.visible = false
-	_main_layout.visible = true

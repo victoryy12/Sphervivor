@@ -17,7 +17,7 @@ const DEFAULT_ENEMY_MAX_HP := 1000.0
 @onready var hit_sfx = get_node_or_null("HitsSFX") as AudioStreamPlayer3D
 @onready var attack_sfx = get_node_or_null("AttacksSFX") as AudioStreamPlayer3D
 
-var experience_drop = preload("res://experience_point.tscn")
+var experience_drop = preload("res://level scenes/experience_point.tscn")
 
 var knockback_timer := 0.0
 @export var knockback_duration := 0.25

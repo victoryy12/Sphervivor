@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dh0pg7noum18o"]
+[gd_scene format=3 uid="uid://d3p3dxnc2utyn"]
 
-[ext_resource type="Script" uid="uid://d2s7x407y180s" path="res://scripts/enemy_ai_RB.gd" id="1_gwy4j"]
+[ext_resource type="Script" uid="uid://d2s7x407y180s" path="res://scripts/enemy_ai_RB.gd" id="1_mbxyh"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6rg8l"]
 
@@ -10,17 +10,13 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_6rg8l"]
 material = SubResource("StandardMaterial3D_6rg8l")
 
-[node name="enemy1" type="RigidBody3D" unique_id=1083921973 groups=["Enemies"]]
+[node name="enemy1" type="RigidBody3D" unique_id=776914691]
 collision_layer = 3
-script = ExtResource("1_gwy4j")
+script = ExtResource("1_mbxyh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1824893992]
+transform = Transform3D(1.9596989, 0, 0, 0, 1.0191348, 0, 0, 0, 1.5255239, 0, 0, 0)
 shape = SubResource("SphereShape3D_6rg8l")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1988273411]
 mesh = SubResource("SphereMesh_6rg8l")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=383424308]
-avoidance_enabled = true
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
