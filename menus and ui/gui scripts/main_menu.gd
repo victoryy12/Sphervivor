@@ -9,9 +9,11 @@ extends Control
 # Update these paths if you moved HelpPanel to the root Main menu node
 @onready var help_panel: Control = $HelpPanel 
 @onready var help_label: Label = $HelpPanel/Label
+@onready var options_menu: Control = $OptionsMenu
 
 func _ready():
 	help_panel.visible = false
+	options_menu.visible = false
 	_update_ui_layout()
 	get_viewport().size_changed.connect(_update_ui_layout)
 	
@@ -50,14 +52,14 @@ func _on_start_button_pressed():
 	get_tree().change_scene_to_file("res://game.tscn")
 
 func _on_setting_button_pressed():
-	var current_scene = get_tree().current_scene
-	var scene_path = current_scene.scene_file_path
+	options_menu.visible = true
+	$Background.visible = false
+	$CenterContainer.visible = false
 
-	var options = preload("res://menus and ui/options_menu.tscn").instantiate()
-	options.previous_scene = scene_path
-
-	get_tree().root.add_child(options)
-	current_scene.queue_free()
+func _on_options_menu_back_pressed() -> void:
+	options_menu.visible = false
+	$Background.visible = true
+	$CenterContainer.visible = true
 
 func _on_help_button_pressed():
 	help_panel.visible = true

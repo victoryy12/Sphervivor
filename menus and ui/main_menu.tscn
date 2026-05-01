@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b7gqepkqvbsjj" path="res://menus and ui/gui scripts/main_menu.gd" id="1_06t4h"]
 [ext_resource type="FontFile" uid="uid://wf1lm3oelgmo" path="res://assets/Inlanders Demo.otf" id="2_font0"]
+[ext_resource type="PackedScene" uid="uid://bxcexrj52ax3" path="res://menus and ui/options_menu.tscn" id="3_q5h2j"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0gfd0"]
 load_path = "res://.godot/imported/main-menu.png-847ee1b82a40cc8625df7db4122cf193.ctex"
@@ -105,8 +106,12 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Back"
 
+[node name="OptionsMenu" parent="." unique_id=1779928583 instance=ExtResource("3_q5h2j")]
+layout_mode = 1
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/startButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/settingButton" to="." method="_on_setting_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/helpButton" to="." method="_on_help_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/exitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="HelpPanel/helpButtonBack" to="." method="_on_help_back_button_pressed"]
+[connection signal="back_pressed" from="OptionsMenu" to="." method="_on_options_menu_back_pressed"]

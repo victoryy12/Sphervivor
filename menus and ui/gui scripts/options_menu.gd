@@ -161,7 +161,5 @@ func _sensitivity_from_slider(slider_v: float) -> float:
 
 
 func _on_back_pressed() -> void:
-	if previous_scene != "":
-		get_tree().change_scene_to_file(previous_scene)
-	else:
-		back_pressed.emit()
+	visible = false
+	back_pressed.emit()

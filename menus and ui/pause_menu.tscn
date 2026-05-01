@@ -95,6 +95,7 @@ expand_icon = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 22
 text = "Settings"
 icon = ExtResource("3_14738")
 icon_alignment = 1

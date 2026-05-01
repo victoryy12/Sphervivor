@@ -195,6 +195,8 @@ func _update_ui_scale() -> void:
 	var stats_height: float = clampf(base_size * 0.195, 68.0 * r, 248.0 * r)
 
 	logo.custom_minimum_size.y = logo_height
+	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	logo.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	pause_panel.custom_minimum_size.x = panel_width
 	stats_panel.custom_minimum_size.y = stats_height
 
@@ -251,8 +253,7 @@ func _on_settings_button_pressed() -> void:
 	options_menu.visible = true
 	_main_layout.visible = false
 
-
-func _on_options_back():
+func _on_options_menu_back_pressed() -> void:
 	options_menu.visible = false
 	_main_layout.visible = true
 
