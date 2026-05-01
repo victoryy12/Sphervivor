@@ -11,6 +11,7 @@ extends CanvasLayer
 @onready var resume_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/resumeButton
 @onready var restart_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/restartButton
 @onready var help_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/helpButton
+@onready var settings_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/settingsButton
 @onready var quit_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/quitButton
 
 @onready var _main_layout: MarginContainer = $MainLayout
@@ -208,7 +209,7 @@ func _update_ui_scale() -> void:
 		if row is HBoxContainer:
 			row.add_theme_constant_override("separation", stat_inner_sep)
 
-	for button in [resume_button, restart_button, help_button, quit_button]:
+	for button in [resume_button, restart_button, help_button, settings_button, quit_button]:
 		button.custom_minimum_size.y = button_height
 		button.add_theme_font_size_override("font_size", button_font_size)
 
