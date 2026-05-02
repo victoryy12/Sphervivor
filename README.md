@@ -3,7 +3,7 @@ Spherevivor is a single-player roguelike, where, as the name implies, you play a
 __________________________________________________________________________________________________________________________________________________________________________________________________________________
 How to Play
 
-Use your abilities to defeat enemies and collect experience points that drop from defeated enemies to level a skill of your choosing. Will you be able to defeat The Absolute Sphere?!
+Play from your browser via https://victorvman.itch.io/spherevivor and press "Run game"
 __________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 Controls
