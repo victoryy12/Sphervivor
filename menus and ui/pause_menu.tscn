@@ -110,7 +110,18 @@ icon = ExtResource("7_helppng")
 icon_alignment = 1
 expand_icon = true
 
+[node name="mainMenu" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=1403082154]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font0")
+theme_override_font_sizes/font_size = 22
+text = "back to main menu"
+icon = ExtResource("3_14738")
+icon_alignment = 1
+expand_icon = true
+
 [node name="quitButton" type="Button" parent="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer" unique_id=398176399]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_font0")
@@ -246,10 +257,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 24.0
-offset_top = 76.0
-offset_right = 244.0
-offset_bottom = 76.0
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(110, 0)
@@ -280,6 +291,7 @@ text = "Back"
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/settingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/helpButton" to="." method="_on_help_button_pressed"]
+[connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/mainMenu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/quitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="HelpPanel/helpButtonBack" to="." method="_on_help_back_button_pressed"]
 [connection signal="back_pressed" from="OptionsMenu" to="." method="_on_options_menu_back_pressed"]

@@ -3,6 +3,7 @@ extends Control
 @onready var vbox: VBoxContainer = $CenterContainer/VBoxContainer
 @onready var start_button: Button = $CenterContainer/VBoxContainer/startButton
 @onready var settings_button: Button = $CenterContainer/VBoxContainer/settingButton
+@onready var mainMenu_button: Button = $CenterContainer/VBoxContainer/mainMenu
 @onready var help_button: Button = $CenterContainer/VBoxContainer/helpButton
 @onready var exit_button: Button = $CenterContainer/VBoxContainer/exitButton
 

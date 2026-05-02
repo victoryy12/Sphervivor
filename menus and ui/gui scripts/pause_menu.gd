@@ -13,6 +13,7 @@ extends CanvasLayer
 @onready var help_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/helpButton
 @onready var settings_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/settingsButton
 @onready var quit_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/quitButton
+@onready var menu_button: Button = $MainLayout/RootVBox/ButtonsCenter/pauseOptions/VBoxContainer/mainMenu
 
 @onready var _main_layout: MarginContainer = $MainLayout
 @onready var _root_vbox: VBoxContainer = $MainLayout/RootVBox
@@ -48,7 +49,7 @@ Movement: W,A,S,D
 Jump: Space
 Slam: Jump + Shift
 Spin: Left Mouse or E
-Charge: Right Mouse
+Charge: Right Mouse and release to launch
 
 Defeat enemies to gain XP and level up!
 Bosses are shielded until their phase ends!"""
@@ -209,7 +210,7 @@ func _update_ui_scale() -> void:
 		if row is HBoxContainer:
 			row.add_theme_constant_override("separation", stat_inner_sep)
 
-	for button in [resume_button, restart_button, help_button, settings_button, quit_button]:
+	for button in [resume_button, restart_button, help_button, settings_button, menu_button, quit_button]:
 		button.custom_minimum_size.y = button_height
 		button.add_theme_font_size_override("font_size", button_font_size)
 
@@ -287,3 +288,8 @@ func _do_restart():
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_main_menu_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://menus and ui/main_menu.tscn")

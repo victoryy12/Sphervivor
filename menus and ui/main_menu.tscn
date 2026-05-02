@@ -65,6 +65,7 @@ theme_override_fonts/font = ExtResource("2_font0")
 text = "Help"
 
 [node name="exitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1690058898]
+visible = false
 custom_minimum_size = Vector2(220, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_font0")
