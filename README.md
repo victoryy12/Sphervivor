@@ -3,7 +3,12 @@ Spherevivor is a single-player roguelike, where, as the name implies, you play a
 __________________________________________________________________________________________________________________________________________________________________________________________________________________
 How to Play
 
-Play from your browser via https://victorvman.itch.io/spherevivor and press "Run game"
+Play from your browser via https://victorvman.itch.io/spherevivor and press "Run game".
+
+If you want to play the game locally on your device, 
+1. Find and press the download link on the Itch.io page https://victorvman.itch.io/spherevivor
+2. Unzip and open the folder
+3. run Spherevivor.exe
 __________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 Controls
